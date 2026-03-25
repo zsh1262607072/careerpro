@@ -6009,7 +6009,7 @@ function applyTheme(theme) {
 }
 
 // ==================== 版本信息 ====================
-const APP_VERSION   = 'v11.3.8';
+const APP_VERSION   = 'v11.3.10';
 const BUILD_DATE    = '2026-03-26';   // ← 每次修改时同步更新此日期
 (function injectVersion(){
   const badge   = document.getElementById('verBadge');
@@ -6050,7 +6050,7 @@ async function genBindFingerprint(username, pass, keyCode, usedAt) {
 }
 
 // ---- Gist 在线验证 Key（注册/登录均使用） ----
-// 返回 { ok, msg, keyInfo } 或 { ok:false, offline:true } 表示网络不通
+// 返回 { ok, msg, keyInfo, writeToken } 或 { ok:false, offline:true } 表示网络不通
 async function validateKeyOnline(code, gistId) {
   if (!gistId) return { ok: false, msg: '未配置 Gist ID，无法验证激活码' };
   try {
@@ -6067,7 +6067,12 @@ async function validateKeyOnline(code, gistId) {
     if (k.disabled)          return { ok: false, msg: '激活码已被管理员禁用' };
     if (k.bindFingerprint)   return { ok: false, msg: '该激活码已完成身份绑定，无法再次使用' };
     if (k.usedBy)            return { ok: false, msg: '该激活码已被使用，不可重复注册' };
-    return { ok: true, keyInfo: k, fullDB: db };
+    // 提取写回Token（管理端推送时混淆嵌入，客户端解混淆后用于写回绑定状态）
+    let writeToken = '';
+    if (db['_wt']) {
+      try { writeToken = atob(db['_wt'].split('').reverse().join('')); } catch(e) {}
+    }
+    return { ok: true, keyInfo: k, fullDB: db, writeToken };
   } catch(e) {
     if (e.name === 'TimeoutError' || e.name === 'AbortError') {
       return { ok: false, offline: true, msg: '网络请求超时，请检查网络连接' };
@@ -6163,7 +6168,9 @@ async function consumeKey(code, username, pass, gistId, token) {
     const keyFile = gistData.files && gistData.files[GIST_FILE_CLIENT];
     let remoteDB = {};
     if (keyFile && keyFile.content) { try { remoteDB = JSON.parse(keyFile.content); } catch(e) {} }
-    remoteDB[code.toUpperCase()] = { ...(remoteDB[code.toUpperCase()] || {}), ...keyInfo };
+    // 先保留原始Key对象（含 days/note 等管理字段），再合并绑定信息
+    const originalKey = remoteDB[code.toUpperCase()] || {};
+    remoteDB[code.toUpperCase()] = { ...originalKey, ...keyInfo };
 
     // 更新 用户表
     const userFile = gistData.files && gistData.files[GIST_USER_FILE_CLIENT];
@@ -6189,9 +6196,10 @@ async function consumeKey(code, username, pass, gistId, token) {
     console.log('[CareerPro] Key绑定 + 用户信息已同步到 Gist');
 
     // 缓存自己的Key信息到本地（下次登录校验用）
-    const k = remoteDB[code.toUpperCase()];
-    if (k) saveKeyCache({ keyCode: code.toUpperCase(), days: k.days||0, usedAt, disabled: false,
-      expire: k.days === 0 ? Infinity : usedAt + (k.days||0)*86400000, cachedAt: Date.now() });
+    // 注意：从 originalKey 取 days，确保有期限Key（days>0）被正确缓存，不会被误认为永久
+    const keyDays = typeof originalKey.days === 'number' ? originalKey.days : 0;
+    saveKeyCache({ keyCode: code.toUpperCase(), days: keyDays, usedAt, disabled: false,
+      expire: keyDays === 0 ? Infinity : usedAt + keyDays * 86400000, cachedAt: Date.now() });
   } catch(e) { console.warn('[CareerPro] Gist 写回失败:', e); }
   return keyInfo;
 }
@@ -6208,7 +6216,7 @@ function getUserKeyExpire(username) {
     if (cache.disabled) return 0;
     return cache.days === 0 ? Infinity : cache.expire || 0;
   }
-  return Infinity; // 无缓存时默认永久（联网登录时会更新缓存）
+  return null; // 无缓存时返回null，由调用方联网查询（showProfileModal会异步刷新）
 }
 
 // 兼容旧调用：同步版checkUserKeyValid，供initAuth等场景使用
@@ -6439,8 +6447,8 @@ async function doRegStep2() {
   msgEl.style.display = 'none';
 
   try {
-    // 联网验证激活码（从 Gist 在线查询，不查本地）
-    const { ok, msg, keyInfo, offline } = await validateKeyOnline(_pendingKey, gistId);
+    // 联网验证激活码（从 Gist 在线查询，不查本地），同时获取管理端嵌入的写回Token
+    const { ok, msg, keyInfo, offline, writeToken } = await validateKeyOnline(_pendingKey, gistId);
     if (!ok) {
       if (offline) throw new Error(msg + '（网络异常，请检查网络后重试）');
       throw new Error(msg);
@@ -6459,8 +6467,10 @@ async function doRegStep2() {
     users[_pendingUser] = { pass: _pendingPass, keyCode: _pendingKey, joinDate };
     saveUsers(users);
 
-    // consumeKey：写绑定指纹 + PATCH 到 Gist（有 token 时写回，无 token 时只做本地缓存）
-    await consumeKey(_pendingKey, _pendingUser, _pendingPass, gistId, cfg.token || '');
+    // consumeKey：写绑定指纹 + PATCH 到 Gist
+    // 优先用管理端推送时嵌入的 writeToken（自动），其次用本地配置 token（若有）
+    const effectiveToken = writeToken || cfg.token || '';
+    await consumeKey(_pendingKey, _pendingUser, _pendingPass, gistId, effectiveToken);
 
     // 全部成功 → 登录
     msgEl.textContent = '✅ 激活码验证成功！账号已正式创建';
@@ -8827,34 +8837,24 @@ function updateResumeGuestBanner() {
   }
 }
 
-function showProfileModal() {
-  const user = currentUser();
-  if (!user) return;
-  const resumeKey = `careerpro_resume_${user}`;
-  const saved = JSON.parse(localStorage.getItem(resumeKey) || '[]');
-  const users = getUsers();
-  const uData = users[user] || {};
-  const joinDate = typeof uData === 'object' ? (uData.joinDate || '未知') : localStorage.getItem(`careerpro_join_${user}`) || '未知';
-
-  // 计算到期状态
-  const expire = getUserKeyExpire(user);
-  let expireHtml = '';
+// 将有效期数值转换为 HTML badge
+function _buildExpireHtml(expire) {
   if (expire === Infinity) {
-    expireHtml = `<div style="display:inline-block;background:#065f46;color:#6ee7b7;border-radius:20px;padding:3px 12px;font-size:12px;font-weight:700;margin-top:6px">♾ 永久有效</div>`;
-  } else if (expire === 0) {
-    expireHtml = `<div style="display:inline-block;background:#7f1d1d;color:#fca5a5;border-radius:20px;padding:3px 12px;font-size:12px;font-weight:700;margin-top:6px">⚠️ 激活码异常</div>`;
+    return `<div style="display:inline-block;background:#065f46;color:#6ee7b7;border-radius:20px;padding:3px 12px;font-size:12px;font-weight:700;margin-top:6px">♾ 永久有效</div>`;
+  } else if (!expire || expire === 0) {
+    return `<div style="display:inline-block;background:#7f1d1d;color:#fca5a5;border-radius:20px;padding:3px 12px;font-size:12px;font-weight:700;margin-top:6px">⚠️ 激活码异常</div>`;
   } else {
     const daysLeft = Math.ceil((expire - Date.now()) / 86400000);
     const expireDate = new Date(expire).toLocaleDateString('zh-CN');
     const color = daysLeft <= 3 ? '#7f1d1d' : daysLeft <= 7 ? '#78350f' : '#1e3a5f';
     const textColor = daysLeft <= 3 ? '#fca5a5' : daysLeft <= 7 ? '#fde68a' : '#93c5fd';
-    expireHtml = `
-      <div style="display:inline-block;background:${color};color:${textColor};border-radius:20px;padding:3px 12px;font-size:12px;font-weight:700;margin-top:6px">
-        ${daysLeft > 0 ? `⏳ 剩余 ${daysLeft} 天（${expireDate}到期）` : '⏰ 已到期'}
-      </div>`;
+    return `<div style="display:inline-block;background:${color};color:${textColor};border-radius:20px;padding:3px 12px;font-size:12px;font-weight:700;margin-top:6px">${daysLeft > 0 ? `⏳ 剩余 ${daysLeft} 天（${expireDate}到期）` : '⏰ 已到期'}</div>`;
   }
+}
 
-  document.getElementById('profileContent').innerHTML = `
+function _buildProfileInner(user, joinDate, saved, expire) {
+  const expireHtml = _buildExpireHtml(expire);
+  return `
     <div class="profile-section">
       <div class="profile-avatar-big">${user.charAt(0).toUpperCase()}</div>
       <div class="profile-username">${user}</div>
@@ -8862,7 +8862,7 @@ function showProfileModal() {
       ${expireHtml}
       <div class="profile-stats" style="margin-top:16px">
         <div class="pstat"><span class="pstat-num">${saved.length}</span><span class="pstat-label">已保存简历</span></div>
-        <div class="pstat"><span class="pstat-num">${expire !== 0 ? '✓' : '✗'}</span><span class="pstat-label">激活状态</span></div>
+        <div class="pstat"><span class="pstat-num">${(expire && expire !== 0) ? '✓' : '✗'}</span><span class="pstat-label">激活状态</span></div>
         <div class="pstat"><span class="pstat-num">⭐</span><span class="pstat-label">会员身份</span></div>
       </div>
       <div style="margin-top:20px;padding-top:16px;border-top:1px solid var(--border)">
@@ -8871,7 +8871,31 @@ function showProfileModal() {
         <button class="mbtn-submit" style="padding:8px 18px;font-size:12px;height:auto;background:transparent;border:1px solid var(--border);color:var(--text2)" onclick="closeProfileModal();showToast('密码修改功能开发中')">修改密码</button>
       </div>
     </div>`;
+}
+
+async function showProfileModal() {
+  const user = currentUser();
+  if (!user) return;
+  const resumeKey = `careerpro_resume_${user}`;
+  const saved = JSON.parse(localStorage.getItem(resumeKey) || '[]');
+  const users = getUsers();
+  const uData = users[user] || {};
+  const joinDate = typeof uData === 'object' ? (uData.joinDate || '未知') : localStorage.getItem(`careerpro_join_${user}`) || '未知';
+
+  // 先用本地缓存快速展示（可能不准，稍后联网刷新）
+  const cachedExpire = getUserKeyExpire(user);
+  document.getElementById('profileContent').innerHTML = _buildProfileInner(user, joinDate, saved, cachedExpire);
   document.getElementById('profileModal').classList.add('show');
+
+  // 联网查询最新有效期（不依赖缓存）
+  try {
+    const { valid, expire } = await checkUserKeyValidOnline(user);
+    const freshExpire = expire !== undefined ? expire : (valid ? Infinity : 0);
+    // 仅当弹窗还开着时刷新内容
+    if (document.getElementById('profileModal').classList.contains('show')) {
+      document.getElementById('profileContent').innerHTML = _buildProfileInner(user, joinDate, saved, freshExpire);
+    }
+  } catch(e) { /* 网络失败，保持缓存结果 */ }
 }
 
 // ---- Key过期弹窗 ----
