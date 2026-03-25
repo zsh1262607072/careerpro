@@ -1995,41 +1995,16 @@ option{background:var(--bg3);color:var(--text)}
   </div>
 </div>
 
-<!-- =================== 注册确认弹窗（两步强制同步）=================== -->
+<!-- =================== 注册确认弹窗（Gist 验证）=================== -->
 <div id="regSuccessModal" style="display:none;position:fixed;inset:0;z-index:1200;background:rgba(0,0,0,.7);backdrop-filter:blur(8px);align-items:center;justify-content:center">
   <div style="background:var(--bg2);border:1px solid var(--border-gold);border-radius:18px;padding:24px 24px 20px;width:min(440px,94vw);box-shadow:0 12px 48px rgba(0,0,0,.75);position:relative">
 
     <!-- 标题 -->
-    <div style="font-size:19px;font-weight:700;color:var(--gold);margin-bottom:4px;text-align:center">📋 完成注册 · 同步到后台</div>
-    <div style="font-size:12px;color:var(--text3);text-align:center;margin-bottom:16px">以下两步均为必填，完成后账号正式生效</div>
+    <div style="font-size:19px;font-weight:700;color:var(--gold);margin-bottom:4px;text-align:center">☁️ 完成注册 · 在线验证</div>
+    <div style="font-size:12px;color:var(--text3);text-align:center;margin-bottom:16px">验证激活码有效性，完成后账号正式生效</div>
 
-    <!-- 进度条 -->
-    <div style="display:flex;gap:8px;margin-bottom:18px;align-items:center">
-      <div id="regStep1Indicator" style="flex:1;padding:7px 0;border-radius:8px;text-align:center;font-size:12px;font-weight:700;background:var(--gold-dim);border:1px solid var(--border-gold);color:var(--gold);transition:all .3s">
-        步骤 1：钉钉推送
-      </div>
-      <div style="color:var(--text3);font-size:14px">→</div>
-      <div id="regStep2Indicator" style="flex:1;padding:7px 0;border-radius:8px;text-align:center;font-size:12px;font-weight:700;background:var(--bg3);border:1px solid var(--border);color:var(--text3);transition:all .3s">
-        步骤 2：Gist 同步
-      </div>
-    </div>
-
-    <!-- 步骤1 面板 -->
-    <div id="regStepPanel1">
-      <div style="background:var(--bg3);border-radius:10px;padding:11px 14px;margin-bottom:12px;font-size:12px;color:var(--text2);line-height:1.8">
-        <div>📣 向管理员钉钉发送注册通知</div>
-        <div style="color:var(--text3)">发送内容：用户名 · 脱敏激活码 · 注册时间（不含密码）</div>
-      </div>
-      <div id="regStep1Msg" style="font-size:12px;margin-bottom:10px;display:none;padding:8px 12px;border-radius:8px"></div>
-      <button id="regStep1Btn" onclick="doRegStep1()"
-        style="width:100%;padding:11px;background:linear-gradient(135deg,#f96b2f,#ff9a3c);color:#fff;border:none;border-radius:10px;font-size:14px;font-weight:700;cursor:pointer;transition:all .2s"
-        onmouseover="this.style.filter='brightness(1.1)'" onmouseout="this.style.filter=''">
-        📣 发送钉钉通知
-      </button>
-    </div>
-
-    <!-- 步骤2 面板（默认隐藏） -->
-    <div id="regStepPanel2" style="display:none">
+    <!-- 步骤2 面板（直接显示） -->
+    <div id="regStepPanel2">
       <div style="background:var(--bg3);border-radius:10px;padding:11px 14px;margin-bottom:12px;font-size:12px;color:var(--text2);line-height:1.8">
         <div>☁️ 将 Key 使用状态 + 用户信息写回 GitHub Gist</div>
         <div style="color:var(--text3)">管理员可随时从 Gist 拉取最新状态</div>
@@ -2419,8 +2394,8 @@ option{background:var(--bg3);color:var(--text)}
   <div class="grid g4">
     <a class="card" href="https://www.iguopin.com" target="_blank"><div class="card-name">国聘网</div><div class="card-desc">国务院国资委官方招聘平台</div><div class="card-tag tag-red">官方</div></a>
     <a class="card" href="https://www.chinajob.gov.cn" target="_blank"><div class="card-name">中国公共招聘网</div><div class="card-desc">人力资源和社会保障部</div><div class="card-tag tag-red">官方</div></a>
-    <a class="card" href="https://www.51job.com/campus/" target="_blank"><div class="card-name">前程无忧-国企专栏</div><div class="card-desc">国企央企校招专区</div><div class="card-tag tag-orange">聚合</div></a>
-    <a class="card" href="https://govjob.zhaopin.com" target="_blank"><div class="card-name">智联-国企专区</div><div class="card-desc">国企央企专属招聘版块</div><div class="card-tag tag-orange">聚合</div></a>
+    <a class="card" href="https://campus.51job.com" target="_blank"><div class="card-name">前程无忧-国企专栏</div><div class="card-desc">国企央企校招专区</div><div class="card-tag tag-orange">聚合</div></a>
+    <a class="card" href="https://www.zhaopin.com/jobs/enterprise/" target="_blank"><div class="card-name">智联-国企专区</div><div class="card-desc">国企央企专属招聘版块</div><div class="card-tag tag-orange">聚合</div></a>
   </div>
 
   <div class="sec-title">▍能源/电力</div>
@@ -2531,7 +2506,7 @@ option{background:var(--bg3);color:var(--text)}
       <a class="card" href="https://job.csair.com" target="_blank"><div class="card-name">南方航空</div><div class="card-desc">南航官方人才招聘系统</div><div class="card-tag tag-blue">三大航</div></a>
       <a class="card" href="https://zhaopin.airchina.com.cn" target="_blank"><div class="card-name">中国国际航空</div><div class="card-desc">国航官方招聘入口</div><div class="card-tag tag-red">三大航</div></a>
       <a class="card" href="https://job.ceair.com" target="_blank"><div class="card-name">中国东方航空</div><div class="card-desc">东航官方招聘系统</div><div class="card-tag tag-blue">三大航</div></a>
-      <a class="card" href="https://www.hnair.com/abouthnair/recruitment/" target="_blank"><div class="card-name">海南航空</div><div class="card-desc">海航集团人才招聘</div><div class="card-tag tag-teal">四大航</div></a>
+      <a class="card" href="http://recruitment.hnair.com/HRCandidateManageAir/home.aspx" target="_blank"><div class="card-name">海南航空</div><div class="card-desc">海航集团人才招聘</div><div class="card-tag tag-teal">四大航</div></a>
       <a class="card" href="https://hr.xiamenair.com" target="_blank"><div class="card-name">厦门航空</div><div class="card-desc">厦航官方招聘入口</div><div class="card-tag tag-blue">地方航</div></a>
       <a class="card" href="https://www.shenzhenair.com/careers/" target="_blank"><div class="card-name">深圳航空</div><div class="card-desc">深航官方招聘系统</div><div class="card-tag tag-green">地方航</div></a>
       <a class="card" href="https://wecruit.hotjob.cn/SU62ea129d0dcad4075c8525ca/pb/index.html" target="_blank"><div class="card-name">吉祥航空</div><div class="card-desc">吉航人才招聘入口</div><div class="card-tag tag-orange">地方航</div></a>
@@ -2743,7 +2718,7 @@ option{background:var(--bg3);color:var(--text)}
     <div class="grid g4">
       <a class="card" href="https://bbs.byr.cn" target="_blank"><div class="card-name">北邮人论坛</div><div class="card-desc">北京邮电大学，通信/互联网求职强</div><div class="card-tag tag-green">211通信</div></a>
       <a class="card" href="https://career.csu.edu.cn" target="_blank"><div class="card-name">中南大学就业信息网</div><div class="card-desc">中南大学官方就业招聘平台</div><div class="card-tag tag-green">211</div></a>
-      <a class="card" href="https://zsjy.swjtu.edu.cn" target="_blank"><div class="card-name">西南交大就业信息网</div><div class="card-desc">西南交通大学官方就业招聘平台</div><div class="card-tag tag-teal">铁路院校</div></a>
+      <a class="card" href="https://career.bjtu.edu.cn" target="_blank"><div class="card-name">北京交大就业信息网</div><div class="card-desc">北京交通大学官方就业招聘平台</div><div class="card-tag tag-teal">铁路院校</div></a>
       <a class="card" href="https://nuist.91job.org.cn" target="_blank"><div class="card-name">南信大就业信息网</div><div class="card-desc">南京信息工程大学官方就业平台</div><div class="card-tag tag-green">211</div></a>
       <a class="card" href="https://career.buct.edu.cn" target="_blank"><div class="card-name">北化工就业信息网</div><div class="card-desc">北京化工大学官方就业招聘平台</div><div class="card-tag tag-teal">211</div></a>
       <a class="card" href="https://career.sysu.edu.cn" target="_blank"><div class="card-name">中山大学就业信息网</div><div class="card-desc">中山大学官方就业招聘平台</div><div class="card-tag tag-blue">985</div></a>
@@ -2756,13 +2731,13 @@ option{background:var(--bg3);color:var(--text)}
   <div class="bbs-panel bbs-hidden" id="bbs-community">
     <div class="sec-title">▍综合求职论坛/社区</div>
     <div class="grid g4">
-      <a class="card" href="https://www.nowcoder.com/discuss/career" target="_blank"><div class="card-name">牛客求职讨论区</div><div class="card-desc">技术岗笔试/面经最全，互联网必备</div><div class="card-tag tag-green">技术</div></a>
+      <a class="card" href="https://www.nowcoder.com/discuss" target="_blank"><div class="card-name">牛客求职讨论区</div><div class="card-desc">技术岗笔试/面经最全，互联网必备</div><div class="card-tag tag-green">技术</div></a>
       <a class="card" href="https://www.yingjiesheng.com" target="_blank"><div class="card-name">应届生求职论坛</div><div class="card-desc">国企/事业单位信息最多的老牌论坛</div><div class="card-tag tag-orange">老牌</div></a>
       <a class="card" href="https://www.zhihu.com/topic/19554298/hot" target="_blank"><div class="card-name">知乎·求职话题</div><div class="card-desc">深度经验分享+行业分析+答疑</div><div class="card-tag tag-blue">问答</div></a>
       <a class="card" href="https://www.zhihu.com/topic/20014574/hot" target="_blank"><div class="card-name">知乎·校园招聘</div><div class="card-desc">校招攻略、面试经验、内推汇总</div><div class="card-tag tag-blue">校招</div></a>
       <a class="card" href="https://maimai.cn/web/search_center?type=feed" target="_blank"><div class="card-name">脉脉·职言</div><div class="card-desc">职场匿名吐槽+内推信息最真实</div><div class="card-tag tag-teal">内推</div></a>
       <a class="card" href="https://juejin.cn/jobs" target="_blank"><div class="card-name">稀土掘金 · 招聘</div><div class="card-desc">互联网/科技岗社区招聘板块</div><div class="card-tag tag-green">互联网</div></a>
-      <a class="card" href="https://www.nowcoder.com/discuss/career" target="_blank"><div class="card-name">牛客·职场讨论</div><div class="card-desc">互联网面经+海外求职+内推帖</div><div class="card-tag tag-blue">留学求职</div></a>
+      <a class="card" href="https://www.nowcoder.com/discuss" target="_blank"><div class="card-name">牛客·职场讨论</div><div class="card-desc">互联网面经+海外求职+内推帖</div><div class="card-tag tag-blue">留学求职</div></a>
       <a class="card" href="https://www.jobui.com/" target="_blank"><div class="card-name">职友集（评价情报）</div><div class="card-desc">公司评价+薪资情报+面试题库</div><div class="card-tag tag-orange">薪资情报</div></a>
     </div>
 
@@ -2838,7 +2813,7 @@ option{background:var(--bg3);color:var(--text)}
       <a class="card" href="https://www.zhihu.com/question/search?q=%E5%85%AC%E5%8A%A1%E5%91%98+%E5%B7%A5%E8%B5%84%E5%A4%9A%E5%B0%91" target="_blank"><div class="card-name">知乎·公务员薪资</div><div class="card-desc">各地公务员真实薪资水平调研</div><div class="card-tag tag-red">知乎</div></a>
       <a class="card" href="https://www.zhihu.com/topic/20006703/hot" target="_blank"><div class="card-name">知乎·职场攻略</div><div class="card-desc">职场生存法则+升职加薪秘籍</div><div class="card-tag tag-blue">知乎</div></a>
       <a class="card" href="https://www.lagou.com/discuss/" target="_blank"><div class="card-name">拉勾·技术圈</div><div class="card-desc">互联网技术社区+经验分享</div><div class="card-tag tag-orange">技术</div></a>
-      <a class="card" href="https://www.51job.com/zt/en/trend.html" target="_blank"><div class="card-name">前程无忧·职场趋势</div><div class="card-desc">行业薪酬报告+就业趋势分析</div><div class="card-tag tag-blue">报告</div></a>
+      <a class="card" href="https://www.51job.com/salary-research" target="_blank"><div class="card-name">前程无忧·职场趋势</div><div class="card-desc">行业薪酬报告+就业趋势分析</div><div class="card-tag tag-blue">报告</div></a>
       <a class="card" href="https://www.zhaopin.com/salary/" target="_blank"><div class="card-name">智联招聘·薪酬报告</div><div class="card-desc">各行业薪资调查报告下载</div><div class="card-tag tag-blue">报告</div></a>
       <a class="card" href="https://www.offershow.cn" target="_blank"><div class="card-name">OfferShow</div><div class="card-desc">互联网Offer薪资透明化平台</div><div class="card-tag tag-green">薪资</div></a>
     </div>
@@ -2850,10 +2825,10 @@ option{background:var(--bg3);color:var(--text)}
     <div class="grid g4">
       <a class="card" href="https://www.chinagwy.org" target="_blank"><div class="card-name">国考报名系统</div><div class="card-desc">国家公务员考试官方报名</div><div class="card-tag tag-red">官方</div></a>
       <a class="card" href="https://www.huatu.com/a/luntan/" target="_blank"><div class="card-name">华图教育社区</div><div class="card-desc">公考经验帖+考情分析</div><div class="card-tag tag-red">公考</div></a>
-      <a class="card" href="https://www.offcn.com/html/community/" target="_blank"><div class="card-name">中公教育社区</div><div class="card-desc">公考讨论+省考地方信息</div><div class="card-tag tag-red">公考</div></a>
+      <a class="card" href="https://www.offcn.com" target="_blank"><div class="card-name">中公教育</div><div class="card-desc">公考讨论+省考地方信息</div><div class="card-tag tag-red">公考</div></a>
       <a class="card" href="https://www.fenbi.com" target="_blank"><div class="card-name">粉笔网</div><div class="card-desc">AI刷题+公考题库+社区答疑</div><div class="card-tag tag-red">刷题</div></a>
       <a class="card" href="https://www.sydw.cn" target="_blank"><div class="card-name">事业单位考试网</div><div class="card-desc">全国事业编制招聘公告</div><div class="card-tag tag-orange">事业单位</div></a>
-      <a class="card" href="https://www.cpta.com.cn" target="_blank"><div class="card-name">中国人事考试网</div><div class="card-desc">职业资格考试官方报名</div><div class="card-tag tag-red">官方</div></a>
+      <a class="card" href="https://www.mohrss.gov.cn/SYrlzyhshbzb/zwgk/gzsy/zyzg/" target="_blank"><div class="card-name">中国人事考试网</div><div class="card-desc">职业资格考试官方报名（人社部）</div><div class="card-tag tag-red">官方</div></a>
       <a class="card" href="https://www.xiaohongshu.com/explore?q=%E5%9B%BD%E8%80%83+%E5%88%86%E6%95%B0%E7%BA%BF" target="_blank"><div class="card-name">小红书·国考分析</div><div class="card-desc">报考数据分析+热门岗位推荐</div><div class="card-tag tag-pink">分析</div></a>
       <a class="card" href="https://tieba.baidu.com/f?kw=%E5%9B%BD%E8%80%83" target="_blank"><div class="card-name">国考贴吧</div><div class="card-desc">历年真题讨论+各地省考经验</div><div class="card-tag tag-red">贴吧</div></a>
     </div>
@@ -3208,7 +3183,7 @@ option{background:var(--bg3);color:var(--text)}
     </div>
     <div class="sec-title">▍信息交流</div>
     <div class="grid g4">
-      <a class="card" href="https://www.zhihu.com/topic/19553659" target="_blank"><div class="card-name">知乎-博士申请</div><div class="card-desc">申请经验·导师评价·课题组</div><div class="card-tag tag-blue">问答</div></a>
+      <a class="card" href="https://www.zhihu.com/topic/19553659/hot" target="_blank"><div class="card-name">知乎-博士申请</div><div class="card-desc">申请经验·导师评价·课题组</div><div class="card-tag tag-blue">问答</div></a>
       <a class="card" href="https://www.newsmth.net/nForum/#!board/Postgrad" target="_blank"><div class="card-name">水木社区-考博版</div><div class="card-desc">博士申请经验·导师信息分享</div><div class="card-tag tag-teal">社区</div></a>
       <a class="card" href="https://www.xiaohongshu.com/search_result?keyword=%E7%94%B3%E8%AF%B7%E5%8D%9A%E5%A3%AB" target="_blank"><div class="card-name">小红书-申博经验</div><div class="card-desc">上岸经验·联系导师技巧</div><div class="card-tag tag-pink">经验</div></a>
       <a class="card" href="https://github.com/search?q=PhD+application" target="_blank"><div class="card-name">GitHub开源资料</div><div class="card-desc">博士申请清单·文书模板</div><div class="card-tag tag-purple">资源</div></a>
@@ -3308,7 +3283,7 @@ option{background:var(--bg3);color:var(--text)}
         <a class="card" href="https://www.zujuan.com" target="_blank"><div class="card-name">组卷网</div><div class="card-desc">全学科真题组卷·支持导出打印</div><div class="card-tag tag-teal">刷题</div></a>
         <a class="card" href="https://www.233.com/gaokao/" target="_blank"><div class="card-name">233网校</div><div class="card-desc">高考历年真题·模拟题精讲</div><div class="card-tag tag-green">真题</div></a>
         <a class="card" href="https://www.21cnjy.com" target="_blank"><div class="card-name">二一教育</div><div class="card-desc">中学全科教学资源与题库</div><div class="card-tag tag-purple">资源</div></a>
-        <a class="card" href="https://www.ixuetang.com" target="_blank"><div class="card-name">爱学堂</div><div class="card-desc">中考专项练习·知识点梳理</div><div class="card-tag tag-orange">中考</div></a>
+        <a class="card" href="https://www.jyeoo.com" target="_blank"><div class="card-name">精英猿</div><div class="card-desc">初高中专项练习·知识点梳理</div><div class="card-tag tag-orange">中考</div></a>
         <a class="card" href="https://www.docin.com/gaokao" target="_blank"><div class="card-name">豆丁高考</div><div class="card-desc">历年高考真题·解析·押题卷</div><div class="card-tag tag-red">真题</div></a>
         <a class="card" href="https://www.xuexin.org.cn" target="_blank"><div class="card-name">学信网题库</div><div class="card-desc">官方备考资源·招生信息权威</div><div class="card-tag tag-gold">官方</div></a>
         <a class="card" href="https://www.gaokao.cn" target="_blank"><div class="card-name">高考网</div><div class="card-desc">高考资讯·真题·志愿填报指导</div><div class="card-tag tag-blue">综合</div></a>
@@ -3508,11 +3483,11 @@ option{background:var(--bg3);color:var(--text)}
         <a class="card" href="https://gaokao.chsi.com.cn" target="_blank"><div class="card-name">阳光高考</div><div class="card-desc">教育部官方高考信息平台·院校专业查询</div><div class="card-tag tag-gold">官方</div></a>
         <a class="card" href="https://www.gaokao.cn/colleges" target="_blank"><div class="card-name">高考网·院校库</div><div class="card-desc">全国高校信息·录取分数线汇总</div><div class="card-tag tag-blue">查分</div></a>
         <a class="card" href="https://www.eol.cn" target="_blank"><div class="card-name">中国教育在线</div><div class="card-desc">志愿填报指南·招生计划·专业介绍</div><div class="card-tag tag-teal">志愿</div></a>
-        <a class="card" href="https://www.gaokaohelp.com" target="_blank"><div class="card-name">高考帮</div><div class="card-desc">智能志愿推荐·历年录取数据对比</div><div class="card-tag tag-green">智能</div></a>
-        <a class="card" href="https://www.zhuanyejiuye.com" target="_blank"><div class="card-name">专业就业网</div><div class="card-desc">专业就业前景·薪资水平分析</div><div class="card-tag tag-orange">就业</div></a>
+        <a class="card" href="https://gaokao.chsi.com.cn" target="_blank"><div class="card-name">阳光高考</div><div class="card-desc">智能志愿推荐·历年录取数据对比</div><div class="card-tag tag-green">智能</div></a>
+        <a class="card" href="http://www.mycos.com.cn" target="_blank"><div class="card-name">麦可思研究</div><div class="card-desc">专业就业前景·薪资水平分析</div><div class="card-tag tag-orange">就业</div></a>
         <a class="card" href="https://www.usnews.com/best-colleges" target="_blank"><div class="card-name">US News排名</div><div class="card-desc">美国大学综合排名·专业排名参考</div><div class="card-tag tag-purple">排名</div></a>
         <a class="card" href="https://www.shanghairanking.cn" target="_blank"><div class="card-name">软科排名</div><div class="card-desc">中国大学排名·专业排名·ESI学科</div><div class="card-tag tag-red">排名</div></a>
-        <a class="card" href="https://xuesheng.eol.cn/html/gk/score/" target="_blank"><div class="card-name">历年分数线库</div><div class="card-desc">中国教育在线·各院校历年录取分数线</div><div class="card-tag tag-blue">数据</div></a>
+        <a class="card" href="https://gaokao.chsi.com.cn/gkxx/sxzc/" target="_blank"><div class="card-name">历年分数线库</div><div class="card-desc">学信网·各院校历年录取分数线</div><div class="card-tag tag-blue">数据</div></a>
       </div>
     </div>
   </div>
@@ -3819,9 +3794,9 @@ option{background:var(--bg3);color:var(--text)}
       <a class="card" href="https://www.chinagwy.org" target="_blank"><div class="card-name">中国志愿</div><div class="card-desc">智能填报·全国院校招生计划</div><div class="card-tag tag-teal">智能</div></a>
       <a class="card" href="https://gaokao.baidu.com" target="_blank"><div class="card-name">百度高考</div><div class="card-desc">院校查询·大数据志愿参考</div><div class="card-tag tag-orange">工具</div></a>
       <a class="card" href="https://www.eol.cn" target="_blank"><div class="card-name">中国教育在线</div><div class="card-desc">志愿模拟·招生计划·专业解读</div><div class="card-tag tag-purple">权威</div></a>
-      <a class="card" href="https://www.gaokaohelp.com" target="_blank"><div class="card-name">高考帮</div><div class="card-desc">大数据智能推荐·冲稳保策略</div><div class="card-tag tag-red">推荐</div></a>
+      <a class="card" href="https://gaokao.chsi.com.cn" target="_blank"><div class="card-name">阳光高考</div><div class="card-desc">大数据智能推荐·冲稳保策略</div><div class="card-tag tag-red">推荐</div></a>
       <a class="card" href="https://www.shanghairanking.cn" target="_blank"><div class="card-name">软科中国排名</div><div class="card-desc">大学综合排名·学科排名</div><div class="card-tag tag-yellow">排名</div></a>
-      <a class="card" href="https://www.zhuanyejiuye.com" target="_blank"><div class="card-name">专业就业网</div><div class="card-desc">专业就业前景·薪资分析</div><div class="card-tag tag-green">就业</div></a>
+      <a class="card" href="http://www.mycos.com.cn" target="_blank"><div class="card-name">麦可思研究</div><div class="card-desc">专业就业前景·薪资分析</div><div class="card-tag tag-green">就业</div></a>
     </div>
   </div>
 
@@ -3964,15 +3939,15 @@ option{background:var(--bg3);color:var(--text)}
       <a class="card" href="https://www.zuoyebang.com" target="_blank"><div class="card-name">作业帮</div><div class="card-desc">拍照搜题·全科解析·模拟考试</div><div class="card-tag tag-teal">搜题</div></a>
       <a class="card" href="https://www.jyb.cn" target="_blank"><div class="card-name">中国教育报</div><div class="card-desc">高考政策资讯·招生改革动态</div><div class="card-tag tag-red">资讯</div></a>
       <a class="card" href="https://www.ncss.cn" target="_blank"><div class="card-name">国家课程标准</div><div class="card-desc">教育部课程标准官方文件</div><div class="card-tag tag-gold">官方</div></a>
-      <a class="card" href="https://www.ixuetang.com" target="_blank"><div class="card-name">爱学堂</div><div class="card-desc">中考备考·知识点精讲</div><div class="card-tag tag-purple">中考</div></a>
+      <a class="card" href="https://www.jyeoo.com" target="_blank"><div class="card-name">精英猿</div><div class="card-desc">中考备考·知识点精讲</div><div class="card-tag tag-purple">中考</div></a>
       <a class="card" href="https://www.docin.com/zhongkao" target="_blank"><div class="card-name">豆丁中考</div><div class="card-desc">中考真题·模拟题·专项练习</div><div class="card-tag tag-pink">中考</div></a>
     </div>
     <div class="sec-title" style="margin-top:20px">▍中考备考资源</div>
     <div class="grid g4">
       <a class="card" href="https://www.zhongkao.com" target="_blank"><div class="card-name">中考网</div><div class="card-desc">全国中考信息·真题·分数线</div><div class="card-tag tag-blue">综合</div></a>
-      <a class="card" href="https://www.jyeoo.com/math" target="_blank"><div class="card-name">精英猿数学</div><div class="card-desc">初中数学专项训练·考点梳理</div><div class="card-tag tag-teal">数学</div></a>
+      <a class="card" href="https://www.jyeoo.com" target="_blank"><div class="card-name">精英猿数学</div><div class="card-desc">初中数学专项训练·考点梳理</div><div class="card-tag tag-teal">数学</div></a>
       <a class="card" href="https://www.eduxue.com" target="_blank"><div class="card-name">沪教云校</div><div class="card-desc">上海中学全科精品课·真题解析</div><div class="card-tag tag-green">上海</div></a>
-      <a class="card" href="https://www.yjbys.com/zhongkao/" target="_blank"><div class="card-name">园结百业</div><div class="card-desc">中考语文阅读理解·写作范文</div><div class="card-tag tag-orange">语文</div></a>
+      <a class="card" href="https://www.zuowen.com" target="_blank"><div class="card-name">作文网</div><div class="card-desc">中考语文阅读理解·写作范文</div><div class="card-tag tag-orange">语文</div></a>
     </div>
   </div>
 </div>
@@ -5608,35 +5583,17 @@ function doRegister() {
   showRegSuccessModal(user, pass, keyCode);
 }
 
-// ==================== 注册两步强制同步弹窗 ====================
-
-// 钉钉机器人配置（不含密钥，安全）
-const DINGTALK_WEBHOOK = 'https://oapi.dingtalk.com/robot/send?access_token=a2104a330795584cf0bdc3f675082a20abe336e49a012db3700b226f35ff0654';
-const DINGTALK_SECRET  = 'SEC57ddbdee59e78358532fb3a93524ceeb855a603ef7fc2f4bb793d74c4981ca14';
+// ==================== 注册 Gist 验证弹窗 ====================
 
 // 临时缓存待注册信息（注册前不写localStorage）
 let _pendingUser    = '';
 let _pendingPass    = '';
 let _pendingKey     = '';
-let _step1Done      = false;
 
 function showRegSuccessModal(username, pass, keyCode) {
   _pendingUser = username;
   _pendingPass = pass;
   _pendingKey  = keyCode;
-  _step1Done   = false;
-
-  // 重置步骤UI
-  document.getElementById('regStepPanel1').style.display = '';
-  document.getElementById('regStepPanel2').style.display = 'none';
-  const s1 = document.getElementById('regStep1Indicator');
-  const s2 = document.getElementById('regStep2Indicator');
-  s1.style.background = 'var(--gold-dim)'; s1.style.borderColor = 'var(--border-gold)'; s1.style.color = 'var(--gold)';
-  s2.style.background = 'var(--bg3)';      s2.style.borderColor = 'var(--border)';      s2.style.color = 'var(--text3)';
-  const m1 = document.getElementById('regStep1Msg');
-  if (m1) m1.style.display = 'none';
-  const btn1 = document.getElementById('regStep1Btn');
-  if (btn1) { btn1.textContent = '📣 发送钉钉通知'; btn1.disabled = false; }
 
   // 预填已知 Gist ID
   const cfg = getGistCfg();
@@ -5651,82 +5608,9 @@ function showRegSuccessModal(username, pass, keyCode) {
   modal.style.display = 'flex';
 }
 
-// 步骤1：钉钉推送（必须成功）
-async function doRegStep1() {
-  const msgEl = document.getElementById('regStep1Msg');
-  const btn   = document.getElementById('regStep1Btn');
-  btn.textContent = '⏳ 推送中...'; btn.disabled = true;
-  msgEl.style.display = 'none';
 
-  try {
-    const now       = new Date();
-    const timestamp = now.getTime();
-    const joinDate  = now.toLocaleDateString('zh-CN') + ' ' + now.toLocaleTimeString('zh-CN');
-    const maskedKey = _pendingKey.replace(/(.{4})-(.{4})-(.{4})-(.{4})/, (m, a, b, c, d) => `${a}-****-****-${d}`);
-
-    // 钉钉加签：timestamp + \n + secret → HmacSHA256 → base64
-    const signStr  = timestamp + '\n' + DINGTALK_SECRET;
-    const encoder  = new TextEncoder();
-    const keyData  = await crypto.subtle.importKey('raw', encoder.encode(DINGTALK_SECRET), { name: 'HMAC', hash: 'SHA-256' }, false, ['sign']);
-    const sigBuf   = await crypto.subtle.sign('HMAC', keyData, encoder.encode(signStr));
-    const sigB64   = btoa(String.fromCharCode(...new Uint8Array(sigBuf)));
-    const sign     = encodeURIComponent(sigB64);
-
-    const url = `${DINGTALK_WEBHOOK}&timestamp=${timestamp}&sign=${sign}`;
-
-    const body = {
-      msgtype: 'markdown',
-      markdown: {
-        title: '🎉 CareerPro 新用户注册',
-        text: [
-          '## 🎉 CareerPro 新用户注册通知',
-          '',
-          `- **用户名**：${_pendingUser}`,
-          `- **激活码（脱敏）**：${maskedKey}`,
-          `- **注册时间**：${joinDate}`,
-          `- **设备**：${navigator.platform} · ${navigator.language}`,
-          '',
-          '> ℹ️ 请前往 KeyAdmin 后台确认激活码使用状态',
-        ].join('\n')
-      }
-    };
-
-    const res = await fetch(url, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(body)
-    });
-    const data = await res.json();
-    if (data.errcode === 0) {
-      // 步骤1成功
-      _step1Done = true;
-      msgEl.textContent = '✅ 钉钉通知已发送成功！';
-      msgEl.style.background = 'rgba(34,197,94,.1)'; msgEl.style.color = 'var(--green2)'; msgEl.style.display = '';
-      btn.textContent = '✅ 已推送';
-
-      // 切换到步骤2
-      setTimeout(() => {
-        document.getElementById('regStepPanel1').style.display = 'none';
-        document.getElementById('regStepPanel2').style.display = '';
-        const s1 = document.getElementById('regStep1Indicator');
-        const s2 = document.getElementById('regStep2Indicator');
-        s1.style.background = 'rgba(34,197,94,.15)'; s1.style.borderColor = 'rgba(34,197,94,.4)'; s1.style.color = '#22c55e';
-        s2.style.background = 'var(--gold-dim)';     s2.style.borderColor = 'var(--border-gold)'; s2.style.color = 'var(--gold)';
-        s1.textContent = '✅ 步骤 1：已完成';
-      }, 800);
-    } else {
-      throw new Error(data.errmsg || `errcode ${data.errcode}`);
-    }
-  } catch(e) {
-    msgEl.textContent = '❌ 推送失败：' + e.message + ' — 请检查网络后重试';
-    msgEl.style.background = 'rgba(239,68,68,.1)'; msgEl.style.color = 'var(--red2)'; msgEl.style.display = '';
-    btn.textContent = '📣 重新发送'; btn.disabled = false;
-  }
-}
-
-// 步骤2：联网验证激活码 + 写入Gist + 正式注册
+// 联网验证激活码 + 写入Gist + 正式注册
 async function doRegStep2() {
-  if (!_step1Done) return; // 防止跳过步骤1
   const gistId = (document.getElementById('regSyncGistId').value || '').trim();
   const msgEl  = document.getElementById('regSyncMsg');
   const btn    = document.getElementById('regStep2Btn');
@@ -5790,10 +5674,10 @@ async function doRegStep2() {
 }
 
 
-// 兼容旧调用（已废弃，保留空函数防报错）
-function skipGistSync() {}
-async function submitRegToGist() {}
-function fetchKeyDBFromGistManual() {} // Key库不再存本地，此函数废弃
+
+
+
+
 
 
 
@@ -8193,7 +8077,6 @@ function closeKeyExpiredModal() {
 
 
 
-// importKeyDB 已废弃（v11.2 安全升级：Key库不再存本地）
 
 // 续期（不需要重新注册，已有账号绑定新Key）
 function doRenewKey() {
@@ -9158,25 +9041,23 @@ function renderDashboard() {
   const expEl = document.getElementById('dashExpire');
   if (expEl) {
     try {
-      const users = JSON.parse(localStorage.getItem('careerpro_users') || '{}');
-      const info = users[user];
-      if (info && typeof info === 'object' && info.keyCode) {
-        const kdb = getKeyDB();
-        const kinfo = kdb[info.keyCode];
-        if (kinfo) {
-          if (kinfo.days === 0) {
-            expEl.innerHTML = '有效期：<strong>永久有效</strong> 🎉';
-          } else if (kinfo.usedAt) {
-            const exp = new Date(kinfo.usedAt);
-            exp.setDate(exp.getDate() + kinfo.days);
-            const diff = Math.ceil((exp - Date.now()) / 86400000);
-            expEl.innerHTML = diff > 0
-              ? `有效期：<strong>${exp.toLocaleDateString()}</strong> 到期（剩余 ${diff} 天）`
-              : `<span style="color:var(--red2)">⚠️ 账号已到期，请续期</span>`;
-          }
+      const cache = getKeyCache();
+      if (cache && cache.user === user) {
+        if (!cache.valid) {
+          expEl.innerHTML = `<span style="color:var(--red2)">⚠️ 账号已到期，请续期</span>`;
+        } else if (cache.expire === 0) {
+          expEl.innerHTML = '有效期：<strong>永久有效</strong> 🎉';
+        } else if (cache.expire) {
+          const exp = new Date(cache.expire);
+          const diff = Math.ceil((exp - Date.now()) / 86400000);
+          expEl.innerHTML = diff > 0
+            ? `有效期：<strong>${exp.toLocaleDateString()}</strong> 到期（剩余 ${diff} 天）`
+            : `<span style="color:var(--red2)">⚠️ 账号已到期，请续期</span>`;
+        } else {
+          expEl.textContent = '永久有效';
         }
       } else {
-        expEl.textContent = '永久有效';
+        expEl.textContent = '—（需重新登录刷新）';
       }
     } catch(e) { expEl.textContent = '—'; }
   }
