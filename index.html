@@ -1757,106 +1757,466 @@ option{background:var(--bg3);color:var(--text)}
    移动端全局响应式适配 (≤768px)
    ==================================================== */
 
-/* --- 顶栏手机端折叠 --- */
+/* ===== 弹窗移动端底部弹出 ===== */
+/* 仅在真手机上（hover不可用媒体特性）触发底部弹出样式 */
+@media(max-width:768px) and (hover:none){
+  .modal-overlay{
+    align-items: flex-end !important;
+    padding: 0 !important;
+  }
+  .modal-box{
+    width: 100% !important;
+    max-width: 100% !important;
+    border-radius: 20px 20px 0 0 !important;
+    padding: 0 !important;
+    max-height: 92vh;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  /* 顶部拖动指示条 */
+  .modal-box::before{
+    content: '';
+    display: block;
+    width: 40px; height: 4px;
+    background: var(--border2);
+    border-radius: 2px;
+    margin: 12px auto 0;
+    flex-shrink: 0;
+  }
+  /* 弹窗内部内边距重置 */
+  .modal-box > *:not(.modal-close){
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  .modal-title{ padding-top:20px; font-size:19px; }
+  .modal-sub{ font-size:13px; margin-bottom:16px; }
+  .modal-tabs{ margin: 0 20px 20px; }
+  .mfield{ padding: 0 20px; margin-bottom:14px; }
+  .mfield:first-of-type{ padding-top:0; }
+  .mbtn-submit{ margin: 0 20px 12px !important; width: calc(100% - 40px) !important; }
+  .modal-footer{ padding: 0 20px 24px; }
+  .guest-continue{ padding: 0 20px 20px; }
+  #loginForm, #registerForm{ padding:0 }
+
+  /* VIP墙底部弹出 */
+  .vip-wall-modal{
+    align-items: flex-end !important;
+    padding: 0 !important;
+  }
+  .vip-wall-box{
+    width: 100% !important;
+    max-width: 100% !important;
+    border-radius: 20px 20px 0 0 !important;
+    padding: 20px 18px 24px !important;
+    max-height: 92vh;
+    overflow-y: auto;
+  }
+  /* 注册确认弹窗底部弹出 */
+  #regSuccessModal{
+    align-items: flex-end !important;
+  }
+  #regSuccessModal > div{
+    width: 100% !important;
+    border-radius: 20px 20px 0 0 !important;
+    padding: 20px 20px 28px !important;
+    max-height: 92vh;
+    overflow-y:auto;
+  }
+}
+
+/* ===== 汉堡菜单：PC端默认隐藏（仅手机端显示）===== */
+.ham-drawer{ display:none; }
+.ham-overlay{ display:none; }
+
+/* ===== 全局手机端基础修复 ===== */
 @media(max-width:768px){
   body{ user-select:auto; } /* 手机允许选中文字 */
 
+  /* ===== 顶栏 ===== */
   .topbar{
-    padding:0 14px;
-    height:54px;
-    flex-wrap:nowrap;
+    padding: 0 12px;
+    height: 52px;
+    flex-wrap: nowrap;
+    gap: 8px;
   }
+  .logo-area{ gap: 8px; }
+  .logo-icon{ width:32px; height:32px; font-size:16px; border-radius:8px; }
   .logo-sub,.ver{ display:none; }
-  .logo-area > span[style*="border-radius:20px"]{ display:none; } /* 手机端隐藏管理员标签 */
-  .logo-name{ font-size:14px; }
-  /* 顶栏右侧：仅保留主题切换 + 登录按钮，隐藏其他 */
+  .logo-area > span[style*="border-radius:20px"]{ display:none; } /* 隐藏管理员标签 */
+  .logo-name{ font-size:15px; }
+  /* 顶栏右侧：大多数按钮收进汉堡菜单 */
+  .tbr{ gap:6px; }
   .tbr-clock,.tbr-sep,.topbar-stats{ display:none!important; }
-  .tbtn-gold{ padding:0 12px; font-size:11px; height:30px; }
-  .tbtn-outline,.tbtn-ghost{ display:none; }
-  /* 用户徽章精简 */
+  /* 全行业全开 / 论坛全开 → 收进汉堡菜单，顶栏隐藏 */
+  .tbtn-gold,.tbtn-ghost{ display:none!important; }
+  /* 登录按钮：只在未登录时才在顶栏显示，已登录则用头像 */
+  .tbtn-outline{ display:none; }
+  /* 用户徽章精简但保留头像（易于点击） */
+  .user-badge{
+    padding: 0 8px;
+    gap: 4px;
+    height: 36px;
+    border-radius: 10px;
+    min-width: 36px;
+  }
   .user-badge .user-name{ display:none; }
-  .user-badge{ padding:0 8px; gap:4px; }
+  /* 主题切换区：收进汉堡菜单 */
+  .theme-toggle-wrap{ display:none; }
 
-  /* --- 搜索区 --- */
-  .szone{ padding:10px 14px; }
-  .srow{ gap:6px; }
-  .sinput{ width:100%; flex:1; min-width:0; }
-  .sselect{ width:calc(50% - 3px); flex:1; }
-  .sbtn{ padding:0 14px; font-size:12px; }
+  /* ===== 汉堡按钮（移动端强制显示） ===== */
+  .ham-btn{
+    display: flex !important;   /* 覆盖行内 style="display:none" */
+    align-items: center;
+    justify-content: center;
+    width: 36px; height: 36px;
+    border: 1px solid var(--border2);
+    background: var(--bg3);
+    border-radius: 10px;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: background .2s;
+  }
+  .ham-btn:active{ background: var(--bg4); }
+  .ham-lines{
+    display:flex; flex-direction:column;
+    gap:5px; width:18px;
+    pointer-events:none;
+  }
+  .ham-lines span{
+    display:block; height:2px;
+    background: var(--text);
+    border-radius:2px;
+    transition: transform .25s, opacity .25s;
+  }
+  /* 汉堡"X"动画 */
+  .ham-btn.open .ham-lines span:nth-child(1){ transform:translateY(7px) rotate(45deg); }
+  .ham-btn.open .ham-lines span:nth-child(2){ opacity:0; transform:scaleX(0); }
+  .ham-btn.open .ham-lines span:nth-child(3){ transform:translateY(-7px) rotate(-45deg); }
+
+  /* ===== 汉堡抽屉遮罩 ===== */
+  .ham-overlay{
+    display:none;
+    position:fixed; inset:0;
+    z-index:9000;
+    background:rgba(0,0,0,.45);
+    backdrop-filter:blur(2px);
+  }
+  .ham-overlay.open{ display:block; }
+
+  /* ===== 汉堡抽屉主体 ===== */
+  .ham-drawer{
+    display:block;    /* 覆盖全局 display:none，手机端靠 bottom:-100% 隐藏 */
+    position:fixed;
+    bottom: -100%;
+    left:0; right:0;
+    z-index:9001;
+    background: var(--bg2);
+    border-radius:22px 22px 0 0;
+    padding: 0 0 env(safe-area-inset-bottom,0);
+    box-shadow: 0 -8px 40px rgba(0,0,0,.6);
+    transition: bottom .32s cubic-bezier(.32,1,.32,1);
+    max-height: 80vh;
+    overflow-y:auto;
+  }
+  .ham-drawer.open{ bottom:0; }
+
+  /* 拖动条 */
+  .ham-drag{
+    width:40px; height:4px;
+    background:var(--border2);
+    border-radius:4px;
+    margin: 12px auto 0;
+  }
+
+  /* 抽屉顶部标题行 */
+  .ham-drawer-head{
+    display:flex; align-items:center; justify-content:space-between;
+    padding: 14px 20px 0;
+  }
+  .ham-drawer-title{
+    font-size:13px; font-weight:600;
+    color:var(--text2); letter-spacing:.5px;
+  }
+  .ham-drawer-close{
+    background:none; border:none;
+    color:var(--text3); font-size:18px;
+    width:32px; height:32px;
+    display:flex; align-items:center; justify-content:center;
+    cursor:pointer; border-radius:8px;
+    transition:background .2s;
+  }
+  .ham-drawer-close:active{ background:var(--bg3); }
+
+  /* 分割线 */
+  .ham-divider{
+    height:1px; background:var(--border);
+    margin:12px 16px;
+  }
+
+  /* 分组标题 */
+  .ham-group-label{
+    font-size:11px; color:var(--text3);
+    letter-spacing:1px; padding:0 20px 6px;
+    text-transform:uppercase;
+  }
+
+  /* 每个操作行 */
+  .ham-item{
+    display:flex; align-items:center;
+    gap:14px; padding:13px 20px;
+    font-size:14px; color:var(--text);
+    cursor:pointer; border:none; background:none;
+    width:100%; text-align:left;
+    transition:background .15s;
+    border-radius:12px;
+    margin:0 0;
+  }
+  .ham-item:active{ background:var(--bg3); }
+  .ham-item-icon{
+    width:36px; height:36px;
+    display:flex; align-items:center; justify-content:center;
+    background:var(--bg3); border-radius:10px;
+    font-size:18px; flex-shrink:0;
+  }
+  .ham-item-text{ flex:1; }
+  .ham-item-label{ font-size:14px; font-weight:600; color:var(--text); }
+  .ham-item-sub{ font-size:12px; color:var(--text3); margin-top:1px; }
+  .ham-item-arrow{ color:var(--text3); font-size:14px; }
+
+  /* 主题切换行（内嵌开关） */
+  .ham-theme-row{
+    display:flex; align-items:center;
+    gap:14px; padding:13px 20px;
+    width:100%;
+  }
+  .ham-theme-right{ display:flex; align-items:center; gap:8px; margin-left:auto; }
+
+  /* 登录按钮（游客时显示） */
+  .ham-login-btn{
+    margin:12px 16px 16px;
+    display:block; width:calc(100% - 32px);
+    height:46px; border-radius:14px;
+    background:linear-gradient(135deg,var(--gold),var(--gold2));
+    border:none; cursor:pointer;
+    font-size:15px; font-weight:700;
+    color:#1a1000; letter-spacing:.5px;
+    transition:opacity .2s;
+  }
+  .ham-login-btn:active{ opacity:.85; }
+  /* 用户信息行（已登录时） */
+  .ham-user-row{
+    display:flex; align-items:center;
+    gap:12px; padding:14px 20px;
+    background: var(--gold-dim);
+    border-radius:14px;
+    margin:12px 16px;
+    border:1px solid var(--border-gold);
+  }
+  .ham-user-avatar{
+    width:40px;height:40px;
+    background:var(--bg3);border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    font-size:19px;flex-shrink:0;
+  }
+  .ham-user-name{ font-size:14px;font-weight:700;color:var(--text); }
+  .ham-user-sub{ font-size:12px;color:var(--text3); }
+
+  /* ===== 搜索区 ===== */
+  .szone{ padding:10px 12px; }
+  .srow{ gap:6px; flex-wrap:wrap; }
+  .sinput{
+    width:100%; flex:1 1 100%;
+    min-width:0;
+    height:42px; /* 触摸友好 */
+    font-size:14px; /* 防iOS自动缩放(>= 16px最佳，但14px可接受) */
+    border-radius:12px;
+  }
+  .sselect{
+    flex:1 1 calc(50% - 3px);
+    height:42px;
+    font-size:13px;
+    border-radius:12px;
+  }
+  .sbtn{
+    flex:0 0 auto;
+    height:42px;
+    padding:0 16px;
+    font-size:13px;
+    border-radius:12px;
+  }
   .kw-show{ display:none; }
-  .quick-tags{ display:none; } /* 手机上隐藏快捷词 */
+  .quick-tags{ display:none; }
 
-  /* --- Tab栏手机端 --- */
+  /* ===== Tab栏 ===== */
   .tabbar{
-    padding:0 0 0 8px;
-    gap:0;
-    -webkit-overflow-scrolling:touch;
+    padding: 0;
+    gap: 0;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none; /* Firefox */
   }
+  .tabbar::-webkit-scrollbar{ display:none; }
   .tab{
-    padding:11px 12px;
-    font-size:12px;
-    gap:5px;
+    padding: 12px 14px;
+    font-size: 12px;
+    gap: 5px;
+    min-height: 44px; /* 触摸目标 */
+    flex-shrink: 0;
+    scroll-snap-align: start;
+    letter-spacing: 0;
   }
-  .tbadge{ display:none; } /* tab徽章手机隐藏 */
+  .tab.active{
+    background: var(--gold-dim);
+    border-radius: 0;
+  }
+  .tbadge{ display:none; }
 
-  /* --- 内容区 --- */
-  .content{ padding:14px 12px; }
+  /* ===== 内容区 ===== */
+  .content{ padding:12px 12px; }
 
-  /* --- 网格响应 --- */
+  /* ===== 区块标题增大可读性 ===== */
+  .sec-title{ font-size:12px; letter-spacing:1px; }
+
+  /* ===== 网格 ===== */
   .g2,.g3,.g4,.g5{
-    grid-template-columns:1fr!important;
+    grid-template-columns: 1fr !important;
+    gap: 10px !important;
   }
-  /* 专业概览保留双列 */
   .major-overview{
-    grid-template-columns:repeat(2,1fr)!important;
+    grid-template-columns: repeat(2,1fr) !important;
   }
-  /* 直招入口也双列 */
   .mdv-direct-grid{
-    grid-template-columns:repeat(2,1fr)!important;
+    grid-template-columns: repeat(2,1fr) !important;
   }
 
-  /* --- 卡片 --- */
-  .card{ padding:12px 14px; border-radius:12px; }
-  /* 禁止 hover 上浮动画（手机不需要） */
+  /* ===== 卡片 ===== */
+  .card{
+    padding: 13px 14px;
+    border-radius: 12px;
+    gap: 5px;
+  }
+  .card-name{ font-size:14px; } /* 不变，保持可读 */
+  .card-desc{ font-size:12px; line-height:1.55; }
+  .card-tag{ font-size:11px; padding:3px 9px; }
+  /* 禁止hover上浮动画 */
   .card:hover,.mlink:hover,.tl-item:hover{ transform:none!important; }
 
-  /* --- 行业专项导航 --- */
-  .sector-nav{ padding:10px 12px; gap:6px; }
-  .snav-btn{ min-width:72px; height:46px; padding:0 12px; font-size:11px; }
-  .snav-btn span:first-child{ font-size:15px; }
-
-  /* --- 专业详情 --- */
-  .mdv-hero{ padding:14px 16px; gap:12px; }
-  .mdv-hero-icon{ font-size:30px; }
-  .mdv-title{ font-size:16px; }
-  .mdv-back-btn{ height:30px; padding:0 12px; font-size:11px; }
-
-  /* --- Footer --- */
-  .footer{
-    padding:16px 14px;
-    flex-direction:column;
-    align-items:flex-start;
-    gap:8px;
+  /* ===== 专业链接按钮 ===== */
+  .mlink{
+    padding: 9px 14px;
+    font-size: 13px;
+    min-height: 38px;
+    display: inline-flex;
+    align-items: center;
   }
-  .footer-right{ flex-wrap:wrap; gap:8px; }
 
-  /* --- 回到顶部 --- */
-  .back-top{ right:12px; bottom:20px; width:36px; height:36px; font-size:14px; }
+  /* ===== 行业专项导航 ===== */
+  .sector-nav{
+    padding: 10px 10px;
+    gap: 6px;
+  }
+  .snav-btn{
+    min-width: 0;
+    flex: 1 1 calc(33.3% - 6px);
+    height: 52px;
+    padding: 0 10px;
+    font-size: 11px;
+    border-radius: 10px;
+  }
+  .snav-btn span:first-child{ font-size:18px; }
 
-  /* --- 登录模态框 --- */
-  .modal-box{ padding:24px 20px; border-radius:16px; }
-  .modal-title{ font-size:18px; }
-  .modal-sub{ margin-bottom:18px; }
+  /* ===== 专业详情英雄区 ===== */
+  .mdv-hero{ padding:14px 14px; gap:12px; }
+  .mdv-hero-icon{ font-size:32px; }
+  .mdv-title{ font-size:17px; }
+  .mdv-back-btn{ height:36px; padding:0 14px; font-size:12px; min-width:44px; }
+  .mdv-desc{ font-size:13px; line-height:1.65; }
 
-  /* --- 到期弹窗 --- */
-  #keyExpiredModal .modal-box{ padding:24px 20px; }
+  /* ===== 分数线/备考相关（大表格）===== */
+  .score-table-wrap{ overflow-x:auto; -webkit-overflow-scrolling:touch; }
+  .score-table{ min-width:500px; font-size:12px; }
+
+  /* ===== 游客横幅 ===== */
+  .guest-banner-v2{
+    flex-direction: column;
+    gap: 12px;
+    padding: 14px;
+  }
+  .gbv2-btns{
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .gbv2-btns .tbtn{
+    flex: 1 1 calc(50% - 4px);
+    min-height: 40px;
+    justify-content: center;
+  }
+  .gbv2-features{ gap:6px; }
+
+  /* ===== 招聘时间轴 ===== */
+  .tl-item{ padding:13px 14px; }
+  .tl-title{ font-size:14px; }
+  .tl-sub{ font-size:12px; }
+
+  /* ===== Tip提示条 ===== */
+  .tip{ font-size:12px; padding:10px 14px; }
+
+  /* ===== Footer ===== */
+  .footer{
+    padding: 16px 14px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  .footer-right{ flex-wrap:wrap; gap:8px; font-size:12px; }
+
+  /* ===== 回到顶部 ===== */
+  .back-top{
+    right: 14px;
+    bottom: 24px;
+    width: 40px; height: 40px;
+    font-size: 15px;
+    border-radius: 12px;
+  }
+
+  /* ===== 登录/注册弹窗（非hover:none时的降级样式）===== */
+  .modal-box{
+    padding: 24px 20px 28px;
+    border-radius: 20px;
+    width: calc(100vw - 28px);
+    max-width: 420px;
+  }
+  .modal-title{ font-size:19px; }
+  .modal-sub{ font-size:13px; margin-bottom:18px; }
+  .mfield input{ height:46px; font-size:14px; border-radius:12px; }
+  .mbtn-submit{ height:46px; font-size:15px; border-radius:12px; }
+  .modal-tabs{ height:42px; }
+  .modal-tab{ font-size:14px; }
+
+  /* ===== 到期弹窗 ===== */
+  #keyExpiredModal .modal-box{ padding:24px 20px 28px; }
+  #keyExpiredModal .mbtn-submit{ height:46px; }
+
+  /* ===== VIP 墙弹窗 ===== */
+  .vip-wall-box{ padding:24px 18px 24px !important; }
+  .vip-wall-title{ font-size:20px; }
+  .vip-compare-table{ font-size:12px; }
+  .vip-compare-table td, .vip-compare-table th{ padding:8px 6px; }
+  /* 购码/登录按钮触摸友好 */
+  .vip-wall-box .mbtn-submit{ height:46px; font-size:14px; }
+
+  /* ===== 全局按钮触摸目标兜底 ===== */
+  button, .tbtn, .sbtn, .rbtn, .mc-btn, .dash-qbtn{
+    min-height: 36px;
+  }
 }
 
 /* ====================================================
    简历工坊手机端适配 (≤768px)
    ==================================================== */
 @media(max-width:768px){
-  /* 简历工坊两栏变单列 */
+  /* 两栏变单列 */
   .resume-workshop{
     flex-direction:column!important;
     gap:0!important;
@@ -1866,24 +2226,53 @@ option{background:var(--bg3);color:var(--text)}
     max-width:100%!important;
     flex:none!important;
   }
-  /* 预览区在手机上折叠成可展开的区域 */
-  .rpreview-col{
-    margin-top:16px;
+  .rpreview-col{ margin-top:14px; }
+
+  /* 输入面板内边距 */
+  .resume-input-panel,.resume-preview-panel{
+    padding: 16px 14px !important;
+    border-radius: 14px !important;
   }
 
-  /* 工具栏按钮小一点 */
+  /* 简历表单label放大 */
+  .rform-label{ font-size:12px; }
+
+  /* 输入框触摸友好 */
+  .rform-input,.rform-select{
+    height:44px!important;
+    font-size:14px!important;
+    border-radius:10px!important;
+  }
+  .rform-textarea{
+    font-size:14px!important;
+    border-radius:10px!important;
+    padding:12px 14px!important;
+  }
+
+  /* 基本信息双列网格→单列 */
+  .resume-input-panel > .rmod-body [style*="grid-template-columns:1fr 1fr"],
+  .resume-input-panel [style*="grid-template-columns:1fr 1fr"]{
+    display:flex!important;
+    flex-direction:column!important;
+    gap:0!important;
+  }
+
+  /* 工具栏 */
   .resume-toolbar{
     flex-wrap:wrap;
     gap:6px!important;
   }
   .resume-toolbar .rbtn{
-    font-size:11px!important;
-    padding:5px 10px!important;
-    height:30px!important;
+    font-size:12px!important;
+    padding:0 12px!important;
+    height:36px!important;
+    flex:1 1 calc(50% - 3px);
+    justify-content:center;
   }
 
-  /* 简历输入模块 */
-  .rmod-header{ padding:10px 14px; }
+  /* 模块头部 */
+  .rmod-header{ padding:12px 14px; }
+  .rmod-title{ font-size:14px; }
   .rform-row{ flex-direction:column!important; gap:8px!important; }
   .rform-row > .rform-group{ width:100%!important; flex:none!important; }
 
@@ -1892,16 +2281,150 @@ option{background:var(--bg3);color:var(--text)}
   .exp-item-row{ flex-direction:column!important; gap:6px!important; }
   .exp-item-row > .rform-group{ width:100%!important; }
 
+  /* 添加经历按钮更大 */
+  .exp-add-btn{
+    height:40px!important;
+    font-size:13px!important;
+    width:100%!important;
+  }
+
   /* 简历预览 */
   .resume-preview-doc{
-    padding:20px 16px!important;
+    padding:18px 14px!important;
     font-size:13px!important;
   }
-  .rv-name{ font-size:22px!important; }
+  .rv-name{ font-size:21px!important; }
+  .resume-preview-header{ flex-direction:column; gap:10px; align-items:stretch; }
+  .resume-preview-actions{ flex-wrap:wrap; gap:6px; }
+  .resume-preview-actions select,.resume-preview-actions .rbtn{
+    flex:1 1 calc(50% - 3px);
+    height:36px!important;
+    font-size:12px!important;
+  }
 
   /* 评分面板 */
   .score-panel{ padding:14px 12px!important; }
   .score-dims{ grid-template-columns:1fr 1fr!important; }
+
+  /* AI扩写/润色按钮行 */
+  .resume-actions{ gap:8px; }
+  .resume-actions .rbtn{
+    flex:1 1 calc(50% - 4px);
+    height:42px!important;
+    font-size:13px!important;
+    justify-content:center;
+  }
+}
+
+/* ====================================================
+   会员中心手机端优化 (≤768px)
+   ==================================================== */
+@media(max-width:768px){
+  .member-center{ flex-direction:column; gap:0; }
+
+  /* 侧边栏→横向胶囊导航 */
+  .mc-sidebar{
+    width:100%;
+    position:sticky;
+    top:52px; /* 顶栏高度 */
+    z-index:100;
+    background:var(--bg2);
+    border:none;
+    border-bottom:1px solid var(--border);
+    border-radius:0;
+    padding:6px 8px;
+    display:flex;
+    flex-wrap:nowrap;
+    overflow-x:auto;
+    gap:4px;
+    scrollbar-width:none;
+    -webkit-overflow-scrolling:touch;
+    box-shadow: 0 2px 8px rgba(0,0,0,.2);
+  }
+  .mc-sidebar::-webkit-scrollbar{ display:none; }
+
+  .mc-nav-item{
+    flex-shrink: 0;
+    padding: 7px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    border-left: none;
+    border: 1px solid transparent;
+    white-space: nowrap;
+    min-height: 34px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    color: var(--text3);
+  }
+  .mc-nav-item.active{
+    background: var(--gold-dim);
+    border-color: var(--border-gold);
+    color: var(--gold);
+    font-weight: 600;
+  }
+  .mc-nav-icon{ font-size:14px; }
+
+  /* 主内容区 */
+  .mc-main{ padding-top:12px; }
+  .mc-section-title{ font-size:15px; }
+
+  /* 仪表盘 */
+  .dash-hero{ gap:12px; padding:14px 14px; }
+  .dash-avatar{ width:44px; height:44px; font-size:18px; }
+  .dash-name{ font-size:16px; }
+  .dash-expire{ font-size:12px; }
+  .dash-stats-row{ gap:6px; }
+  .dash-stat{
+    padding:10px 8px;
+    border-radius:10px;
+    flex:1 1 calc(33.3% - 4px);
+    min-width:0;
+  }
+  .dash-stat-num{ font-size:20px; }
+  .dash-stat-label{ font-size:10px; }
+  .dash-quick{ gap:8px; }
+  .dash-qbtn{
+    flex: 1 1 calc(50% - 4px);
+    height: 40px;
+    font-size: 12px;
+    border-radius: 10px;
+  }
+
+  /* 收藏夹 */
+  .fav-toolbar{ flex-wrap:wrap; gap:6px; }
+  .fav-toolbar .mc-btn{ flex:1 1 calc(50% - 3px); min-height:40px; justify-content:center; }
+  .fav-toolbar #favSearch{ flex:1 1 100%; max-width:100%!important; }
+  .fav-form-row{ flex-direction:column!important; gap:8px; }
+  .fav-input{ height:42px; font-size:14px; }
+  .fav-item{ padding:12px 12px; }
+
+  /* 看板 */
+  .kanban-board{ flex-direction:column; gap:12px; }
+  .kanban-col{ min-width:100%; }
+  .kanban-col-header{ font-size:13px; }
+
+  /* 面试提醒 */
+  .mc-action-bar{ flex-wrap:wrap; gap:6px; }
+  .mc-action-bar .mc-btn{ flex:1 1 calc(50% - 3px); min-height:40px; justify-content:center; }
+  .interview-item{ flex-wrap:wrap; gap:6px; }
+
+  /* 求职日记 */
+  .diary-item{ padding:12px; }
+  .diary-editor textarea{ font-size:14px; }
+
+  /* 数据统计 */
+  .stats-grid{ grid-template-columns:repeat(2,1fr); }
+
+  /* 简历对比 */
+  .compare-panel{ flex-direction:column; gap:12px; }
+
+  /* 内推码库 */
+  .referral-form{ flex-direction:column!important; gap:8px; }
+  .referral-form input,.referral-form select{
+    height:42px; font-size:14px;
+    flex:none!important; width:100%!important;
+  }
 }
 
 /* ====================================================
@@ -1914,8 +2437,18 @@ option{background:var(--bg3);color:var(--text)}
   .mdv-direct-grid{
     grid-template-columns:1fr!important;
   }
-  .tab{ padding:10px 9px; font-size:11px; }
-  .tbtn-gold{ font-size:10px; }
+  .tab{ padding:10px 10px; font-size:11px; }
+  .tbtn-gold{ font-size:11px; padding:0 8px; }
+  .logo-name{ font-size:13px; }
+  /* 简历工具栏全行 */
+  .resume-toolbar .rbtn{
+    flex:1 1 100%!important;
+  }
+  .resume-actions .rbtn{
+    flex:1 1 100%!important;
+  }
+  /* 仪表盘快捷按钮全行 */
+  .dash-qbtn{ flex:1 1 100%!important; }
 }
 
 </style>
@@ -1961,6 +2494,17 @@ option{background:var(--bg3);color:var(--text)}
         <input type="password" id="loginPass" placeholder="输入密码" autocomplete="current-password" onkeydown="if(event.key==='Enter')doLogin()" />
       </div>
       <div class="modal-err" id="loginErr">账号或密码错误，请重试</div>
+      <!-- 用户协议勾选 -->
+      <div style="display:flex;align-items:flex-start;gap:8px;margin:0 0 14px;font-size:12px;color:var(--text3);line-height:1.6">
+        <input type="checkbox" id="loginAgreeChk" style="margin-top:2px;width:15px;height:15px;flex-shrink:0;accent-color:var(--gold);cursor:pointer" />
+        <label for="loginAgreeChk" style="cursor:pointer">
+          我已阅读并同意
+          <a onclick="showAgreementModal('terms')" style="color:var(--gold);text-decoration:none;cursor:pointer">《用户协议》</a>
+          和
+          <a onclick="showAgreementModal('privacy')" style="color:var(--gold);text-decoration:none;cursor:pointer">《隐私政策》</a>
+          ，承诺合法合规使用本平台
+        </label>
+      </div>
       <button class="mbtn-submit" onclick="doLogin()">登录</button>
     </div>
     <!-- 注册表单 -->
@@ -1983,6 +2527,17 @@ option{background:var(--bg3);color:var(--text)}
         <div style="font-size:11px;color:var(--text3);margin-top:4px">注册需要有效激活码，请联系管理员获取</div>
       </div>
       <div class="modal-err" id="regErr"></div>
+      <!-- 用户协议勾选 -->
+      <div style="display:flex;align-items:flex-start;gap:8px;margin:0 0 14px;font-size:12px;color:var(--text3);line-height:1.6">
+        <input type="checkbox" id="regAgreeChk" style="margin-top:2px;width:15px;height:15px;flex-shrink:0;accent-color:var(--gold);cursor:pointer" />
+        <label for="regAgreeChk" style="cursor:pointer">
+          我已阅读并同意
+          <a onclick="showAgreementModal('terms')" style="color:var(--gold);text-decoration:none;cursor:pointer">《用户协议》</a>
+          和
+          <a onclick="showAgreementModal('privacy')" style="color:var(--gold);text-decoration:none;cursor:pointer">《隐私政策》</a>
+          ，承诺合法合规使用本平台
+        </label>
+      </div>
       <button class="mbtn-submit" onclick="doRegister()">立即注册</button>
       <div style="font-size:11px;color:var(--text3);margin-top:10px;text-align:center;line-height:1.6">
         注册后需完成在线验证，激活码由管理员提供<br>
@@ -2195,7 +2750,7 @@ option{background:var(--bg3);color:var(--text)}
       <span class="logo-name">CareerPro</span>
       <span class="logo-sub">易学易升</span>
     </div>
-    <span class="ver" id="verBadge" title="构建日期">v11.3.2</span>
+    <span class="ver" id="verBadge" title="构建日期">v11.3.5</span>
     <span style="margin-left:10px;padding:3px 10px;border-radius:20px;background:var(--gold-dim);border:1px solid var(--border2);font-size:11px;color:var(--gold);white-space:nowrap;letter-spacing:.5px">
       👤 管理员：张少涵 &nbsp;QQ&nbsp;<a href="https://wpa.qq.com/msgrd?v=3&uin=1262607072&site=qq&menu=yes" target="_blank" style="color:var(--gold);text-decoration:none;font-weight:700">1262607072</a>
     </span>
@@ -2235,7 +2790,181 @@ option{background:var(--bg3);color:var(--text)}
       <span class="theme-label" id="themeLabel">🌙</span>
       <div class="theme-toggle" id="themeToggle" onclick="toggleTheme()"></div>
     </div>
+    <!-- 汉堡菜单按钮（仅移动端可见） -->
+    <button class="ham-btn" id="hamBtn" onclick="toggleHamMenu()" aria-label="菜单" style="display:none">
+      <div class="ham-lines">
+        <span></span><span></span><span></span>
+      </div>
+    </button>
   </div>
+</div>
+
+<!-- 汉堡菜单遮罩 -->
+<div class="ham-overlay" id="hamOverlay" onclick="closeHamMenu()"></div>
+
+<!-- 汉堡菜单抽屉 -->
+<div class="ham-drawer" id="hamDrawer">
+  <div class="ham-drag"></div>
+  <div class="ham-drawer-head">
+    <span class="ham-drawer-title">快捷操作</span>
+    <button class="ham-drawer-close" onclick="closeHamMenu()">✕</button>
+  </div>
+
+  <!-- 用户区（动态填充） -->
+  <div id="hamUserArea"></div>
+
+  <div class="ham-divider"></div>
+
+  <!-- 快捷导航 -->
+  <div class="ham-group-label">快捷导航</div>
+  <button class="ham-item" onclick="hamAction(()=>sw('general'))">
+    <span class="ham-item-icon">🏢</span>
+    <span class="ham-item-text">
+      <span class="ham-item-label">全行业招聘</span>
+      <span class="ham-item-sub">20+ 招聘平台聚合</span>
+    </span>
+    <span class="ham-item-arrow">›</span>
+  </button>
+  <button class="ham-item" onclick="hamAction(()=>sw('major'))">
+    <span class="ham-item-icon">🎓</span>
+    <span class="ham-item-text">
+      <span class="ham-item-label">按专业找工作</span>
+      <span class="ham-item-sub">21 个专业方向</span>
+    </span>
+    <span class="ham-item-arrow">›</span>
+  </button>
+  <button class="ham-item" onclick="hamAction(()=>sw('state'))">
+    <span class="ham-item-icon">🏛️</span>
+    <span class="ham-item-text">
+      <span class="ham-item-label">国企央企</span>
+      <span class="ham-item-sub">22 个国企招聘渠道</span>
+    </span>
+    <span class="ham-item-arrow">›</span>
+  </button>
+  <button class="ham-item" onclick="hamAction(()=>sw('rail'))">
+    <span class="ham-item-icon">🚄</span>
+    <span class="ham-item-text">
+      <span class="ham-item-label">行业专项</span>
+      <span class="ham-item-sub">铁路 · 航空 · 能源等</span>
+    </span>
+    <span class="ham-item-arrow">›</span>
+  </button>
+  <button class="ham-item" onclick="hamAction(()=>sw('education'))">
+    <span class="ham-item-icon">📚</span>
+    <span class="ham-item-text">
+      <span class="ham-item-label">升学深造</span>
+      <span class="ham-item-sub">考研 · 出国 · 升本</span>
+    </span>
+    <span class="ham-item-arrow">›</span>
+  </button>
+  <button class="ham-item" onclick="hamAction(()=>sw('exam'))">
+    <span class="ham-item-icon">📝</span>
+    <span class="ham-item-text">
+      <span class="ham-item-label">升学备考</span>
+      <span class="ham-item-sub">题库 · 分数线 · 备考资源</span>
+    </span>
+    <span class="ham-item-arrow">›</span>
+  </button>
+  <button class="ham-item" onclick="hamAction(()=>swResume())">
+    <span class="ham-item-icon">📄</span>
+    <span class="ham-item-text">
+      <span class="ham-item-label">简历工坊</span>
+      <span class="ham-item-sub">AI 生成 · 一键润色</span>
+    </span>
+    <span class="ham-item-arrow">›</span>
+  </button>
+  <button class="ham-item" onclick="hamAction(()=>sw('bbs'))">
+    <span class="ham-item-icon">💬</span>
+    <span class="ham-item-text">
+      <span class="ham-item-label">论坛社区</span>
+      <span class="ham-item-sub">经验贴 · 内推 · 求职圈</span>
+    </span>
+    <span class="ham-item-arrow">›</span>
+  </button>
+  <button class="ham-item" onclick="hamAction(()=>sw('tieba'))">
+    <span class="ham-item-icon">🧡</span>
+    <span class="ham-item-text">
+      <span class="ham-item-label">贴吧专区</span>
+      <span class="ham-item-sub">百度贴吧求职板块</span>
+    </span>
+    <span class="ham-item-arrow">›</span>
+  </button>
+  <button class="ham-item" onclick="hamAction(()=>sw('timeline'))">
+    <span class="ham-item-icon">🗓️</span>
+    <span class="ham-item-text">
+      <span class="ham-item-label">招聘时间表</span>
+      <span class="ham-item-sub">春招 · 秋招 · 重要节点</span>
+    </span>
+    <span class="ham-item-arrow">›</span>
+  </button>
+  <button class="ham-item" onclick="hamAction(()=>handleMemberTab())">
+    <span class="ham-item-icon">⭐</span>
+    <span class="ham-item-text">
+      <span class="ham-item-label">会员中心</span>
+      <span class="ham-item-sub">仪表盘 · 简历库 · 求职日记</span>
+    </span>
+    <span class="ham-item-arrow">›</span>
+  </button>
+
+  <div class="ham-divider"></div>
+
+  <!-- 工具操作 -->
+  <div class="ham-group-label">工具</div>
+  <button class="ham-item" onclick="hamAction(()=>openAll('general'))">
+    <span class="ham-item-icon">⚡</span>
+    <span class="ham-item-text">
+      <span class="ham-item-label">全行业全开</span>
+      <span class="ham-item-sub">一键打开全部招聘链接</span>
+    </span>
+  </button>
+  <button class="ham-item" onclick="hamAction(()=>openAll('bbs'))">
+    <span class="ham-item-icon">🏫</span>
+    <span class="ham-item-text">
+      <span class="ham-item-label">论坛全开</span>
+      <span class="ham-item-sub">打开全部论坛社区</span>
+    </span>
+  </button>
+
+  <div class="ham-divider"></div>
+
+  <!-- 主题切换 -->
+  <div class="ham-group-label">外观</div>
+  <div class="ham-theme-row">
+    <span class="ham-item-icon" style="background:var(--bg3);border-radius:10px;width:36px;height:36px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">🎨</span>
+    <span style="font-size:14px;font-weight:600;color:var(--text);flex:1;margin-left:14px">日间 / 夜间模式</span>
+    <div class="ham-theme-right">
+      <span class="theme-label" id="hamThemeLabel">🌙</span>
+      <div class="theme-toggle" id="hamThemeToggle" onclick="toggleTheme();syncHamThemeLabel()" style="cursor:pointer"></div>
+    </div>
+  </div>
+
+  <div class="ham-divider"></div>
+
+  <!-- 法律信息 -->
+  <div class="ham-group-label">法律信息</div>
+  <button class="ham-item" onclick="hamAction(()=>showAgreementModal('terms'))">
+    <span class="ham-item-icon">📋</span>
+    <span class="ham-item-text">
+      <span class="ham-item-label">用户协议</span>
+    </span>
+    <span class="ham-item-arrow">›</span>
+  </button>
+  <button class="ham-item" onclick="hamAction(()=>showAgreementModal('privacy'))">
+    <span class="ham-item-icon">🔒</span>
+    <span class="ham-item-text">
+      <span class="ham-item-label">隐私政策</span>
+    </span>
+    <span class="ham-item-arrow">›</span>
+  </button>
+  <button class="ham-item" onclick="hamAction(()=>showAgreementModal('copyright'))">
+    <span class="ham-item-icon">©️</span>
+    <span class="ham-item-text">
+      <span class="ham-item-label">版权声明</span>
+    </span>
+    <span class="ham-item-arrow">›</span>
+  </button>
+
+  <div style="height:env(safe-area-inset-bottom,12px);min-height:12px"></div>
 </div>
 
 <!-- 搜索区 -->
@@ -4423,12 +5152,43 @@ option{background:var(--bg3);color:var(--text)}
     <span class="footer-dot">·</span>
     <a class="footer-link" href="https://www.iguopin.com" target="_blank">国聘网</a>
     <span class="footer-dot">·</span>
-    <span style="color:var(--text3)" id="footerVer">v11.3.2</span>
+    <span style="color:var(--text3)" id="footerVer">v11.3.6</span>
+  </div>
+  <!-- 版权声明行 -->
+  <div style="width:100%;border-top:1px solid var(--border);padding-top:10px;margin-top:4px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px">
+    <span style="font-size:11px;color:var(--text3)">
+      © 2024–2026 易学易升 CareerPro · 张少涵 · 保留所有权利
+      <span style="margin:0 6px;color:var(--border2)">·</span>
+      未经授权禁止复制、转载或商业使用
+    </span>
+    <span style="font-size:11px;color:var(--text3);display:flex;gap:12px">
+      <a onclick="showAgreementModal('terms')" style="color:var(--text3);cursor:pointer;text-decoration:underline;text-underline-offset:2px">用户协议</a>
+      <a onclick="showAgreementModal('privacy')" style="color:var(--text3);cursor:pointer;text-decoration:underline;text-underline-offset:2px">隐私政策</a>
+      <a onclick="showAgreementModal('copyright')" style="color:var(--text3);cursor:pointer;text-decoration:underline;text-underline-offset:2px">版权声明</a>
+    </span>
   </div>
 </footer>
 
 <!-- 回到顶部 -->
 <button class="back-top" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="回到顶部">↑</button>
+
+<!-- =================== 用户协议 / 隐私政策 / 版权声明 弹窗 =================== -->
+<div class="modal-overlay" id="agreementModal" onclick="if(event.target===this)closeAgreementModal()">
+  <div class="modal-box" style="max-width:640px;max-height:82vh;display:flex;flex-direction:column">
+    <button class="modal-close" onclick="closeAgreementModal()">✕</button>
+    <!-- 标签切换 -->
+    <div style="display:flex;gap:0;border-bottom:1px solid var(--border);margin-bottom:16px">
+      <button class="agr-tab" id="agr-tab-terms"   onclick="switchAgrTab('terms')"    style="flex:1;padding:10px 0;font-size:13px;font-weight:600;border:none;background:none;cursor:pointer;color:var(--text);border-bottom:2px solid transparent;transition:all .2s">用户协议</button>
+      <button class="agr-tab" id="agr-tab-privacy"  onclick="switchAgrTab('privacy')"  style="flex:1;padding:10px 0;font-size:13px;font-weight:600;border:none;background:none;cursor:pointer;color:var(--text3);border-bottom:2px solid transparent;transition:all .2s">隐私政策</button>
+      <button class="agr-tab" id="agr-tab-copyright" onclick="switchAgrTab('copyright')" style="flex:1;padding:10px 0;font-size:13px;font-weight:600;border:none;background:none;cursor:pointer;color:var(--text3);border-bottom:2px solid transparent;transition:all .2s">版权声明</button>
+    </div>
+    <!-- 内容滚动区 -->
+    <div id="agreementContent" style="flex:1;overflow-y:auto;font-size:13px;line-height:1.9;color:var(--text2);padding:0 4px 8px"></div>
+    <div style="text-align:center;padding-top:12px">
+      <button onclick="closeAgreementModal()" style="background:linear-gradient(135deg,var(--gold),var(--gold2));color:#1a1000;border:none;border-radius:10px;padding:9px 36px;font-size:13px;font-weight:700;cursor:pointer">我已阅读</button>
+    </div>
+  </div>
+</div>
 
 <script>
 // 标签切换
@@ -4436,7 +5196,14 @@ function sw(id) {
   document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
   document.getElementById('panel-' + id).classList.add('active');
-  document.getElementById('tab-' + id).classList.add('active');
+  const activeTab = document.getElementById('tab-' + id);
+  if (activeTab) {
+    activeTab.classList.add('active');
+    // 手机端：active Tab 滚动到可视区域居中
+    if (window.innerWidth <= 768) {
+      activeTab.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+    }
+  }
   // 进度条动画
   const pg = document.getElementById('pg');
   pg.style.width = '60%';
@@ -4568,6 +5335,8 @@ window.onload = function() {
   if (vipWall) vipWall.addEventListener('click', function(e){ if(e.target===this) closeVipWall(); });
   // 初始化面试倒计时定时器
   setInterval(refreshInterviewCountdowns, 60000);
+  // 初始化汉堡菜单（移动端）
+  initHamMenu();
 };
 
 // ====== 网络检测守卫 ======
@@ -5240,7 +6009,7 @@ function applyTheme(theme) {
 }
 
 // ==================== 版本信息 ====================
-const APP_VERSION   = 'v11.3.2';
+const APP_VERSION   = 'v11.3.8';
 const BUILD_DATE    = '2026-03-26';   // ← 每次修改时同步更新此日期
 (function injectVersion(){
   const badge   = document.getElementById('verBadge');
@@ -5334,10 +6103,12 @@ async function checkUserKeyValidOnline(username) {
             clearKeyCache();
             return { valid: false };
           }
-          const expire = k.days === 0 ? Infinity : (k.usedAt || 0) + k.days * 86400000;
+          // 兼容 usedAt（毫秒）和 boundAt（ISO字符串）两种字段
+          const usedAtMs = k.usedAt || (k.boundAt ? new Date(k.boundAt).getTime() : null);
+          const expire = k.days === 0 ? Infinity : (usedAtMs ? usedAtMs + k.days * 86400000 : Infinity);
           const valid  = k.days === 0 || Date.now() < expire;
           // 更新本地缓存（仅存自己的Key信息）
-          saveKeyCache({ keyCode, days: k.days, usedAt: k.usedAt, disabled: k.disabled, expire, cachedAt: Date.now() });
+          saveKeyCache({ keyCode, days: k.days, usedAt: usedAtMs, disabled: k.disabled, expire, cachedAt: Date.now() });
           return { valid, expire };
         }
       }
@@ -5450,9 +6221,10 @@ function getUsers() {
   try { return JSON.parse(localStorage.getItem(AUTH_KEY) || '{}'); } catch(e) { return {}; }
 }
 function saveUsers(u) { localStorage.setItem(AUTH_KEY, JSON.stringify(u)); }
-function getSession() { return localStorage.getItem(SESSION_KEY) || null; }
-function setSession(u) { localStorage.setItem(SESSION_KEY, u); }
-function clearSession() { localStorage.removeItem(SESSION_KEY); }
+// ⚡ session 改用 sessionStorage：标签页/浏览器关闭后自动退出，不再跨会话保持登录
+function getSession() { return sessionStorage.getItem(SESSION_KEY) || null; }
+function setSession(u) { sessionStorage.setItem(SESSION_KEY, u); }
+function clearSession() { sessionStorage.removeItem(SESSION_KEY); }
 
 function isLoggedIn() {
   const user = getSession();
@@ -5473,7 +6245,7 @@ function currentUser() {
 // 初始化UI
 function initAuth() {
   // 检查当前session是否Key已过期
-  const rawUser = localStorage.getItem(SESSION_KEY);
+  const rawUser = getSession();
   if (rawUser && !checkUserKeyValid(rawUser)) {
     clearSession();
     showKeyExpiredModal(rawUser);
@@ -5544,6 +6316,14 @@ async function doLogin() {
   const pass = document.getElementById('loginPass').value;
   const errEl = document.getElementById('loginErr');
   errEl.style.display = 'none';
+  // ── 协议勾选检查 ──
+  const agreeChk = document.getElementById('loginAgreeChk');
+  if (agreeChk && !agreeChk.checked) {
+    errEl.textContent = '⚠️ 请先阅读并勾选同意《用户协议》和《隐私政策》';
+    errEl.style.display = 'block';
+    agreeChk.focus();
+    return;
+  }
   if (!user || !pass) { errEl.textContent = '请填写账号和密码'; errEl.style.display = 'block'; return; }
   const users = getUsers();
   const uData = users[user];
@@ -5586,6 +6366,14 @@ function doRegister() {
   const keyCode = (document.getElementById('regKey').value || '').trim().toUpperCase();
   const errEl   = document.getElementById('regErr');
   errEl.style.display = 'none';
+  // ── 协议勾选检查 ──
+  const agreeChk = document.getElementById('regAgreeChk');
+  if (agreeChk && !agreeChk.checked) {
+    errEl.textContent = '⚠️ 请先阅读并勾选同意《用户协议》和《隐私政策》';
+    errEl.style.display = 'block';
+    agreeChk.focus();
+    return;
+  }
   if (!user || user.length < 3)  { errEl.textContent = '用户名至少3位'; errEl.style.display = 'block'; return; }
   if (user.length > 16)          { errEl.textContent = '用户名最多16位'; errEl.style.display = 'block'; return; }
   if (pass.length < 6)           { errEl.textContent = '密码至少6位'; errEl.style.display = 'block'; return; }
@@ -8103,37 +8891,66 @@ function closeKeyExpiredModal() {
 
 
 
-// 续期（不需要重新注册，已有账号绑定新Key）
-function doRenewKey() {
-  const rawUser = localStorage.getItem(SESSION_KEY) || '';
-  // 尝试从过期modal的上下文获取用户名
+// 续期（联网验证新激活码 + 绑定到已有账号）
+async function doRenewKey() {
+  const rawUser = getSession() || '';
   const labelText = document.getElementById('keyExpiredUser').textContent;
   const match = labelText.match(/"([^"]+)"/);
   const targetUser = match ? match[1] : rawUser;
   const newKey = (document.getElementById('renewKeyInput').value || '').trim().toUpperCase();
   const errEl = document.getElementById('renewKeyErr');
+  const btn   = document.querySelector('#keyExpiredModal .mbtn-submit');
   errEl.style.display = 'none';
+
   if (!newKey) { errEl.textContent = '请输入激活码'; errEl.style.display = 'block'; return; }
-  const { ok, msg } = validateKey(newKey);
-  if (!ok) { errEl.textContent = msg; errEl.style.display = 'block'; return; }
-  if (!targetUser) { errEl.textContent = '无法识别账号，请重新登录'; errEl.style.display = 'block'; return; }
-  // 绑定新Key
-  const users = getUsers();
-  const uData = users[targetUser];
-  if (!uData) { errEl.textContent = '账号不存在'; errEl.style.display = 'block'; return; }
-  if (typeof uData === 'object') {
-    uData.keyCode = newKey;
-    users[targetUser] = uData;
-  } else {
-    // 旧格式升级
-    users[targetUser] = { pass: uData, keyCode: newKey, joinDate: new Date().toLocaleDateString('zh-CN') };
+  if (!newKey.match(/^CPRO-[A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{4}$/)) {
+    errEl.textContent = '激活码格式不正确（应为 CPRO-XXXX-XXXX-XXXX）';
+    errEl.style.display = 'block'; return;
   }
-  saveUsers(users);
-  consumeKey(newKey, targetUser);
-  setSession(targetUser);
-  closeKeyExpiredModal();
-  initAuth();
-  showToast(`🎉 续期成功！欢迎回来，${targetUser}！`);
+  if (!targetUser) { errEl.textContent = '无法识别账号，请重新登录'; errEl.style.display = 'block'; return; }
+
+  // 联网验证
+  const cfg = getGistCfg();
+  if (!cfg.gistId) {
+    errEl.textContent = '未配置 Gist ID，无法验证激活码，请联系管理员';
+    errEl.style.display = 'block'; return;
+  }
+
+  if (btn) { btn.textContent = '⏳ 验证中...'; btn.disabled = true; }
+  errEl.textContent = '⏳ 正在联网验证激活码...';
+  errEl.style.color = 'var(--text3)'; errEl.style.display = 'block';
+
+  try {
+    const { ok, msg } = await validateKeyOnline(newKey, cfg.gistId);
+    if (!ok) throw new Error(msg);
+
+    // 验证通过 → 更新账号绑定
+    const users = getUsers();
+    const uData = users[targetUser];
+    if (!uData) throw new Error('账号不存在');
+    if (typeof uData === 'object') {
+      uData.keyCode = newKey;
+      users[targetUser] = uData;
+    } else {
+      users[targetUser] = { pass: uData, keyCode: newKey, joinDate: new Date().toLocaleDateString('zh-CN') };
+    }
+    saveUsers(users);
+    clearKeyCache();
+
+    // consumeKey 写绑定指纹 + PATCH Gist
+    const pass = typeof uData === 'object' ? uData.pass : uData;
+    await consumeKey(newKey, targetUser, pass, cfg.gistId, cfg.token || '');
+
+    setSession(targetUser);
+    closeKeyExpiredModal();
+    initAuth();
+    showToast(`🎉 续期成功！欢迎回来，${targetUser}！`);
+  } catch(e) {
+    errEl.textContent = '❌ ' + e.message;
+    errEl.style.color = 'var(--red2)'; errEl.style.display = 'block';
+  } finally {
+    if (btn) { btn.textContent = '立即续期'; btn.disabled = false; }
+  }
 }
 
 // 从个人主页触发续期
@@ -9067,22 +9884,28 @@ function renderDashboard() {
   if (expEl) {
     try {
       const cache = getKeyCache();
-      if (cache && cache.user === user) {
-        if (!cache.valid) {
-          expEl.innerHTML = `<span style="color:var(--red2)">⚠️ 账号已到期，请续期</span>`;
-        } else if (cache.expire === 0) {
-          expEl.innerHTML = '有效期：<strong>永久有效</strong> 🎉';
-        } else if (cache.expire) {
+      // cache里没有user字段，用keyCode+用户账号的keyCode对比来确认是当前用户的缓存
+      const users = getUsers();
+      const uData = users[user];
+      const myKeyCode = typeof uData === 'object' ? uData.keyCode : null;
+      const cacheIsValid = cache && myKeyCode && cache.keyCode === myKeyCode;
+
+      if (cacheIsValid) {
+        if (cache.disabled) {
+          expEl.innerHTML = `<span style="color:var(--red2)">⚠️ 激活码已被禁用，请联系管理员</span>`;
+        } else if (cache.expire === Infinity || cache.days === 0) {
+          expEl.innerHTML = '有效期：<strong>♾ 永久有效</strong> 🎉';
+        } else if (cache.expire && Date.now() < cache.expire) {
           const exp = new Date(cache.expire);
-          const diff = Math.ceil((exp - Date.now()) / 86400000);
-          expEl.innerHTML = diff > 0
-            ? `有效期：<strong>${exp.toLocaleDateString()}</strong> 到期（剩余 ${diff} 天）`
-            : `<span style="color:var(--red2)">⚠️ 账号已到期，请续期</span>`;
+          const diff = Math.ceil((cache.expire - Date.now()) / 86400000);
+          const color = diff <= 3 ? 'var(--red2)' : diff <= 7 ? '#f59e0b' : 'var(--gold2)';
+          expEl.innerHTML = `有效期：<strong style="color:${color}">${exp.toLocaleDateString('zh-CN')} 到期</strong>（剩余 <strong style="color:${color}">${diff} 天</strong>）`;
         } else {
-          expEl.textContent = '永久有效';
+          expEl.innerHTML = `<span style="color:var(--red2)">⚠️ 账号已到期，请续期</span>`;
         }
       } else {
-        expEl.textContent = '—（需重新登录刷新）';
+        // 无匹配缓存时显示提示，引导刷新
+        expEl.innerHTML = `<span style="color:var(--text3)">— 重新登录后显示有效期</span>`;
       }
     } catch(e) { expEl.textContent = '—'; }
   }
@@ -10042,6 +10865,259 @@ function copyText(text) {
     document.execCommand('copy'); document.body.removeChild(ta);
     showToast('✅ 已复制');
   });
+}
+
+
+// ==================== 用户协议 / 隐私政策 / 版权声明 弹窗 ====================
+
+const AGREEMENT_CONTENT = {
+  terms: `
+<h3 style="font-size:15px;font-weight:700;color:var(--text);margin:0 0 14px">📋 用户协议</h3>
+<p><strong>最后更新：2026年3月26日</strong></p>
+<p>欢迎使用 CareerPro · 易学易升（以下简称"本平台"）。在使用本平台前，请仔细阅读以下协议条款。使用本平台即表示您已阅读、理解并同意接受本协议的全部条款。</p>
+
+<p><strong>一、服务说明</strong></p>
+<p>本平台为招聘信息导航及求职辅助工具，聚合整理了公开招聘平台、院校就业信息及求职辅助资源，仅供参考使用。平台内所有招聘信息均来自第三方网站，本平台不对其真实性、时效性承担责任。</p>
+
+<p><strong>二、账号与激活码</strong></p>
+<p>1. 用户注册账号需使用有效激活码，激活码由管理员授权颁发，严禁转让、出售或共享。<br>
+2. 一个激活码只能绑定一个账号，激活后不可解绑或迁移。<br>
+3. 激活码到期后账号功能将受限，续购新激活码可恢复权限。<br>
+4. 如发现账号被他人盗用，请立即联系管理员处理。</p>
+
+<p><strong>三、使用规范</strong></p>
+<p>用户承诺：<br>
+1. 不利用本平台从事任何违法违规活动；<br>
+2. 不对本平台进行逆向工程、破解或二次开发；<br>
+3. 不传播、复制、出售本平台内容或功能；<br>
+4. 不以任何方式绕过账号验证机制。</p>
+
+<p><strong>四、免责声明</strong></p>
+<p>本平台仅为导航工具，对第三方平台内容、招聘信息的真实性不承担法律责任。AI生成内容仅供参考，用户需自行核实后使用。</p>
+
+<p><strong>五、协议变更</strong></p>
+<p>本平台保留随时更新本协议的权利，更新后继续使用即视为同意新条款。</p>
+  `,
+  privacy: `
+<h3 style="font-size:15px;font-weight:700;color:var(--text);margin:0 0 14px">🔒 隐私政策</h3>
+<p><strong>最后更新：2026年3月26日</strong></p>
+<p>本平台高度重视用户隐私保护，请仔细阅读本政策。</p>
+
+<p><strong>一、数据存储方式</strong></p>
+<p>本平台为纯前端应用，<strong>所有数据仅存储在您本人设备的浏览器本地存储（localStorage / sessionStorage）中</strong>，不上传至任何服务器（激活码验证除外）。</p>
+
+<p><strong>二、收集的信息</strong></p>
+<p>1. <strong>账号信息</strong>：用户名、密码（本地存储）、激活码；<br>
+2. <strong>求职数据</strong>：简历内容、收藏夹、求职日记等，均存储于本地；<br>
+3. <strong>激活码验证</strong>：登录时会请求 GitHub Gist 验证激活码有效性，该请求会暴露您的 IP 地址给 GitHub，请知悉。</p>
+
+<p><strong>三、数据安全</strong></p>
+<p>1. 密码以明文存储于本地，建议不要使用您常用的重要密码；<br>
+2. 清除浏览器数据将导致本地账号及求职数据丢失，请定期备份；<br>
+3. 本平台不对因设备丢失、浏览器数据清除导致的数据丢失负责。</p>
+
+<p><strong>四、第三方链接</strong></p>
+<p>本平台包含大量第三方网站链接，点击跳转后您将受第三方网站的隐私政策约束，本平台对此不承担责任。</p>
+
+<p><strong>五、联系方式</strong></p>
+<p>如有隐私相关问题，请联系管理员 QQ：1262607072。</p>
+  `,
+  copyright: `
+<h3 style="font-size:15px;font-weight:700;color:var(--text);margin:0 0 14px">©️ 版权声明</h3>
+<p><strong>声明日期：2026年3月26日</strong></p>
+
+<p><strong>一、版权归属</strong></p>
+<p>本平台（CareerPro · 易学易升）的全部源代码、界面设计、文案、功能逻辑及数据库内容，版权归 <strong>张少涵</strong> 所有，受《中华人民共和国著作权法》及相关国际版权公约保护。</p>
+
+<p><strong>二、禁止行为</strong></p>
+<p>未经权利人书面授权，任何单位或个人不得：<br>
+1. 复制、转载、传播本平台的全部或部分内容；<br>
+2. 对本平台代码进行逆向工程、反编译或破解；<br>
+3. 将本平台代码或设计用于商业目的；<br>
+4. 以任何形式冒充本平台提供服务；<br>
+5. 去除或修改本平台的版权标识。</p>
+
+<p><strong>三、法律责任</strong></p>
+<p>一经发现侵权行为，权利人将依法追究侵权者的民事和刑事责任，侵权者需承担停止侵权、消除影响、赔偿损失等法律责任。侵权赔偿金额不低于 <strong>人民币5万元</strong> 或实际损失（取较高者）。</p>
+
+<p><strong>四、合法使用</strong></p>
+<p>购买激活码的用户获得本平台的<strong>个人非商业使用权</strong>，该权利不可转让，且不包括对源代码的访问权或二次开发权。</p>
+
+<p><strong>五、侵权举报</strong></p>
+<p>发现侵权行为请联系：QQ <strong>1262607072</strong>，我们将依法处理。</p>
+  `
+};
+
+let _currentAgrTab = 'terms';
+
+function showAgreementModal(tab) {
+  tab = tab || 'terms';
+  _currentAgrTab = tab;
+  const modal = document.getElementById('agreementModal');
+  if (!modal) return;
+  modal.classList.add('show');
+  switchAgrTab(tab);
+}
+
+function closeAgreementModal() {
+  const modal = document.getElementById('agreementModal');
+  if (modal) modal.classList.remove('show');
+}
+
+function switchAgrTab(tab) {
+  _currentAgrTab = tab;
+  const tabs = ['terms', 'privacy', 'copyright'];
+  tabs.forEach(t => {
+    const el = document.getElementById('agr-tab-' + t);
+    if (!el) return;
+    if (t === tab) {
+      el.style.color = 'var(--gold)';
+      el.style.borderBottomColor = 'var(--gold)';
+    } else {
+      el.style.color = 'var(--text3)';
+      el.style.borderBottomColor = 'transparent';
+    }
+  });
+  const content = document.getElementById('agreementContent');
+  if (content) content.innerHTML = AGREEMENT_CONTENT[tab] || '';
+}
+
+// ==================== 汉堡菜单 ====================
+
+/**
+ * initHamMenu - 页面加载时初始化
+ * 1. 监听屏幕尺寸，决定是否显示汉堡按钮
+ * 2. 触摸下滑手势关闭抽屉
+ */
+function initHamMenu() {
+  // 抽屉下滑手势关闭
+  const drawer = document.getElementById('hamDrawer');
+  if (!drawer) return;
+  let startY = 0;
+  drawer.addEventListener('touchstart', e => { startY = e.touches[0].clientY; }, { passive: true });
+  drawer.addEventListener('touchend', e => {
+    const dy = e.changedTouches[0].clientY - startY;
+    if (dy > 60) closeHamMenu();   // 下滑 60px 以上关闭
+  }, { passive: true });
+}
+
+/** 打开 / 关闭汉堡抽屉（切换） */
+function toggleHamMenu() {
+  const btn     = document.getElementById('hamBtn');
+  const overlay = document.getElementById('hamOverlay');
+  const drawer  = document.getElementById('hamDrawer');
+  if (!drawer) return;
+
+  const isOpen = drawer.classList.contains('open');
+  if (isOpen) {
+    closeHamMenu();
+  } else {
+    // 渲染用户区
+    renderHamUser();
+    // 同步主题标签
+    syncHamThemeLabel();
+    // 打开
+    drawer.classList.add('open');
+    if (overlay) overlay.classList.add('open');
+    if (btn) btn.classList.add('open');
+    document.body.style.overflow = 'hidden';  // 防止背景滚动
+  }
+}
+
+/** 关闭汉堡抽屉 */
+function closeHamMenu() {
+  const btn     = document.getElementById('hamBtn');
+  const overlay = document.getElementById('hamOverlay');
+  const drawer  = document.getElementById('hamDrawer');
+  if (!drawer) return;
+  drawer.classList.remove('open');
+  if (overlay) overlay.classList.remove('open');
+  if (btn) btn.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+/**
+ * hamAction(fn) - 汉堡菜单内的操作统一入口
+ * 先关闭抽屉，再执行 fn（稍作延迟，让关闭动画先完成）
+ */
+function hamAction(fn) {
+  closeHamMenu();
+  setTimeout(() => {
+    try { fn(); } catch(e) { console.warn('[hamAction]', e); }
+  }, 220);
+}
+
+/**
+ * renderHamUser - 渲染汉堡抽屉顶部用户区
+ * 已登录 → 用户头像+名称+有效期提示
+ * 游客   → 渐变登录按钮
+ */
+function renderHamUser() {
+  const area = document.getElementById('hamUserArea');
+  if (!area) return;
+
+  const user = getSession();
+  if (user) {
+    // 已登录：读取缓存中的剩余天数
+    let expireText = '';
+    try {
+      const cache = getKeyCache();
+      if (cache && cache.keyCode) {
+        if (cache.disabled) {
+          expireText = '<span style="color:#d94040;font-size:11px">⚠️ 激活码已禁用</span>';
+        } else if (cache.expire === Infinity || cache.days === 0) {
+          expireText = '<span style="color:var(--gold);font-size:11px">♾ 永久有效</span>';
+        } else if (cache.expire) {
+          const now   = Date.now();
+          const left  = Math.max(0, Math.ceil((cache.expire - now) / 86400000));
+          const color = left <= 3 ? '#d94040' : left <= 7 ? '#e0a000' : 'var(--text3)';
+          expireText  = `<span style="color:${color};font-size:11px">剩余 ${left} 天</span>`;
+        }
+      }
+    } catch(e) {}
+
+    area.innerHTML = `
+      <div class="ham-user-row">
+        <div class="ham-user-avatar">👤</div>
+        <div style="flex:1;min-width:0">
+          <div class="ham-user-name" style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${escapeHtml(user)}</div>
+          <div class="ham-user-sub">${expireText || '已登录'}</div>
+        </div>
+        <button onclick="hamAction(()=>handleMemberTab())"
+          style="background:var(--gold-dim);border:1px solid var(--border-gold);color:var(--gold);
+                 font-size:12px;font-weight:600;padding:5px 10px;border-radius:8px;cursor:pointer;white-space:nowrap">
+          会员中心
+        </button>
+      </div>`;
+  } else {
+    // 游客：显示注册/登录按钮
+    area.innerHTML = `
+      <div style="padding:12px 16px 4px">
+        <button class="ham-login-btn"
+          onclick="hamAction(()=>{ showLoginModal(); setTimeout(()=>switchModalTab('register'),50); })">
+          ✨ 注册 / 登录
+        </button>
+      </div>`;
+  }
+}
+
+/** 同步汉堡菜单内的主题标签（日/夜） */
+function syncHamThemeLabel() {
+  const label = document.getElementById('hamThemeLabel');
+  if (!label) return;
+  const isDark = document.body.classList.contains('dark') ||
+                 document.documentElement.getAttribute('data-theme') === 'dark' ||
+                 localStorage.getItem('careerpro-theme') === 'dark';
+  label.textContent = isDark ? '☀️' : '🌙';
+}
+
+/** 简单 HTML 转义（防 XSS） */
+function escapeHtml(str) {
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
 }
 
 </script>
