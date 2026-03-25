@@ -1999,6 +1999,9 @@ option{background:var(--bg3);color:var(--text)}
 <div id="regSuccessModal" style="display:none;position:fixed;inset:0;z-index:1200;background:rgba(0,0,0,.7);backdrop-filter:blur(8px);align-items:center;justify-content:center">
   <div style="background:var(--bg2);border:1px solid var(--border-gold);border-radius:18px;padding:24px 24px 20px;width:min(440px,94vw);box-shadow:0 12px 48px rgba(0,0,0,.75);position:relative">
 
+    <!-- 右上角关闭（放弃注册） -->
+    <button onclick="cancelReg()" title="放弃注册" style="position:absolute;top:12px;right:14px;background:none;border:none;cursor:pointer;font-size:18px;color:var(--text3);line-height:1;padding:4px 6px;border-radius:6px;transition:color .2s" onmouseover="this.style.color='var(--red2)'" onmouseout="this.style.color='var(--text3)'">✕</button>
+
     <!-- 标题 -->
     <div style="font-size:19px;font-weight:700;color:var(--gold);margin-bottom:4px;text-align:center">☁️ 完成注册 · 在线验证</div>
     <div style="font-size:12px;color:var(--text3);text-align:center;margin-bottom:16px">验证激活码有效性，完成后账号正式生效</div>
@@ -2192,7 +2195,7 @@ option{background:var(--bg3);color:var(--text)}
       <span class="logo-name">CareerPro</span>
       <span class="logo-sub">易学易升</span>
     </div>
-    <span class="ver" id="verBadge" title="构建日期">v11.3</span>
+    <span class="ver" id="verBadge" title="构建日期">v11.3.1</span>
     <span style="margin-left:10px;padding:3px 10px;border-radius:20px;background:var(--gold-dim);border:1px solid var(--border2);font-size:11px;color:var(--gold);white-space:nowrap;letter-spacing:.5px">
       👤 管理员：张少涵 &nbsp;QQ&nbsp;<a href="https://wpa.qq.com/msgrd?v=3&uin=1262607072&site=qq&menu=yes" target="_blank" style="color:var(--gold);text-decoration:none;font-weight:700">1262607072</a>
     </span>
@@ -4420,7 +4423,7 @@ option{background:var(--bg3);color:var(--text)}
     <span class="footer-dot">·</span>
     <a class="footer-link" href="https://www.iguopin.com" target="_blank">国聘网</a>
     <span class="footer-dot">·</span>
-    <span style="color:var(--text3)" id="footerVer">v11.3</span>
+    <span style="color:var(--text3)" id="footerVer">v11.3.1</span>
   </div>
 </footer>
 
@@ -5237,7 +5240,7 @@ function applyTheme(theme) {
 }
 
 // ==================== 版本信息 ====================
-const APP_VERSION   = 'v11.3';
+const APP_VERSION   = 'v11.3.1';
 const BUILD_DATE    = '2026-03-26';   // ← 每次修改时同步更新此日期
 (function injectVersion(){
   const badge   = document.getElementById('verBadge');
@@ -5596,6 +5599,18 @@ function doRegister() {
 
 // ==================== 注册 Gist 验证弹窗 ====================
 
+// 放弃注册：清空待注册缓存 + 重置弹窗 + 关闭
+function cancelReg() {
+  _pendingUser = _pendingPass = _pendingKey = '';
+  // 重置弹窗内部状态，方便下次打开时干净
+  const msgEl = document.getElementById('regSyncMsg');
+  if (msgEl) msgEl.style.display = 'none';
+  const btn = document.getElementById('regStep2Btn');
+  if (btn) { btn.textContent = '☁️ 同步到 Gist 后台'; btn.disabled = false; }
+  document.getElementById('regSuccessModal').style.display = 'none';
+  showToast('⚠️ 注册已取消，激活码未消耗');
+}
+
 // 临时缓存待注册信息（注册前不写localStorage）
 let _pendingUser    = '';
 let _pendingPass    = '';
@@ -5665,8 +5680,7 @@ async function doRegStep2() {
     btn.textContent = '✅ 验证完成';
 
     const s2 = document.getElementById('regStep2Indicator');
-    s2.style.background = 'rgba(34,197,94,.15)'; s2.style.borderColor = 'rgba(34,197,94,.4)'; s2.style.color = '#22c55e';
-    s2.textContent = '✅ 步骤 2：已完成';
+    if (s2) { s2.style.background = 'rgba(34,197,94,.15)'; s2.style.borderColor = 'rgba(34,197,94,.4)'; s2.style.color = '#22c55e'; s2.textContent = '✅ 步骤 2：已完成'; }
 
     setTimeout(() => {
       document.getElementById('regSuccessModal').style.display = 'none';
