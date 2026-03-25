@@ -1849,8 +1849,21 @@ option{background:var(--bg3);color:var(--text)}
   .tbr-clock,.tbr-sep,.topbar-stats{ display:none!important; }
   /* 全行业全开 / 论坛全开 → 收进汉堡菜单，顶栏隐藏 */
   .tbtn-gold,.tbtn-ghost{ display:none!important; }
-  /* 登录按钮：只在未登录时才在顶栏显示，已登录则用头像 */
-  .tbtn-outline{ display:none; }
+  /* 登录按钮：手机端精简为图标模式（只保留🔑图标，不显示文字） */
+  .tbtn-outline{
+    padding: 0 !important;
+    width: 36px !important;
+    height: 36px !important;
+    min-width: 36px !important;
+    border-radius: 10px !important;
+    font-size: 0 !important;          /* 隐藏文字 */
+    letter-spacing: 0 !important;
+  }
+  .tbtn-outline::before{
+    content: '🔑';
+    font-size: 16px !important;
+    display: block;
+  }
   /* 用户徽章精简但保留头像（易于点击） */
   .user-badge{
     padding: 0 8px;
@@ -2198,6 +2211,16 @@ option{background:var(--bg3);color:var(--text)}
   #keyExpiredModal .modal-box{ padding:24px 20px 28px; }
   #keyExpiredModal .mbtn-submit{ height:46px; }
 
+  /* ===== 云端同步弹窗手机端适配 ===== */
+  #cloudSyncModal .modal-box{
+    padding: 24px 20px 28px !important;  /* 覆盖行内 style 的 padding */
+  }
+  #cloudSyncModal .modal-box > div:first-child{ margin-bottom:14px !important; }
+  #cloudSyncModal .modal-box button{
+    min-height: 48px !important;          /* 触摸友好大按钮 */
+    font-size: 15px !important;
+  }
+
   /* ===== VIP 墙弹窗 ===== */
   .vip-wall-box{ padding:24px 18px 24px !important; }
   .vip-wall-title{ font-size:20px; }
@@ -2473,6 +2496,37 @@ option{background:var(--bg3);color:var(--text)}
 #noNetworkOverlay button:hover{transform:scale(1.04)}
 </style>
 
+<!-- ☁️ 登录后云端同步询问弹窗（每次登录都弹） -->
+<div class="modal-overlay" id="cloudSyncModal" style="z-index:9999" onclick="if(event.target===this)closeSyncModal(false)">
+  <div class="modal-box" style="max-width:420px;padding:28px 28px 24px">
+    <div style="text-align:center;margin-bottom:18px">
+      <div style="font-size:32px;margin-bottom:8px">☁️</div>
+      <div style="font-size:17px;font-weight:700;color:var(--text1);margin-bottom:6px">云端数据同步</div>
+      <div style="font-size:13px;color:var(--text3);line-height:1.7">开启后，每次登录自动从云端恢复数据<br>（简历/收藏/日记等），关闭页面前自动备份</div>
+    </div>
+    <!-- 需配置 Gist ID 提示 -->
+    <div id="syncModalGistTip" style="display:none;background:rgba(255,180,0,.08);border:1px solid rgba(255,180,0,.25);border-radius:8px;padding:10px 12px;font-size:12px;color:var(--text3);margin-bottom:14px;line-height:1.6">
+      ⚠️ 检测到未配置 Gist ID，自动同步需先在<strong style="color:var(--gold)">会员中心 → 云端同步</strong>中完成配置
+    </div>
+    <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:18px">
+      <!-- 开启自动同步 -->
+      <button onclick="confirmCloudSync(true)"
+        style="width:100%;padding:13px 0;background:linear-gradient(135deg,var(--gold2),var(--gold));color:#111;border:none;border-radius:10px;font-size:14px;font-weight:700;cursor:pointer;transition:opacity .18s"
+        onmouseover="this.style.opacity='.88'" onmouseout="this.style.opacity='1'">
+        ✅ 开启自动同步
+      </button>
+      <!-- 本次不同步 -->
+      <button onclick="confirmCloudSync(false)"
+        style="width:100%;padding:13px 0;background:var(--bg3);color:var(--text2);border:1px solid var(--border);border-radius:10px;font-size:14px;font-weight:600;cursor:pointer;transition:all .18s"
+        onmouseover="this.style.borderColor='var(--gold)';this.style.color='var(--gold)'"
+        onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--text2)'">
+        暂不开启，跳过
+      </button>
+    </div>
+    <div style="font-size:11px;color:var(--text3);text-align:center;opacity:.75">每次登录都会弹出此提示 · 需要 GitHub Gist 配置</div>
+  </div>
+</div>
+
 <!-- 登录/注册 模态框 -->
 <div class="modal-overlay" id="loginModal" onclick="closeLoginModalIfOuter(event)">
   <div class="modal-box">
@@ -2494,6 +2548,25 @@ option{background:var(--bg3);color:var(--text)}
         <input type="password" id="loginPass" placeholder="输入密码" autocomplete="current-password" onkeydown="if(event.key==='Enter')doLogin()" />
       </div>
       <div class="modal-err" id="loginErr">账号或密码错误，请重试</div>
+      <!-- 换设备登录：折叠区，填 Gist ID 后可从云端同步账号 -->
+      <div style="margin-bottom:14px">
+        <div onclick="toggleLoginGistPanel()" style="display:flex;align-items:center;gap:6px;font-size:12px;color:var(--text3);cursor:pointer;user-select:none;padding:4px 0" id="loginGistToggle">
+          <span id="loginGistArrow" style="transition:transform .2s;display:inline-block">▶</span>
+          换了设备 / 浏览器？点此从云端同步账号
+        </div>
+        <div id="loginGistPanel" style="display:none;margin-top:8px;background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:12px 14px">
+          <div style="font-size:12px;color:var(--text3);margin-bottom:8px;line-height:1.6">
+            填写注册时绑定的 <strong style="color:var(--text2)">Gist ID</strong>，系统将从云端拉取您的账号信息到本设备。
+          </div>
+          <div style="display:flex;gap:8px;align-items:center">
+            <input type="text" id="loginGistIdInput" placeholder="粘贴 Gist ID（32位字母数字）"
+              style="flex:1;background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:8px 12px;font-size:13px;color:var(--text1);outline:none;font-family:monospace"
+              onfocus="this.style.borderColor='var(--gold)'" onblur="this.style.borderColor='var(--border)'"
+              onkeydown="if(event.key==='Enter')doLogin()" />
+          </div>
+          <div style="font-size:11px;color:var(--text3);margin-top:6px">首次在此设备登录时填写，之后此设备自动记住，无需重填。</div>
+        </div>
+      </div>
       <!-- 用户协议勾选 -->
       <div style="display:flex;align-items:flex-start;gap:8px;margin:0 0 14px;font-size:12px;color:var(--text3);line-height:1.6">
         <input type="checkbox" id="loginAgreeChk" style="margin-top:2px;width:15px;height:15px;flex-shrink:0;accent-color:var(--gold);cursor:pointer" />
@@ -2915,6 +2988,14 @@ option{background:var(--bg3);color:var(--text)}
     </span>
     <span class="ham-item-arrow">›</span>
   </button>
+  <button class="ham-item" onclick="hamAction(()=>hamGoCert())">
+    <span class="ham-item-icon">📜</span>
+    <span class="ham-item-text">
+      <span class="ham-item-label">考证中心</span>
+      <span class="ham-item-sub">法律 · 金融 · IT · 特种作业证</span>
+    </span>
+    <span class="ham-item-arrow">›</span>
+  </button>
 
   <div class="ham-divider"></div>
 
@@ -3206,8 +3287,8 @@ option{background:var(--bg3);color:var(--text)}
 
     <div class="sec-title">▍第三方聚合平台</div>
     <div class="grid g4">
-      <a class="card" href="https://rczp.china-railway.com.cn" target="_blank"><div class="card-name">铁路人才网</div><div class="card-desc">专注铁路行业的招聘平台</div><div class="card-tag tag-blue">专业</div></a>
-      <a class="card" href="https://rczp.china-railway.com.cn" target="_blank"><div class="card-name">铁路HR网</div><div class="card-desc">铁路人力资源信息平台</div><div class="card-tag tag-blue">专业</div></a>
+      <a class="card" href="https://www.iguopin.com/job/list?keyword=%E9%93%81%E8%B7%AF%E5%B1%80" target="_blank"><div class="card-name">国聘-铁路局岗</div><div class="card-desc">国资委平台·铁路局全国汇总</div><div class="card-tag tag-blue">聚合</div></a>
+      <a class="card" href="https://www.zhaopin.com/jobs?kw=%E9%93%81%E8%B7%AF+%E6%8B%9B%E8%81%98" target="_blank"><div class="card-name">智联-铁路专区</div><div class="card-desc">铁路相关岗位搜索汇总</div><div class="card-tag tag-blue">聚合</div></a>
       <a class="card" href="https://www.zhaopin.com/jobs?kw=%E9%93%81%E8%B7%AF%E5%B1%80+%E6%8B%9B%E8%81%98" target="_blank"><div class="card-name">智联-铁路岗</div><div class="card-desc">智联招聘铁路局岗位搜索</div><div class="card-tag tag-teal">聚合</div></a>
       <a class="card" href="https://crrc.hotjob.cn" target="_blank"><div class="card-name">中国中车校招</div><div class="card-desc">高铁动车组制造央企</div><div class="card-tag tag-teal">央企</div></a>
     </div>
@@ -3460,7 +3541,7 @@ option{background:var(--bg3);color:var(--text)}
     <div class="grid g4">
       <a class="card" href="https://bbs.byr.cn" target="_blank"><div class="card-name">北邮人论坛</div><div class="card-desc">北京邮电大学，通信/互联网求职强</div><div class="card-tag tag-green">211通信</div></a>
       <a class="card" href="https://career.csu.edu.cn" target="_blank"><div class="card-name">中南大学就业信息网</div><div class="card-desc">中南大学官方就业招聘平台</div><div class="card-tag tag-green">211</div></a>
-      <a class="card" href="http://job.bjtu.edu.cn" target="_blank"><div class="card-name">北京交大就业信息网</div><div class="card-desc">北京交通大学官方就业招聘平台</div><div class="card-tag tag-teal">铁路院校</div></a>
+      <a class="card" href="https://career.bjtu.edu.cn" target="_blank"><div class="card-name">北京交大就业信息网</div><div class="card-desc">北京交通大学官方就业招聘平台</div><div class="card-tag tag-teal">铁路院校</div></a>
       <a class="card" href="https://nuist.91job.org.cn" target="_blank"><div class="card-name">南信大就业信息网</div><div class="card-desc">南京信息工程大学官方就业平台</div><div class="card-tag tag-green">211</div></a>
       <a class="card" href="https://career.buct.edu.cn" target="_blank"><div class="card-name">北化工就业信息网</div><div class="card-desc">北京化工大学官方就业招聘平台</div><div class="card-tag tag-teal">211</div></a>
       <a class="card" href="https://career.sysu.edu.cn" target="_blank"><div class="card-name">中山大学就业信息网</div><div class="card-desc">中山大学官方就业招聘平台</div><div class="card-tag tag-blue">985</div></a>
@@ -3479,7 +3560,7 @@ option{background:var(--bg3);color:var(--text)}
       <a class="card" href="https://www.zhihu.com/topic/20014574/hot" target="_blank"><div class="card-name">知乎·校园招聘</div><div class="card-desc">校招攻略、面试经验、内推汇总</div><div class="card-tag tag-blue">校招</div></a>
       <a class="card" href="https://maimai.cn/web/search_center?type=feed" target="_blank"><div class="card-name">脉脉·职言</div><div class="card-desc">职场匿名吐槽+内推信息最真实</div><div class="card-tag tag-teal">内推</div></a>
       <a class="card" href="https://juejin.cn/jobs" target="_blank"><div class="card-name">稀土掘金 · 招聘</div><div class="card-desc">互联网/科技岗社区招聘板块</div><div class="card-tag tag-green">互联网</div></a>
-      <a class="card" href="https://www.nowcoder.com/discuss" target="_blank"><div class="card-name">牛客·职场讨论</div><div class="card-desc">互联网面经+海外求职+内推帖</div><div class="card-tag tag-blue">留学求职</div></a>
+      <a class="card" href="https://www.v2ex.com/go/career" target="_blank"><div class="card-name">V2EX·职场节点</div><div class="card-desc">互联网从业者薪资+求职讨论</div><div class="card-tag tag-blue">技术</div></a>
       <a class="card" href="https://www.jobui.com/" target="_blank"><div class="card-name">职友集（评价情报）</div><div class="card-desc">公司评价+薪资情报+面试题库</div><div class="card-tag tag-orange">薪资情报</div></a>
     </div>
 
@@ -3864,7 +3945,7 @@ option{background:var(--bg3);color:var(--text)}
       <a class="card" href="https://www.xiaohongshu.com/search_result?keyword=%E4%BF%9D%E7%A0%94%E7%BB%8F%E9%AA%8C" target="_blank"><div class="card-name">小红书-保研经验</div><div class="card-desc">真实上岸贴 · 夏令营面试分享</div><div class="card-tag tag-pink">经验</div></a>
       <a class="card" href="https://www.zhihu.com/topic/19553729/hot" target="_blank"><div class="card-name">知乎-保研专题</div><div class="card-desc">院校对比 · 专业解读 · 导师联系</div><div class="card-tag tag-blue">问答</div></a>
       <a class="card" href="https://www.bilibili.com/search?keyword=%E4%BF%9D%E7%A0%94" target="_blank"><div class="card-name">B站-保研攻略</div><div class="card-desc">夏令营备考·面试技巧视频</div><div class="card-tag tag-pink">视频</div></a>
-      <a class="card" href="https://github.com/jwasham/coding-interview-university" target="_blank"><div class="card-name">保研笔记 GitHub</div><div class="card-desc">开源保研资料·各校录取数据</div><div class="card-tag tag-purple">开源</div></a>
+      <a class="card" href="https://www.baoyantong.cn" target="_blank"><div class="card-name">保研通·开放数据</div><div class="card-desc">各校录取数据·夏令营信息库</div><div class="card-tag tag-purple">数据</div></a>
     </div>
   </div>
 
@@ -4960,6 +5041,28 @@ option{background:var(--bg3);color:var(--text)}
           <button class="dash-qbtn" onclick="requireLogin(()=>sw('resume'),'简历工坊')">✏️ 去写简历</button>
           <button class="dash-qbtn" onclick="mcNav('aiinterview')">🤖 AI面试题</button>
         </div>
+        <!-- 云端同步栏 -->
+        <div id="dashSyncBar" style="margin-top:16px;background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:14px 16px">
+          <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px">
+            <div>
+              <div style="font-size:13px;font-weight:600;color:var(--text1);margin-bottom:3px">☁️ 云端数据同步</div>
+              <div id="dashSyncStatus" style="font-size:12px;color:var(--text3)">加载中…</div>
+            </div>
+            <div style="display:flex;gap:8px;flex-shrink:0">
+              <button id="btnBackupCloud" onclick="backupToCloud(false)"
+                style="background:linear-gradient(135deg,var(--gold2),var(--gold));color:#111;border:none;border-radius:8px;padding:7px 14px;font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap;transition:opacity .2s"
+                onmouseover="this.style.opacity='.85'" onmouseout="this.style.opacity='1'">
+                ☁️ 备份到云端
+              </button>
+              <button id="btnRestoreCloud" onclick="restoreFromCloud(false)"
+                style="background:var(--bg3);color:var(--text1);border:1px solid var(--border);border-radius:8px;padding:7px 14px;font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap;transition:all .2s"
+                onmouseover="this.style.borderColor='var(--gold)';this.style.color='var(--gold)'"
+                onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--text1)'">
+                📥 从云端恢复
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
 
       <!-- ②收藏夹 -->
@@ -6019,7 +6122,7 @@ function applyTheme(theme) {
 }
 
 // ==================== 版本信息 ====================
-const APP_VERSION   = 'v11.3.12';
+const APP_VERSION   = 'v11.3.18';
 const BUILD_DATE    = '2026-03-26';   // ← 每次修改时同步更新此日期
 (function injectVersion(){
   const badge   = document.getElementById('verBadge');
@@ -6052,11 +6155,21 @@ function getKeyCache() {
 function saveKeyCache(obj) { localStorage.setItem(KEY_CACHE_KEY, JSON.stringify(obj)); }
 function clearKeyCache()   { localStorage.removeItem(KEY_CACHE_KEY); }
 
+// SHA-256 通用工具（返回 hex 字符串）
+async function sha256(str) {
+  const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
+  return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2,'0')).join('');
+}
+
+// 密码哈希（加盐）
+async function hashPass(pass) {
+  return await sha256('careerpro-pass::' + pass);
+}
+
 // 生成不可逆绑定指纹（SHA-256，异步）
 async function genBindFingerprint(username, pass, keyCode, usedAt) {
   const raw = `${username}::${pass}::${keyCode}::${usedAt}::careerpro-bind`;
-  const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(raw));
-  return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2,'0')).join('');
+  return await sha256(raw);
 }
 
 // ---- Gist 在线验证 Key（注册/登录均使用） ----
@@ -6115,7 +6228,8 @@ async function checkUserKeyValidOnline(username) {
           const db = JSON.parse(file.content);
           const k  = db[keyCode.toUpperCase()];
           if (!k || k.disabled) {
-            clearKeyCache();
+            // 先把禁用状态写入缓存，让同步版本也能立即感知，不再放行
+            saveKeyCache({ keyCode, days: k ? k.days||0 : 0, usedAt: null, disabled: true, expire: 0, cachedAt: Date.now() });
             return { valid: false };
           }
           // 兼容 usedAt（毫秒）和 boundAt（ISO字符串）两种字段
@@ -6182,11 +6296,13 @@ async function consumeKey(code, username, pass, gistId, token) {
     const originalKey = remoteDB[code.toUpperCase()] || {};
     remoteDB[code.toUpperCase()] = { ...originalKey, ...keyInfo };
 
-    // 更新 用户表
+    // 更新 用户表（含密码哈希，支持跨设备登录）
     const userFile = gistData.files && gistData.files[GIST_USER_FILE_CLIENT];
     let remoteUsers = {};
     if (userFile && userFile.content) { try { remoteUsers = JSON.parse(userFile.content); } catch(e) {} }
+    const passHash = await hashPass(pass);
     remoteUsers[username] = {
+      passHash,
       keyCode: code.toUpperCase(),
       joinDate: new Date().toLocaleDateString('zh-CN'),
       updatedAt: new Date().toISOString()
@@ -6310,6 +6426,7 @@ function closeDropdown() {
 }
 document.addEventListener('click', () => closeDropdown());
 
+
 function showLoginModal() {
   document.getElementById('loginModal').classList.add('show');
   switchModalTab('login');
@@ -6329,6 +6446,326 @@ function switchModalTab(tab) {
   if (tab === 'register') { /* Gist ID 由用户在步骤1填写，不自动拉取Key库 */ }
 }
 
+// ==================== 跨设备账号同步 ====================
+// 折叠面板展开/收起
+function toggleLoginGistPanel() {
+  const panel = document.getElementById('loginGistPanel');
+  const arrow = document.getElementById('loginGistArrow');
+  const show = panel.style.display === 'none';
+  panel.style.display = show ? 'block' : 'none';
+  arrow.style.transform = show ? 'rotate(90deg)' : '';
+}
+
+// 从 Gist careerpro-userdb.json 拉取指定用户的账号信息，写入本地 localStorage
+// 用于换设备/换浏览器后本地无账号的情况
+// manualGistId：用户在登录框手动填写的 Gist ID（可选）
+// 返回 true 表示成功同步，false 表示未找到或网络失败
+async function syncUserFromGist(username, manualGistId) {
+  const cfg = getGistCfg();
+  const gistId = manualGistId || cfg.gistId;
+  if (!gistId) return false;
+
+  // 如果用户手动填了 Gist ID，先保存到本地配置
+  if (manualGistId && manualGistId !== cfg.gistId) {
+    cfg.gistId = manualGistId;
+    localStorage.setItem(GIST_CFG_KEY_CLIENT, JSON.stringify(cfg));
+  }
+
+  try {
+    const res = await fetch(`https://api.github.com/gists/${gistId}`, {
+      signal: AbortSignal.timeout(10000)
+    });
+    if (!res.ok) return false;
+    const data = await res.json();
+    const file = data.files && data.files[GIST_USER_FILE_CLIENT];
+    if (!file || !file.content) return false;
+    const remoteUsers = JSON.parse(file.content);
+    const ru = remoteUsers[username];
+    if (!ru || !ru.passHash) return false; // 云端无该账号或无哈希
+
+    // 写入本地（不存明文密码，只存哈希 + keyCode + joinDate）
+    const users = getUsers();
+    if (!users[username]) {
+      users[username] = {
+        pass: '',
+        passHash: ru.passHash,
+        keyCode: ru.keyCode || '',
+        joinDate: ru.joinDate || ''
+      };
+      saveUsers(users);
+      return true;
+    }
+    // 已有账号但缺少哈希 → 补充哈希（在线迁移）
+    if (!users[username].passHash && ru.passHash) {
+      users[username].passHash = ru.passHash;
+      saveUsers(users);
+    }
+    return true;
+  } catch(e) {
+    console.warn('[CareerPro] syncUserFromGist 失败:', e);
+    return false;
+  }
+}
+
+// ==================== 云端数据备份 / 恢复 ====================
+// 用户数据涉及的所有 localStorage key（用户维度）
+function getUserDataKeys(username) {
+  return {
+    favs:       `careerpro_mc_${username}_favs`,
+    kanban:     `careerpro_mc_${username}_kanban`,
+    interviews: `careerpro_mc_${username}_interviews`,
+    diary:      `careerpro_mc_${username}_diary`,
+    referrals:  `careerpro_mc_${username}_referrals`,
+    resume:     `careerpro_resume_${username}`,
+    wrongbook:  `careerpro_wrongbook_${username}`
+  };
+}
+
+// 收集本地数据 → 生成备份对象
+function collectLocalData(username) {
+  const keys = getUserDataKeys(username);
+  const snapshot = { _version: 1, _user: username, _backupAt: new Date().toISOString() };
+  for (const [field, lsKey] of Object.entries(keys)) {
+    const raw = localStorage.getItem(lsKey);
+    if (raw && raw !== 'null' && raw !== '[]' && raw !== '{}') {
+      try { snapshot[field] = JSON.parse(raw); } catch(e) { /* skip */ }
+    }
+  }
+  return snapshot;
+}
+
+// 把备份对象写回本地 localStorage
+function restoreLocalData(username, snapshot) {
+  const keys = getUserDataKeys(username);
+  for (const [field, lsKey] of Object.entries(keys)) {
+    if (snapshot[field] !== undefined) {
+      localStorage.setItem(lsKey, JSON.stringify(snapshot[field]));
+    }
+  }
+}
+
+// Gist 里备份文件名（每个用户一个文件，避免冲突）
+function getUserBackupFile(username) {
+  return `careerpro-data-${username}.json`;
+}
+
+// ☁️ 备份到云端
+async function backupToCloud(silent) {
+  const user = currentUser();
+  if (!user) { showToast('请先登录'); return false; }
+  const cfg = getGistCfg();
+  if (!cfg.gistId) {
+    if (!silent) showToast('⚠️ 未配置 Gist ID，无法备份');
+    return false;
+  }
+
+  const btn = document.getElementById('btnBackupCloud');
+  if (btn) { btn.disabled = true; btn.textContent = '⏳ 备份中...'; }
+
+  try {
+    const snapshot = collectLocalData(user);
+    const fieldCount = Object.keys(snapshot).filter(k => !k.startsWith('_')).length;
+    if (fieldCount === 0) {
+      if (!silent) showToast('📭 本地暂无数据可备份');
+      return false;
+    }
+
+    // 先 GET 最新 Gist，避免覆盖其他文件
+    const getRes = await fetch(`https://api.github.com/gists/${cfg.gistId}`, {
+      headers: cfg.token ? { 'Authorization': `token ${cfg.token}` } : {},
+      signal: AbortSignal.timeout(12000)
+    });
+    if (!getRes.ok) throw new Error(`Gist 请求失败 (${getRes.status})`);
+
+    const headers = { 'Content-Type': 'application/json' };
+    if (cfg.token) headers['Authorization'] = `token ${cfg.token}`;
+
+    await fetch(`https://api.github.com/gists/${cfg.gistId}`, {
+      method: 'PATCH',
+      headers,
+      body: JSON.stringify({ files: { [getUserBackupFile(user)]: { content: JSON.stringify(snapshot, null, 2) } } }),
+      signal: AbortSignal.timeout(15000)
+    });
+
+    const ts = new Date().toLocaleString('zh-CN');
+    localStorage.setItem(`careerpro_last_backup_${user}`, ts);
+    if (!silent) {
+      showToast(`✅ 数据已备份到云端 · ${ts}`);
+      renderDashboardSyncBar(user);
+    }
+    return true;
+  } catch(e) {
+    if (!silent) showToast('❌ 备份失败：' + e.message);
+    return false;
+  } finally {
+    if (btn) { btn.disabled = false; btn.textContent = '☁️ 备份到云端'; }
+  }
+}
+
+// 📥 从云端恢复
+async function restoreFromCloud(silent) {
+  const user = currentUser();
+  if (!user) { showToast('请先登录'); return false; }
+  const cfg = getGistCfg();
+  if (!cfg.gistId) {
+    if (!silent) showToast('⚠️ 未配置 Gist ID，无法恢复');
+    return false;
+  }
+
+  const btn = document.getElementById('btnRestoreCloud');
+  if (btn) { btn.disabled = true; btn.textContent = '⏳ 恢复中...'; }
+
+  try {
+    const res = await fetch(`https://api.github.com/gists/${cfg.gistId}`, {
+      headers: cfg.token ? { 'Authorization': `token ${cfg.token}` } : {},
+      signal: AbortSignal.timeout(12000)
+    });
+    if (!res.ok) throw new Error(`Gist 请求失败 (${res.status})`);
+    const data = await res.json();
+    const file = data.files && data.files[getUserBackupFile(user)];
+    if (!file || !file.content) {
+      if (!silent) showToast('📭 云端暂无此账号的备份数据');
+      return false;
+    }
+
+    const snapshot = JSON.parse(file.content);
+    if (snapshot._user && snapshot._user !== user) {
+      if (!silent) showToast('⚠️ 备份数据归属账号不匹配，已取消');
+      return false;
+    }
+
+    if (!silent) {
+      const backupAt = snapshot._backupAt ? new Date(snapshot._backupAt).toLocaleString('zh-CN') : '未知';
+      const ok = confirm(`确认从云端恢复数据？\n\n备份时间：${backupAt}\n\n⚠️ 本地当前数据将被覆盖，请确认！`);
+      if (!ok) return false;
+    }
+
+    restoreLocalData(user, snapshot);
+    const ts = new Date().toLocaleString('zh-CN');
+    localStorage.setItem(`careerpro_last_backup_${user}`, snapshot._backupAt
+      ? new Date(snapshot._backupAt).toLocaleString('zh-CN') : ts);
+
+    if (!silent) {
+      showToast('✅ 数据已从云端恢复，页面即将刷新');
+      setTimeout(() => location.reload(), 1200);
+    }
+    return true;
+  } catch(e) {
+    if (!silent) showToast('❌ 恢复失败：' + e.message);
+    return false;
+  } finally {
+    if (btn) { btn.disabled = false; btn.textContent = '📥 从云端恢复'; }
+  }
+}
+
+// 登录后静默自动恢复：只补本地没有的字段，不强制覆盖本地已有数据
+async function autoRestoreOnLogin(user) {
+  const cfg = getGistCfg();
+  if (!cfg.gistId) return;
+  try {
+    const res = await fetch(`https://api.github.com/gists/${cfg.gistId}`, {
+      headers: cfg.token ? { 'Authorization': `token ${cfg.token}` } : {},
+      signal: AbortSignal.timeout(10000)
+    });
+    if (!res.ok) return;
+    const data = await res.json();
+    const file = data.files && data.files[getUserBackupFile(user)];
+    if (!file || !file.content) return;
+    const snapshot = JSON.parse(file.content);
+    if (snapshot._user && snapshot._user !== user) return;
+
+    const keys = getUserDataKeys(user);
+    let restored = 0;
+    for (const [field, lsKey] of Object.entries(keys)) {
+      // 只补本地没有或为空的字段
+      const local = localStorage.getItem(lsKey);
+      const isEmpty = !local || local === 'null' || local === '[]' || local === '{}';
+      if (isEmpty && snapshot[field] !== undefined) {
+        localStorage.setItem(lsKey, JSON.stringify(snapshot[field]));
+        restored++;
+      }
+    }
+    if (restored > 0) {
+      const backupAt = snapshot._backupAt ? new Date(snapshot._backupAt).toLocaleString('zh-CN') : '';
+      showToast(`☁️ 已从云端恢复 ${restored} 项数据${backupAt ? '（备份于 ' + backupAt + '）' : ''}`);
+      // 刷新会员中心（如果当前在会员中心）
+      if (typeof renderDashboard === 'function') renderDashboard();
+    }
+  } catch(e) { /* 静默失败，不打扰用户 */ }
+}
+
+// ==================== 云端同步询问弹窗（每次登录后弹出） ====================
+// _cloudSyncUser 缓存当前询问的用户名，供 confirmCloudSync 使用
+let _cloudSyncUser = null;
+
+function showCloudSyncModal(user) {
+  _cloudSyncUser = user;
+  const modal = document.getElementById('cloudSyncModal');
+  if (!modal) return;
+  // 检查是否已配置 Gist ID，给出友好提示
+  const cfg = getGistCfg();
+  const tipEl = document.getElementById('syncModalGistTip');
+  if (tipEl) tipEl.style.display = cfg.gistId ? 'none' : 'block';
+  modal.classList.add('show');
+}
+
+function closeSyncModal(enabledSync) {
+  const modal = document.getElementById('cloudSyncModal');
+  if (modal) modal.classList.remove('show');
+}
+
+async function confirmCloudSync(enable) {
+  closeSyncModal();
+  const user = _cloudSyncUser;
+  if (enable) {
+    // 用户选择开启自动同步
+    localStorage.setItem('careerpro_auto_sync', '1');
+    showToast('✅ 已开启自动同步');
+    // 立即执行一次从云端恢复（只补没有的字段，不覆盖已有数据）
+    if (user) {
+      setTimeout(() => autoRestoreOnLogin(user), 400);
+    }
+    // 注册 beforeunload 自动备份（关闭/刷新页面前备份到云端）
+    registerAutoBackupOnUnload();
+  } else {
+    // 用户选择不开启
+    localStorage.setItem('careerpro_auto_sync', '0');
+    // 延迟弹出提示
+    setTimeout(() => {
+      showToast('💡 如需同步，可前往「会员中心」手动备份/恢复数据');
+    }, 300);
+  }
+}
+
+// 注册页面关闭/刷新前自动备份
+let _autoBackupRegistered = false;
+function registerAutoBackupOnUnload() {
+  if (_autoBackupRegistered) return;
+  _autoBackupRegistered = true;
+  window.addEventListener('beforeunload', function(e) {
+    const user = currentUser();
+    if (!user) return;
+    if (localStorage.getItem('careerpro_auto_sync') !== '1') return;
+    const cfg = getGistCfg();
+    if (!cfg.gistId) return;
+    // 使用 sendBeacon 发送备份请求（fetch 在 beforeunload 中不可靠）
+    // 先收集数据，然后用 fetch keepalive 发送
+    const snapshot = collectLocalData(user);
+    snapshot._backupAt = new Date().toISOString();
+    snapshot._user = user;
+    // 用 navigator.sendBeacon 发 PATCH 不支持自定义方法，改用 fetch + keepalive
+    const url = `https://api.github.com/gists/${cfg.gistId}`;
+    const fileName = getUserBackupFile(user);
+    const body = JSON.stringify({
+      files: { [fileName]: { content: JSON.stringify(snapshot, null, 2) } }
+    });
+    const headers = { 'Content-Type': 'application/json' };
+    if (cfg.token) headers['Authorization'] = `token ${cfg.token}`;
+    // keepalive 允许在页面卸载时发送
+    fetch(url, { method: 'PATCH', headers, body, keepalive: true }).catch(() => {});
+  });
+}
+
 async function doLogin() {
   const user = document.getElementById('loginUser').value.trim();
   const pass = document.getElementById('loginPass').value;
@@ -6343,11 +6780,65 @@ async function doLogin() {
     return;
   }
   if (!user || !pass) { errEl.textContent = '请填写账号和密码'; errEl.style.display = 'block'; return; }
-  const users = getUsers();
-  const uData = users[user];
+  let users = getUsers();
+  let uData = users[user];
+
+  // ── 本地无该账号 → 尝试从 Gist 拉取（跨设备登录支持）──
+  if (!uData) {
+    errEl.textContent = '⏳ 本地无账号记录，正在从云端同步...';
+    errEl.style.color = 'var(--text3)'; errEl.style.display = 'block';
+    const manualGistId = (document.getElementById('loginGistIdInput')?.value || '').trim();
+    const synced = await syncUserFromGist(user, manualGistId || undefined);
+    if (synced) {
+      users = getUsers();
+      uData = users[user];
+    }
+    errEl.style.color = '';
+  }
+
   // 旧格式兼容（用户表值直接是字符串密码）
   const storedPass = typeof uData === 'object' ? uData.pass : uData;
-  if (!uData || storedPass !== pass) {
+  const storedHash = typeof uData === 'object' ? uData.passHash : null;
+
+  // 密码验证：优先比对哈希，兼容明文旧账号
+  let passOk = false;
+  if (!uData) {
+    passOk = false;
+  } else if (storedHash) {
+    // 新格式：哈希比对
+    const inputHash = await hashPass(pass);
+    passOk = (inputHash === storedHash);
+  } else {
+    // 旧格式：明文比对，通过后顺手迁移为哈希
+    passOk = (storedPass === pass);
+    if (passOk && typeof uData === 'object') {
+      const h = await hashPass(pass);
+      uData.passHash = h;
+      users[user] = uData;
+      saveUsers(users);
+    }
+  }
+
+  if (!uData) {
+    // 本地和云端都找不到该账号
+    const manualFilled = (document.getElementById('loginGistIdInput')?.value || '').trim();
+    if (!manualFilled) {
+      errEl.textContent = '⚠️ 未找到账号。若您是换设备登录，请点击下方「换了设备？」填写 Gist ID 后重试';
+      // 自动展开 Gist ID 面板
+      const panel = document.getElementById('loginGistPanel');
+      const arrow = document.getElementById('loginGistArrow');
+      if (panel && panel.style.display === 'none') {
+        panel.style.display = 'block';
+        if (arrow) arrow.style.transform = 'rotate(90deg)';
+      }
+    } else {
+      errEl.textContent = '⚠️ 云端未找到该账号，请确认用户名和 Gist ID 是否正确';
+    }
+    errEl.style.display = 'block';
+    return;
+  }
+
+  if (!passOk) {
     errEl.textContent = '账号或密码错误，请重试';
     errEl.style.display = 'block';
     return;
@@ -6375,6 +6866,8 @@ async function doLogin() {
   } else {
     showToast(`欢迎回来，${user}！`);
   }
+  // 每次登录都弹出云端同步询问弹窗
+  setTimeout(() => showCloudSyncModal(user), 600);
 }
 
 function doRegister() {
@@ -6471,10 +6964,11 @@ async function doRegStep2() {
     cfg.gistId = gistId;
     localStorage.setItem(GIST_CFG_KEY_CLIENT, JSON.stringify(cfg));
 
-    // 正式写入账号（密码存本地，Key信息不存本地）
+    // 正式写入账号（明文密码仍保留用于兼容，同时存哈希供跨设备验证）
     const joinDate = new Date().toLocaleDateString('zh-CN');
     const users = getUsers();
-    users[_pendingUser] = { pass: _pendingPass, keyCode: _pendingKey, joinDate };
+    const passHash = await hashPass(_pendingPass);
+    users[_pendingUser] = { pass: _pendingPass, passHash, keyCode: _pendingKey, joinDate };
     saveUsers(users);
 
     // consumeKey：写绑定指纹 + PATCH 到 Gist
@@ -8944,10 +9438,24 @@ async function doRefreshKeyStatus() {
   // 先清除本地缓存，强制联网查最新
   clearKeyCache();
 
+  // 检查是否有 Gist ID，没有的话直接提示，不走联网
+  const cfg = getGistCfg();
+  if (!cfg.gistId) {
+    errEl.textContent = '⚠️ 未找到 Gist 配置，请重新登录以完成验证';
+    errEl.style.color = 'var(--orange2)'; errEl.style.display = 'block';
+    btn.textContent = '🔄 刷新状态'; btn.disabled = false;
+    return;
+  }
+
   try {
-    const { valid, expire, offline } = await checkUserKeyValidOnline(user);
-    if (offline) {
+    const { valid, expire, offline, noCache } = await checkUserKeyValidOnline(user);
+    if (offline && noCache) {
       errEl.textContent = '⚠️ 网络异常，无法联网验证，请检查网络后重试';
+      errEl.style.color = 'var(--orange2)'; errEl.style.display = 'block';
+      return;
+    }
+    if (offline) {
+      errEl.textContent = '⚠️ 网络请求失败，请检查网络连接后重试';
       errEl.style.color = 'var(--orange2)'; errEl.style.display = 'block';
       return;
     }
@@ -10006,6 +10514,27 @@ function renderDashboard() {
   setN('dstat-interview', kanban.filter(k => k.status === 'interview').length);
   setN('dstat-resume', resumes.length);
   setN('dstat-diary', diaries.length);
+  // 渲染同步状态栏
+  renderDashboardSyncBar(user);
+}
+
+// 渲染仪表盘云端同步状态栏
+function renderDashboardSyncBar(user) {
+  const statusEl = document.getElementById('dashSyncStatus');
+  if (!statusEl) return;
+  const cfg = getGistCfg();
+  if (!cfg.gistId) {
+    statusEl.innerHTML = '<span style="color:var(--text3)">⚠️ 未配置 Gist ID · 请先完成账号绑定或在注册时填写 Gist ID</span>';
+    return;
+  }
+  const lastBackup = localStorage.getItem(`careerpro_last_backup_${user}`);
+  const autoSync   = localStorage.getItem('careerpro_auto_sync') === '1';
+  const autoTip    = autoSync ? '· <span style="color:var(--gold)">自动同步已开启</span>' : '· 自动同步未开启（每次登录可选择）';
+  if (lastBackup) {
+    statusEl.innerHTML = `上次备份：<strong style="color:var(--text2)">${lastBackup}</strong> <span style="color:var(--text3);font-size:11px">${autoTip}</span>`;
+  } else {
+    statusEl.innerHTML = `<span style="color:var(--text3)">暂无备份记录 ${autoTip}</span>`;
+  }
 }
 
 // ============================================================
@@ -11130,6 +11659,15 @@ function hamAction(fn) {
   setTimeout(() => {
     try { fn(); } catch(e) { console.warn('[hamAction]', e); }
   }, 220);
+}
+
+/** 汉堡菜单 → 考证中心快捷跳转 */
+function hamGoCert() {
+  sw('exam');
+  setTimeout(() => {
+    const certBtn = document.querySelector('.snav-btn[onclick*="cert"]');
+    if (certBtn) certBtn.click();
+  }, 350);
 }
 
 /**
