@@ -151,10 +151,8 @@ body{
   transition:color .2s;
 }
 .logo-admin:hover{
-  color:var(--primary);
+  color:var(--accent);
   text-decoration:underline;
-}
-  letter-spacing:.5px;
 }
 .logo-sub{font-size:10px;color:var(--text3);letter-spacing:2px;text-transform:uppercase;margin-top:1px}
 .ver{
@@ -1326,32 +1324,59 @@ option{background:var(--bg3);color:var(--text)}
 }
 .vip-compare-table {
   width:100%; border-collapse:collapse;
-  font-size:13px; margin-bottom:22px;
+  font-size:12px; margin-bottom:22px;
 }
 .vip-compare-table th {
-  padding:10px 14px; font-size:12px; font-weight:700;
+  padding:10px 8px; font-size:11px; font-weight:700;
   text-align:center; border-bottom:2px solid var(--border);
 }
+.vip-compare-table th:first-child { text-align:left; padding-left:4px; }
 .vip-compare-table th.th-guest { color:var(--text3); }
 .vip-compare-table th.th-vip {
   color:var(--gold2);
   background:var(--gold-dim);
   border-radius:8px 8px 0 0;
 }
+.vip-compare-table th.th-supreme {
+  color:#d4a3ff;
+  background:linear-gradient(135deg,rgba(160,96,240,.18) 0%,rgba(212,175,55,.12) 100%);
+  border-radius:8px 8px 0 0;
+  position:relative;
+}
+.vip-compare-table th.th-supreme::after {
+  content:'推荐';
+  position:absolute; top:-8px; right:4px;
+  font-size:9px; background:linear-gradient(90deg,#a060f0,#d4a455);
+  color:#fff; padding:1px 5px; border-radius:10px; font-weight:700;
+}
 .vip-compare-table td {
-  padding:9px 14px; border-bottom:1px solid var(--border);
+  padding:8px 8px; border-bottom:1px solid var(--border);
   text-align:center; vertical-align:middle;
 }
 .vip-compare-table td:first-child {
-  text-align:left; color:var(--text2); font-size:12px;
+  text-align:left; color:var(--text2); font-size:11.5px; padding-left:4px;
 }
 .vip-compare-table td.td-vip {
   background:rgba(212,175,55,0.04);
   font-weight:600; color:var(--gold2);
 }
+.vip-compare-table td.td-supreme {
+  background:linear-gradient(135deg,rgba(160,96,240,.06) 0%,rgba(212,175,55,.04) 100%);
+  font-weight:700; color:#c080f8;
+}
+/* 分组标题行 */
+.vip-compare-table tr.vip-group-row td {
+  background:rgba(255,255,255,.03);
+  color:var(--text3); font-size:10px; font-weight:700;
+  letter-spacing:.8px; padding:6px 4px 4px;
+  border-bottom:1px solid var(--border);
+  text-transform:uppercase;
+}
 .vip-compare-table tr:last-child td { border-bottom:none; }
-.vip-check { color:var(--green2); font-size:14px; }
-.vip-cross { color:var(--text3); font-size:14px; }
+.vip-check { color:var(--green2); font-size:13px; }
+.vip-cross { color:var(--text3); font-size:13px; opacity:.5; }
+/* 当前用户等级标记 */
+.vip-col-active { outline:2px solid var(--gold); outline-offset:-1px; }
 .vip-wall-btns {
   display:flex; gap:12px; flex-direction:column;
 }
@@ -2583,42 +2608,59 @@ option{background:var(--bg3);color:var(--text)}
 /* --- Tab 栏重设计 --- */
 .tabbar {
   padding:0 24px;
-  gap:0;
-  background:var(--bg);
-  border-bottom:1px solid var(--border);
+  gap:2px;
+  background:var(--bg2);
+  border-bottom:2px solid var(--border);
   position:sticky; top:52px; z-index:300;
+  align-items:stretch;
 }
 .tab {
-  padding:11px 16px;
-  font-size:12px;
+  padding:11px 14px;
+  font-size:12.5px;
+  font-weight:500;
   gap:5px;
-  color:var(--text3);
+  color:var(--text2);
   letter-spacing:0;
+  border-bottom:3px solid transparent;
+  transition:all .2s;
 }
-.tab:hover { color:var(--text2); background:var(--bg3); border-radius:0; }
+.tab:hover {
+  color:var(--text);
+  background:var(--bg3);
+  border-radius:0;
+  border-bottom-color:var(--border2);
+}
 .tab.active {
   color:var(--accent);
   border-bottom-color:var(--accent);
   background:var(--accent-dim);
+  font-weight:700;
 }
 .tab.active .tdot { box-shadow:none; }
 .tdot { width:5px; height:5px; }
-/* Tab 徽标统一降调 */
+/* Tab 徽标增强 */
 .tbadge {
-  font-size:9px;
-  padding:1px 6px;
+  font-size:10px;
+  font-weight:700;
+  padding:1px 7px;
   border-radius:10px;
-  background:var(--bg3);
-  color:var(--text3);
-  border:none;
+  letter-spacing:.3px;
+  vertical-align:middle;
 }
 .tbadge.new-badge {
-  background:var(--accent-dim);
-  color:var(--accent);
+  background:linear-gradient(135deg,#e84040,#c82020);
+  color:#fff;
+  box-shadow:0 1px 6px rgba(232,64,64,.35);
 }
 .tbadge.pro-badge {
-  background:var(--gold-dim);
-  color:var(--gold);
+  background:linear-gradient(135deg,var(--gold),var(--gold2));
+  color:#1a1000;
+  box-shadow:0 1px 6px rgba(212,175,55,.3);
+}
+.tbadge.vip-badge {
+  background:linear-gradient(135deg,#a060f0,#7838d0);
+  color:#fff;
+  box-shadow:0 1px 6px rgba(160,96,240,.35);
 }
 
 /* --- 内容区 --- */
@@ -3116,13 +3158,61 @@ option{background:var(--bg3);color:var(--text)}
   font-weight: 600;
 }
 
+
 /* --- Tab 分隔符 --- */
 .tabbar-sep {
   width: 1px;
-  background: var(--border);
-  margin: 8px 4px;
+  background: linear-gradient(to bottom, transparent, var(--border2) 30%, var(--border2) 70%, transparent);
+  margin: 4px 8px;
   flex-shrink: 0;
+  align-self: stretch;
 }
+
+/* --- Tab 分组底色（三组视觉区分）--- */
+/* 招聘求职组：蓝色微底 */
+#tab-general,#tab-major,#tab-state,#tab-rail,#tab-zhaopin {
+  background: rgba(42,112,192,.04);
+}
+#tab-general:hover,#tab-major:hover,#tab-state:hover,#tab-rail:hover,#tab-zhaopin:hover {
+  background: rgba(42,112,192,.1);
+}
+#tab-general.active,#tab-major.active,#tab-state.active,#tab-rail.active,#tab-zhaopin.active {
+  background: var(--accent-dim);
+}
+/* 升学考试组：绿色微底 */
+#tab-dandao,#tab-education,#tab-exam {
+  background: rgba(30,168,96,.04);
+}
+#tab-dandao:hover,#tab-education:hover,#tab-exam:hover {
+  background: rgba(30,168,96,.1);
+}
+#tab-dandao.active,#tab-education.active,#tab-exam.active {
+  background: rgba(30,168,96,.12);
+  color: var(--green2);
+  border-bottom-color: var(--green2);
+}
+/* 工具组：金/紫色微底 */
+#tab-resume,#tab-timeline,#tab-bbs,#tab-tieba,#tab-member,#tab-cert {
+  background: rgba(212,175,55,.04);
+}
+#tab-resume:hover,#tab-timeline:hover,#tab-bbs:hover,#tab-tieba:hover,#tab-member:hover,#tab-cert:hover {
+  background: rgba(212,175,55,.09);
+}
+#tab-resume.active,#tab-timeline.active,#tab-bbs.active,#tab-tieba.active,#tab-member.active,#tab-cert.active {
+  background: var(--gold-dim);
+  color: var(--gold);
+  border-bottom-color: var(--gold);
+}
+
+[data-theme="light"] #tab-general,[data-theme="light"] #tab-major,
+[data-theme="light"] #tab-state,[data-theme="light"] #tab-rail,
+[data-theme="light"] #tab-zhaopin { background: rgba(42,112,192,.05); }
+[data-theme="light"] #tab-dandao,[data-theme="light"] #tab-education,
+[data-theme="light"] #tab-exam { background: rgba(20,140,70,.05); }
+[data-theme="light"] #tab-resume,[data-theme="light"] #tab-timeline,
+[data-theme="light"] #tab-bbs,[data-theme="light"] #tab-tieba,
+[data-theme="light"] #tab-member,[data-theme="light"] #tab-cert { background: rgba(160,120,20,.05); }
+
 .hide-mobile { display:flex; }
 @media(max-width:768px){ .hide-mobile{ display:none; } }
 
@@ -3338,113 +3428,201 @@ option{background:var(--bg3);color:var(--text)}
 <div class="vip-wall-modal" id="vipWallModal">
   <div class="vip-wall-box">
     <button class="vip-wall-close" onclick="closeVipWall()">✕</button>
-    <div class="vip-wall-title">⭐ 会员专属特权</div>
-    <div class="vip-wall-sub">注册会员后，解锁全套求职工具 · 比游客多10倍功能</div>
+    <div class="vip-wall-title">👑 三级权益对比</div>
+    <div class="vip-wall-sub">选择适合你的会员等级 · 解锁专属功能与特权</div>
 
-    <table class="vip-compare-table">
+    <table class="vip-compare-table" id="vipCompareTable">
       <thead>
         <tr>
-          <th style="text-align:left;color:var(--text2)">功能</th>
-          <th class="th-guest">👤 游客</th>
-          <th class="th-vip">⭐ 会员</th>
+          <th style="text-align:left;color:var(--text2);width:42%">功能</th>
+          <th class="th-guest">👤<br>游客</th>
+          <th class="th-vip">⭐<br>普通会员</th>
+          <th class="th-supreme">👑<br>至尊会员</th>
         </tr>
       </thead>
       <tbody>
+        <!-- 基础功能 -->
+        <tr class="vip-group-row"><td colspan="4">📋 基础功能</td></tr>
         <tr>
           <td>浏览全部招聘资源</td>
           <td class="vip-check">✓</td>
           <td class="td-vip vip-check">✓</td>
+          <td class="td-supreme vip-check">✓</td>
         </tr>
         <tr>
-          <td>AI基础生成简历（有水印）</td>
-          <td class="vip-check">✓</td>
+          <td>AI基础生成简历</td>
+          <td><span style="font-size:10px;color:var(--text3)">含水印</span></td>
           <td class="td-vip vip-check">✓</td>
+          <td class="td-supreme vip-check">✓</td>
         </tr>
         <tr>
           <td>复制简历文本</td>
           <td class="vip-check">✓</td>
           <td class="td-vip vip-check">✓</td>
+          <td class="td-supreme vip-check">✓</td>
         </tr>
+        <tr>
+          <td>考证中心查看资料</td>
+          <td class="vip-check">✓</td>
+          <td class="td-vip vip-check">✓</td>
+          <td class="td-supreme vip-check">✓</td>
+        </tr>
+
+        <!-- 简历工坊 -->
+        <tr class="vip-group-row"><td colspan="4">📝 简历工坊</td></tr>
         <tr>
           <td>无水印完整简历预览</td>
           <td class="vip-cross">✗</td>
           <td class="td-vip">✅ 解锁</td>
+          <td class="td-supreme">✅ 解锁</td>
         </tr>
         <tr>
           <td>AI高级润色简历</td>
           <td class="vip-cross">✗</td>
-          <td class="td-vip">✅ 解锁</td>
+          <td class="td-vip"><span style="font-size:10px">需配置Key</span></td>
+          <td class="td-supreme">✅ 平台请客</td>
         </tr>
         <tr>
           <td>AI评分 + 优化建议</td>
           <td class="vip-cross">✗</td>
-          <td class="td-vip">✅ 解锁</td>
+          <td class="td-vip"><span style="font-size:10px">需配置Key</span></td>
+          <td class="td-supreme">✅ 平台请客</td>
         </tr>
         <tr>
           <td>保存简历（无限份）</td>
           <td class="vip-cross">✗</td>
           <td class="td-vip">✅ 无限</td>
+          <td class="td-supreme">✅ 无限</td>
         </tr>
         <tr>
           <td>一键下载 PDF</td>
           <td class="vip-cross">✗</td>
           <td class="td-vip">✅ 解锁</td>
+          <td class="td-supreme">✅ 解锁</td>
         </tr>
         <tr>
-          <td>⭐ 会员中心（仪表盘）</td>
+          <td>🎨 高级主题 + 专属模板</td>
+          <td class="vip-cross">✗</td>
+          <td class="vip-cross">✗</td>
+          <td class="td-supreme">✅ 至尊专属</td>
+        </tr>
+        <tr>
+          <td>🤖 AI逐段深度优化</td>
+          <td class="vip-cross">✗</td>
+          <td class="vip-cross">✗</td>
+          <td class="td-supreme">✅ 至尊专属</td>
+        </tr>
+
+        <!-- 会员中心 -->
+        <tr class="vip-group-row"><td colspan="4">⭐ 会员中心</td></tr>
+        <tr>
+          <td>仪表盘 + 个人资料</td>
           <td class="vip-cross">✗</td>
           <td class="td-vip">✅ 解锁</td>
+          <td class="td-supreme">✅ 解锁</td>
         </tr>
         <tr>
           <td>求职进度看板</td>
           <td class="vip-cross">✗</td>
           <td class="td-vip">✅ 解锁</td>
+          <td class="td-supreme">✅ 解锁</td>
         </tr>
         <tr>
           <td>面试提醒 + 日历</td>
           <td class="vip-cross">✗</td>
           <td class="td-vip">✅ 解锁</td>
+          <td class="td-supreme">✅ 解锁</td>
         </tr>
         <tr>
           <td>求职日记 + 数据统计</td>
           <td class="vip-cross">✗</td>
           <td class="td-vip">✅ 解锁</td>
+          <td class="td-supreme">✅ 解锁</td>
         </tr>
         <tr>
           <td>内推码库 + 简历对比</td>
           <td class="vip-cross">✗</td>
           <td class="td-vip">✅ 解锁</td>
+          <td class="td-supreme">✅ 解锁</td>
         </tr>
+        <tr>
+          <td>收藏夹</td>
+          <td class="vip-cross">✗</td>
+          <td class="td-vip">✅ 解锁</td>
+          <td class="td-supreme">✅ 解锁</td>
+        </tr>
+
+        <!-- AI功能 -->
+        <tr class="vip-group-row"><td colspan="4">🤖 AI 功能</td></tr>
         <tr>
           <td>AI面试题生成</td>
           <td class="vip-cross">✗</td>
-          <td class="td-vip">✅ 解锁</td>
+          <td class="td-vip"><span style="font-size:10px">需配置Key</span></td>
+          <td class="td-supreme">✅ 平台请客</td>
         </tr>
         <tr>
-          <td>个人资料页 + 收藏夹</td>
+          <td>AI智能解题 + 追问</td>
           <td class="vip-cross">✗</td>
-          <td class="td-vip">✅ 解锁</td>
+          <td class="td-vip"><span style="font-size:10px">需配置Key</span></td>
+          <td class="td-supreme">✅ 平台请客</td>
         </tr>
+        <tr>
+          <td>AI出题 / 一键生成试卷</td>
+          <td class="vip-cross">✗</td>
+          <td class="td-vip"><span style="font-size:10px">需配置Key</span></td>
+          <td class="td-supreme">✅ 平台请客</td>
+        </tr>
+        <tr>
+          <td>🎯 高考AI志愿建议</td>
+          <td class="vip-cross">✗</td>
+          <td class="td-vip"><span style="font-size:10px">需配置Key</span></td>
+          <td class="td-supreme">✅ 平台请客</td>
+        </tr>
+        <tr>
+          <td>🏫 院校专业AI对比分析</td>
+          <td class="vip-cross">✗</td>
+          <td class="vip-cross">✗</td>
+          <td class="td-supreme">✅ 至尊专属</td>
+        </tr>
+        <tr>
+          <td>⚡ AI每日调用额度</td>
+          <td class="vip-cross">✗</td>
+          <td class="td-vip"><span style="font-size:10px">自填Key不限次</span></td>
+          <td class="td-supreme"><span style="font-size:10px">平台Key 20次/天</span></td>
+        </tr>
+
+        <!-- 备考升学 -->
+        <tr class="vip-group-row"><td colspan="4">📚 备考升学</td></tr>
         <tr>
           <td>📕 错题本（记录+定时复习）</td>
           <td class="vip-cross">✗</td>
           <td class="td-vip">✅ 解锁</td>
-        </tr>
-        <tr>
-          <td>🎯 高考填报AI个性化推荐</td>
-          <td><span style="font-size:11px;color:var(--text3)">基础版</span></td>
-          <td class="td-vip">✅ 完整版</td>
+          <td class="td-supreme">✅ 解锁</td>
         </tr>
         <tr>
           <td>📜 考证中心完整题库</td>
-          <td><span style="font-size:11px;color:var(--text3)">查看资料</span></td>
+          <td><span style="font-size:10px;color:var(--text3)">查看资料</span></td>
           <td class="td-vip">✅ 全题库</td>
+          <td class="td-supreme">✅ 全题库</td>
+        </tr>
+        <tr>
+          <td>高考分数线查询</td>
+          <td class="vip-check">✓</td>
+          <td class="td-vip vip-check">✓</td>
+          <td class="td-supreme vip-check">✓</td>
+        </tr>
+        <tr>
+          <td>🎯 高考填报AI个性化推荐</td>
+          <td><span style="font-size:10px;color:var(--text3)">基础版</span></td>
+          <td class="td-vip"><span style="font-size:10px">需配置Key</span></td>
+          <td class="td-supreme">✅ 完整版</td>
         </tr>
       </tbody>
     </table>
 
     <div class="vip-wall-btns">
-      <button class="mbtn-submit" style="margin:0" onclick="closeVipWall();showLoginModal();setTimeout(()=>switchModalTab('register'),50)">✨ 立即购码注册，解锁全部特权</button>
+      <button class="mbtn-submit" style="margin:0" onclick="closeVipWall();showLoginModal();setTimeout(()=>switchModalTab('register'),50)">⭐ 立即购码注册 · 解锁普通会员特权</button>
+      <button onclick="closeVipWall();showToast('👑 请联系管理员咨询至尊会员套餐')" style="background:linear-gradient(135deg,rgba(160,96,240,.15),rgba(212,175,55,.1));border:1px solid rgba(160,96,240,.4);color:#c080f8;padding:11px;border-radius:10px;cursor:pointer;font-size:13px;font-family:inherit;font-weight:700;transition:all .2s" onmouseover="this.style.borderColor='#a060f0'" onmouseout="this.style.borderColor='rgba(160,96,240,.4)'">👑 咨询至尊会员 · 解锁全部AI特权</button>
       <button onclick="closeVipWall();showLoginModal()" style="background:transparent;border:1px solid var(--border);color:var(--text2);padding:10px;border-radius:10px;cursor:pointer;font-size:13px;font-family:inherit;transition:all .2s" onmouseover="this.style.borderColor='var(--gold)';this.style.color='var(--gold)'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--text2)'">🔑 已有账号？直接登录</button>
       <div style="text-align:center;font-size:11px;color:var(--text3)">
         <a onclick="closeVipWall()" style="color:var(--text3);cursor:pointer;text-decoration:underline">以游客身份继续 →</a>
@@ -3723,8 +3901,8 @@ option{background:var(--bg3);color:var(--text)}
   <div style="height:env(safe-area-inset-bottom,12px);min-height:12px"></div>
 </div>
 
-<!-- 搜索区（首页时隐藏，切换至其他招聘面板时显示）-->
-<div class="szone" id="szoneBar" style="display:none">
+<!-- 搜索区（全局显示，所有面板均可见）-->
+<div class="szone" id="szoneBar" style="display:block">
   <div class="srow">
     <input class="sinput" type="text" id="kw" placeholder="输入关键词（如：电气工程师）" value="应届生 招聘" oninput="updateKw()">
     <select class="sselect" id="edu" onchange="updateKw()">
@@ -3764,7 +3942,7 @@ option{background:var(--bg3);color:var(--text)}
   <div class="quick-tags" id="quickTagsBar">
     <span class="quick-tag-label">快捷词：</span>
     <button class="qtag" onclick="setKwAndGo('应届生 招聘')">应届生 招聘</button>
-    <button class="qtag" onclick="setKwAndGo('校园招聘 2025')">校园招聘 2025</button>
+    <button class="qtag" onclick="setKwAndGo('校园招聘 2026')">校园招聘 2026</button>
     <button class="qtag" onclick="setKwAndGo('电气工程师')">电气工程师</button>
     <button class="qtag" onclick="setKwAndGo('铁路局 招聘')">铁路局 招聘</button>
     <button class="qtag" onclick="setKwAndGo('国企 管培生')">国企 管培生</button>
@@ -3806,7 +3984,8 @@ option{background:var(--bg3);color:var(--text)}
   <div class="tab" onclick="sw('timeline')" id="tab-timeline">📅 招聘日历</div>
   <div class="tab" onclick="sw('bbs')" id="tab-bbs">💬 论坛社区</div>
   <div class="tab" onclick="sw('tieba')" id="tab-tieba">🔥 贴吧专区</div>
-  <div class="tab" onclick="handleMemberTab()" id="tab-member">⭐ 会员中心<span class="tbadge pro-badge" style="margin-left:4px">VIP</span></div>
+  <div class="tab" onclick="handleMemberTab()" id="tab-member">⭐ 会员中心<span class="tbadge vip-badge" style="margin-left:4px">VIP</span></div>
+  <div class="tab" onclick="sw('tutorial')" id="tab-tutorial">📖 使用教程</div>
 </div>
 
 <div class="content">
@@ -3836,7 +4015,7 @@ option{background:var(--bg3);color:var(--text)}
       <div id="heroQuickTags" style="display:flex;gap:6px;flex-wrap:wrap;margin-top:10px;align-items:center">
         <span style="font-size:11px;color:var(--text3);white-space:nowrap">热门：</span>
         <button onclick="heroSetKw('应届生 招聘')" style="background:var(--bg3);border:1px solid var(--border);border-radius:16px;padding:3px 10px;font-size:12px;color:var(--text2);cursor:pointer;transition:all .2s" onmouseover="this.style.borderColor='var(--accent)';this.style.color='var(--accent)'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--text2)'">应届生 招聘</button>
-        <button onclick="heroSetKw('校园招聘 2025')" style="background:var(--bg3);border:1px solid var(--border);border-radius:16px;padding:3px 10px;font-size:12px;color:var(--text2);cursor:pointer;transition:all .2s" onmouseover="this.style.borderColor='var(--accent)';this.style.color='var(--accent)'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--text2)'">校园招聘 2025</button>
+        <button onclick="heroSetKw('校园招聘 2026')" style="background:var(--bg3);border:1px solid var(--border);border-radius:16px;padding:3px 10px;font-size:12px;color:var(--text2);cursor:pointer;transition:all .2s" onmouseover="this.style.borderColor='var(--accent)';this.style.color='var(--accent)'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--text2)'">校园招聘 2026</button>
         <button onclick="heroSetKw('电气工程师')" style="background:var(--bg3);border:1px solid var(--border);border-radius:16px;padding:3px 10px;font-size:12px;color:var(--text2);cursor:pointer;transition:all .2s" onmouseover="this.style.borderColor='var(--accent)';this.style.color='var(--accent)'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--text2)'">电气工程师</button>
         <button onclick="heroSetKw('铁路局 招聘')" style="background:var(--bg3);border:1px solid var(--border);border-radius:16px;padding:3px 10px;font-size:12px;color:var(--text2);cursor:pointer;transition:all .2s" onmouseover="this.style.borderColor='var(--accent)';this.style.color='var(--accent)'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--text2)'">铁路局 招聘</button>
         <button onclick="heroSetKw('国企 管培生')" style="background:var(--bg3);border:1px solid var(--border);border-radius:16px;padding:3px 10px;font-size:12px;color:var(--text2);cursor:pointer;transition:all .2s" onmouseover="this.style.borderColor='var(--accent)';this.style.color='var(--accent)'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--text2)'">国企 管培生</button>
@@ -3874,7 +4053,7 @@ option{background:var(--bg3);color:var(--text)}
         <span class="ticker-item" onclick="goHotJob(null,'51job','空乘')"><span class="ticker-co">南方航空</span> 招募 应届空乘/乘务员 <span class="ticker-salary">月薪8千~1.6万</span></span>
         <span class="ticker-item" onclick="goHotJob(null,'boss','运营')"><span class="ticker-co">美团/滴滴</span> 招聘 运营/市场人员 <span class="ticker-salary">月薪1.8万~4万</span></span>
         <span class="ticker-item" onclick="goHotJob(null,'zhilian','土木工程师')"><span class="ticker-co">中国建筑集团</span> 校招 施工/项目管理 <span class="ticker-salary">月薪8千~1.5万</span></span>
-        <span class="ticker-item" onclick="goHotJob(null,'boss','Java开发')"><span class="ticker-co">华为</span> 2025届春招 Java/后端开发 <span class="ticker-salary">月薪2.2万~4.5万</span></span>
+        <span class="ticker-item" onclick="goHotJob(null,'boss','Java开发')"><span class="ticker-co">华为</span> 2026届春招 Java/后端开发 <span class="ticker-salary">月薪2.2万~4.5万</span></span>
         <span class="ticker-item" onclick="goHotJob(null,'zhilian','财务')"><span class="ticker-co">四大会计师事务所</span> 招聘 审计/财务人员 <span class="ticker-salary">月薪8千~2万</span></span>
         <span class="ticker-item" onclick="goHotJob(null,'boss','数据分析')"><span class="ticker-co">京东/拼多多</span> 急招 数据分析师 <span class="ticker-salary">月薪1.5万~3万</span></span>
         <span class="ticker-item" onclick="goHotJob(null,'zhilian','教师')"><span class="ticker-co">各地教育局</span> 招考 有编制教师岗 <span class="ticker-salary">月薪5千~1.2万 含编制</span></span>
@@ -4288,7 +4467,7 @@ option{background:var(--bg3);color:var(--text)}
     <a class="card" href="https://job.zte.com.cn" target="_blank"><div class="card-name">中兴通讯</div><div class="card-desc">5G通信龙头央企</div><div class="card-tag tag-blue">通信</div></a>
     <a class="card" href="https://zglt.zhaopin.com/" target="_blank"><div class="card-name">中国联通</div><div class="card-desc">联通集团官方校招（新苗计划）</div><div class="card-tag tag-blue">通信</div></a>
     <a class="card" href="https://job.chinatelecom.com.cn" target="_blank"><div class="card-name">中国电信</div><div class="card-desc">电信集团招聘入口</div><div class="card-tag tag-blue">通信</div></a>
-    <a class="card" href="https://job.10086.cn" target="_blank"><div class="card-name">中国移动</div><div class="card-desc">移动集团人才招聘</div><div class="card-tag tag-green">通信</div></a>
+    <a class="card" href="https://zgyd.iguopin.com/job" target="_blank"><div class="card-name">中国移动</div><div class="card-desc">移动集团人才招聘（国聘官方入口）</div><div class="card-tag tag-green">通信</div></a>
     <a class="card" href="https://www.iguopin.com/job/list?keyword=%E4%B8%AD%E5%9B%BD%E8%8A%82%E8%83%BD" target="_blank"><div class="card-name">中国节能</div><div class="card-desc">中国节能环保集团</div><div class="card-tag tag-green">环保</div></a>
   </div>
 </div>
@@ -4444,7 +4623,7 @@ option{background:var(--bg3);color:var(--text)}
       <a class="card" href="https://career.huawei.com" target="_blank"><div class="card-name">华为</div><div class="card-desc">华为校园招聘官方平台</div><div class="card-tag tag-red">科技</div></a>
       <a class="card" href="https://talent.alibaba.com/campus/position-list?lang=zh" target="_blank"><div class="card-name">阿里巴巴</div><div class="card-desc">阿里系校招&社招全系统</div><div class="card-tag tag-orange">电商</div></a>
       <a class="card" href="https://join.qq.com/index.html" target="_blank"><div class="card-name">腾讯</div><div class="card-desc">腾讯官方招聘入口</div><div class="card-tag tag-blue">社交</div></a>
-      <a class="card" href="https://careers.bytedance.com/campus" target="_blank"><div class="card-name">字节跳动</div><div class="card-desc">抖音/TikTok/飞书母公司</div><div class="card-tag tag-red">内容</div></a>
+      <a class="card" href="https://job.bytedance.com/campus" target="_blank"><div class="card-name">字节跳动</div><div class="card-desc">抖音/TikTok/飞书母公司</div><div class="card-tag tag-red">内容</div></a>
       <a class="card" href="https://talent.baidu.com/external/baidu/index.html" target="_blank"><div class="card-name">百度</div><div class="card-desc">百度AI+搜索校招</div><div class="card-tag tag-blue">AI</div></a>
       <a class="card" href="https://campus.jd.com" target="_blank"><div class="card-name">京东</div><div class="card-desc">京东校园招聘系统</div><div class="card-tag tag-red">电商</div></a>
       <a class="card" href="https://campus.meituan.com" target="_blank"><div class="card-name">美团</div><div class="card-desc">美团官方校招&社招入口</div><div class="card-tag tag-yellow">本地生活</div></a>
@@ -4515,11 +4694,11 @@ option{background:var(--bg3);color:var(--text)}
 
     <div class="sec-title">▍六大国有银行</div>
     <div class="grid g4">
-      <a class="card" href="https://job.icbc.com.cn" target="_blank"><div class="card-name">中国工商银行</div><div class="card-desc">工行官方校招&社招系统</div><div class="card-tag tag-red">国有行</div></a>
-      <a class="card" href="https://job2.ccb.com/cn/job/index.html" target="_blank"><div class="card-name">中国建设银行</div><div class="card-desc">建行官方人才招聘</div><div class="card-tag tag-blue">国有行</div></a>
+      <a class="card" href="https://job.icbc.com.cn/pc/index.html" target="_blank"><div class="card-name">中国工商银行</div><div class="card-desc">工行官方校招&社招系统</div><div class="card-tag tag-red">国有行</div></a>
+      <a class="card" href="https://job.ccb.com" target="_blank"><div class="card-name">中国建设银行</div><div class="card-desc">建行官方人才招聘</div><div class="card-tag tag-blue">国有行</div></a>
       <a class="card" href="https://career.abchina.com" target="_blank"><div class="card-name">中国农业银行</div><div class="card-desc">农行官方招聘系统</div><div class="card-tag tag-green">国有行</div></a>
       <a class="card" href="https://campus.chinahr.com/pages/boc-2026-Spring" target="_blank"><div class="card-name">中国银行</div><div class="card-desc">中行官方人才招聘入口</div><div class="card-tag tag-red">国有行</div></a>
-      <a class="card" href="https://job.bankcomm.com" target="_blank"><div class="card-name">交通银行</div><div class="card-desc">交行招聘官网系统</div><div class="card-tag tag-blue">国有行</div></a>
+      <a class="card" href="https://campus.bocomm.com.cn" target="_blank"><div class="card-name">交通银行</div><div class="card-desc">交行招聘官网系统</div><div class="card-tag tag-blue">国有行</div></a>
       <a class="card" href="https://www.psbc.com/cn/gyyc/rczp/xyzp/" target="_blank"><div class="card-name">中国邮政储蓄银行</div><div class="card-desc">邮储银行校招&社招入口</div><div class="card-tag tag-green">国有行</div></a>
     </div>
 
@@ -4627,7 +4806,7 @@ option{background:var(--bg3);color:var(--text)}
     <div class="sec-title">▍抖音/快手/微博求职内容</div>
     <div class="grid g4">
       <a class="card" href="https://www.douyin.com/search/%E7%A7%8B%E6%8B%9B%E7%BB%8F%E9%AA%8C" target="_blank"><div class="card-name">抖音·秋招经验</div><div class="card-desc">短视频求职攻略，实时更新</div><div class="card-tag tag-orange">短视频</div></a>
-      <a class="card" href="https://weibo.com/search?q=%E7%A7%8B%E6%8B%9B%202025" target="_blank"><div class="card-name">微博·秋招话题</div><div class="card-desc">实时秋招动态+内推转发</div><div class="card-tag tag-red">微博</div></a>
+      <a class="card" href="https://weibo.com/search?q=%E7%A7%8B%E6%8B%9B%202026" target="_blank"><div class="card-name">微博·秋招话题</div><div class="card-desc">实时秋招动态+内推转发</div><div class="card-tag tag-red">微博</div></a>
       <a class="card" href="https://www.douyin.com/search/%E5%9B%BD%E4%BC%81%E6%8B%9B%E8%81%98" target="_blank"><div class="card-name">抖音·国企招聘</div><div class="card-desc">国企招聘信息+薪资待遇揭秘</div><div class="card-tag tag-orange">国企</div></a>
       <a class="card" href="https://www.bilibili.com/search?keyword=%E5%A4%96%E4%BC%81%E6%A0%A1%E6%8B%9B+%E9%9D%A2%E8%AF%95%E7%BB%8F%E9%AA%8C" target="_blank"><div class="card-name">B站·外企校招面试</div><div class="card-desc">外企/海外大厂面试分享</div><div class="card-tag tag-blue">出海</div></a>
     </div>
@@ -4983,7 +5162,7 @@ option{background:var(--bg3);color:var(--text)}
       <a class="card" href="https://rczp.china-railway.com.cn" target="_blank"><div class="card-name">🚄 中国国家铁路集团</div><div class="card-desc">国铁集团官方招聘入口（铁路局）</div><div class="card-tag tag-red">铁路央企</div></a>
       <a class="card" href="https://zhaopin.sgcc.com.cn" target="_blank"><div class="card-name">⚡ 国家电网</div><div class="card-desc">国网公司校招社招官方入口</div><div class="card-tag tag-green">电力央企</div></a>
       <a class="card" href="https://zhaopin.csg.cn" target="_blank"><div class="card-name">⚡ 南方电网</div><div class="card-desc">南网招聘公告发布官网</div><div class="card-tag tag-green">电力央企</div></a>
-      <a class="card" href="https://hr.sinopec.com" target="_blank"><div class="card-name">🛢️ 中国石化</div><div class="card-desc">中石化社招校招官方入口</div><div class="card-tag tag-blue">石化央企</div></a>
+      <a class="card" href="https://job.sinopec.com" target="_blank"><div class="card-name">🛢️ 中国石化</div><div class="card-desc">中石化社招校招官方入口</div><div class="card-tag tag-blue">石化央企</div></a>
       <a class="card" href="https://zhaopin.cnpc.com.cn" target="_blank"><div class="card-name">🛢️ 中国石油 CNPC</div><div class="card-desc">中石油招聘官方平台</div><div class="card-tag tag-blue">石化央企</div></a>
       <a class="card" href="https://crrc.hotjob.cn" target="_blank"><div class="card-name">🚆 中国中车</div><div class="card-desc">高铁动车组制造央企招聘</div><div class="card-tag tag-teal">制造央企</div></a>
     </div>
@@ -4993,14 +5172,14 @@ option{background:var(--bg3);color:var(--text)}
       <a class="card" href="https://zhr.crec.cn/zhaopin/" target="_blank"><div class="card-name">🏗️ 中国铁建</div><div class="card-desc">CREC官方招聘，铁路建设为主</div><div class="card-tag tag-orange">建筑央企</div></a>
       <a class="card" href="https://crec.iguopin.com" target="_blank"><div class="card-name">🏗️ 中国中铁</div><div class="card-desc">中铁集团招聘官方入口</div><div class="card-tag tag-orange">建筑央企</div></a>
       <a class="card" href="https://zhaopin.powerchina.cn" target="_blank"><div class="card-name">🔌 中国电建</div><div class="card-desc">电力建设集团招聘平台</div><div class="card-tag tag-yellow">建筑央企</div></a>
-      <a class="card" href="https://www.cccc.com.cn/cccc/rcgl/zpxx/" target="_blank"><div class="card-name">🌉 中国交建</div><div class="card-desc">港口公路桥梁建设央企</div><div class="card-tag tag-yellow">建筑央企</div></a>
+      <a class="card" href="https://zhaopin.ccccltd.cn" target="_blank"><div class="card-name">🌉 中国交建</div><div class="card-desc">港口公路桥梁建设央企</div><div class="card-tag tag-yellow">建筑央企</div></a>
     </div>
 
     <div class="sec-title">▍通信/科技/金融央企</div>
     <div class="grid g4">
-      <a class="card" href="https://www.chinaunicom.com/about/aboutus/hr.html" target="_blank"><div class="card-name">📱 中国联通</div><div class="card-desc">联通招聘官方入口</div><div class="card-tag tag-blue">通讯央企</div></a>
+      <a class="card" href="https://zglt.zhaopin.com/" target="_blank"><div class="card-name">📱 中国联通</div><div class="card-desc">联通招聘官方入口（智联合作）</div><div class="card-tag tag-blue">通讯央企</div></a>
       <a class="card" href="https://job.chinatelecom.com.cn" target="_blank"><div class="card-name">📡 中国电信</div><div class="card-desc">电信集团招聘平台</div><div class="card-tag tag-blue">通讯央企</div></a>
-      <a class="card" href="https://www.icbc.com.cn/icbc/rczp/" target="_blank"><div class="card-name">🏦 中国工商银行</div><div class="card-desc">四大行之一官方招聘</div><div class="card-tag tag-red">金融央企</div></a>
+      <a class="card" href="https://job.icbc.com.cn/pc/index.html" target="_blank"><div class="card-name">🏦 中国工商银行</div><div class="card-desc">四大行之一官方招聘</div><div class="card-tag tag-red">金融央企</div></a>
       <a class="card" href="https://www.bankofchina.com/aboutboc/ab6/" target="_blank"><div class="card-name">🏦 中国银行</div><div class="card-desc">中行招聘官方入口</div><div class="card-tag tag-red">金融央企</div></a>
     </div>
 
@@ -5023,11 +5202,11 @@ option{background:var(--bg3);color:var(--text)}
     <div class="grid g4">
       <a class="card" href="https://careers.tencent.com" target="_blank"><div class="card-name">🟢 腾讯招聘</div><div class="card-desc">腾讯官方校招社招入口</div><div class="card-tag tag-green">大厂</div></a>
       <a class="card" href="https://talent.alibaba.com" target="_blank"><div class="card-name">🟠 阿里巴巴招聘</div><div class="card-desc">阿里系全线岗位统一入口</div><div class="card-tag tag-orange">大厂</div></a>
-      <a class="card" href="https://careers.bytedance.com/campus" target="_blank"><div class="card-name">🔴 字节跳动</div><div class="card-desc">抖音/TikTok母公司校招社招</div><div class="card-tag tag-red">大厂</div></a>
+      <a class="card" href="https://job.bytedance.com/campus" target="_blank"><div class="card-name">🔴 字节跳动</div><div class="card-desc">抖音/TikTok母公司校招社招</div><div class="card-tag tag-red">大厂</div></a>
       <a class="card" href="https://talent.baidu.com" target="_blank"><div class="card-name">🔵 百度招聘</div><div class="card-desc">百度官方招聘，AI岗位丰富</div><div class="card-tag tag-blue">大厂</div></a>
       <a class="card" href="https://hr.meituan.com" target="_blank"><div class="card-name">🟡 美团招聘</div><div class="card-desc">美团官方技术/运营岗招聘</div><div class="card-tag tag-yellow">大厂</div></a>
       <a class="card" href="https://job.jd.com" target="_blank"><div class="card-name">🔴 京东招聘</div><div class="card-desc">京东校招社招官方入口</div><div class="card-tag tag-red">大厂</div></a>
-      <a class="card" href="https://jobs.pdd.com" target="_blank"><div class="card-name">🟠 拼多多招聘</div><div class="card-desc">PDD/Temu官方招聘入口</div><div class="card-tag tag-orange">大厂</div></a>
+      <a class="card" href="https://careers.pddglobalhr.com/campus/" target="_blank"><div class="card-name">🟠 拼多多招聘</div><div class="card-desc">PDD/Temu官方招聘入口</div><div class="card-tag tag-orange">大厂</div></a>
       <a class="card" href="https://job.xiaomi.com" target="_blank"><div class="card-name">🟤 小米招聘</div><div class="card-desc">小米官方招聘，硬件+软件</div><div class="card-tag tag-teal">大厂</div></a>
     </div>
 
@@ -5048,10 +5227,10 @@ option{background:var(--bg3);color:var(--text)}
 
     <div class="sec-title">▍汽车/新能源汽车</div>
     <div class="grid g4">
-      <a class="card" href="https://www.baic.com.cn/renli/zhaopin/" target="_blank"><div class="card-name">🚗 北汽集团</div><div class="card-desc">北汽官方招聘入口</div><div class="card-tag tag-blue">汽车</div></a>
-      <a class="card" href="https://hr.byd.com" target="_blank"><div class="card-name">🔋 比亚迪招聘</div><div class="card-desc">新能源汽车龙头，岗位海量</div><div class="card-tag tag-green">新能源</div></a>
-      <a class="card" href="https://career.faw.com.cn" target="_blank"><div class="card-name">🚙 一汽集团</div><div class="card-desc">中国第一汽车集团官方招聘</div><div class="card-tag tag-red">汽车</div></a>
-      <a class="card" href="https://www.nio.cn/join" target="_blank"><div class="card-name">🚗 蔚来汽车</div><div class="card-desc">蔚来官方招聘，新能源造车新势力</div><div class="card-tag tag-teal">新能源</div></a>
+      <a class="card" href="https://baic.iguopin.com" target="_blank"><div class="card-name">🚗 北汽集团</div><div class="card-desc">北汽官方招聘入口（国聘）</div><div class="card-tag tag-blue">汽车</div></a>
+      <a class="card" href="https://job.byd.com/portal/pc" target="_blank"><div class="card-name">🔋 比亚迪招聘</div><div class="card-desc">新能源汽车龙头，岗位海量</div><div class="card-tag tag-green">新能源</div></a>
+      <a class="card" href="https://www.iguopin.com/job/list?keyword=%E4%B8%80%E6%B1%BD" target="_blank"><div class="card-name">🚙 一汽集团</div><div class="card-desc">中国第一汽车集团官方招聘</div><div class="card-tag tag-red">汽车</div></a>
+      <a class="card" href="https://www.nio.cn/careers" target="_blank"><div class="card-name">🚗 蔚来汽车</div><div class="card-desc">蔚来官方招聘，新能源造车新势力</div><div class="card-tag tag-teal">新能源</div></a>
     </div>
 
     <div class="sec-title">▍航空航天/核能</div>
@@ -5064,10 +5243,10 @@ option{background:var(--bg3);color:var(--text)}
 
     <div class="sec-title">▍新能源/环保</div>
     <div class="grid g4">
-      <a class="card" href="https://www.longi.com/cn/talent/" target="_blank"><div class="card-name">☀️ 隆基绿能</div><div class="card-desc">全球最大光伏企业招聘</div><div class="card-tag tag-green">光伏</div></a>
+      <a class="card" href="https://www.longi.com/cn/talent/recruit/" target="_blank"><div class="card-name">☀️ 隆基绿能</div><div class="card-desc">全球最大光伏企业招聘</div><div class="card-tag tag-green">光伏</div></a>
       <a class="card" href="https://www.catl.com/solution/join/" target="_blank"><div class="card-name">🔋 宁德时代</div><div class="card-desc">全球动力电池龙头招聘</div><div class="card-tag tag-green">电池</div></a>
-      <a class="card" href="https://www.chng.com.cn/n17/n22/index.html" target="_blank"><div class="card-name">💡 华能集团</div><div class="card-desc">华能发电央企招聘</div><div class="card-tag tag-orange">能源</div></a>
-      <a class="card" href="https://www.chndagroup.com/rczp/" target="_blank"><div class="card-name">🌊 大唐集团</div><div class="card-desc">大唐电力集团招聘公告</div><div class="card-tag tag-orange">能源</div></a>
+      <a class="card" href="https://www.chng.com.cn/list_zpxx/-/article/cQQKaBtwslFy/list/23524.html" target="_blank"><div class="card-name">💡 华能集团</div><div class="card-desc">华能发电央企招聘</div><div class="card-tag tag-orange">能源</div></a>
+      <a class="card" href="https://zhaopin.china-cdt.com" target="_blank"><div class="card-name">🌊 大唐集团</div><div class="card-desc">大唐电力集团招聘公告</div><div class="card-tag tag-orange">能源</div></a>
     </div>
   </div>
 
@@ -5080,9 +5259,9 @@ option{background:var(--bg3);color:var(--text)}
 
     <div class="sec-title">▍银行类</div>
     <div class="grid g4">
-      <a class="card" href="https://www.icbc.com.cn/icbc/rczp/" target="_blank"><div class="card-name">🔴 工商银行</div><div class="card-desc">四大行之首，全国招聘</div><div class="card-tag tag-red">四大行</div></a>
+      <a class="card" href="https://job.icbc.com.cn/pc/index.html" target="_blank"><div class="card-name">🔴 工商银行</div><div class="card-desc">四大行之首，全国招聘</div><div class="card-tag tag-red">四大行</div></a>
       <a class="card" href="https://www.bankofchina.com/aboutboc/ab6/" target="_blank"><div class="card-name">🔴 中国银行</div><div class="card-desc">国际业务最强四大行</div><div class="card-tag tag-red">四大行</div></a>
-      <a class="card" href="https://job2.ccb.com/cn/job/index.html" target="_blank"><div class="card-name">🔵 建设银行</div><div class="card-desc">建行官方招聘入口</div><div class="card-tag tag-blue">四大行</div></a>
+      <a class="card" href="https://job.ccb.com" target="_blank"><div class="card-name">🔵 建设银行</div><div class="card-desc">建行官方招聘入口</div><div class="card-tag tag-blue">四大行</div></a>
       <a class="card" href="https://career.abchina.com" target="_blank"><div class="card-name">🟢 农业银行</div><div class="card-desc">农行官方社招校招入口</div><div class="card-tag tag-green">四大行</div></a>
       <a class="card" href="https://career.cmbchina.com/campus/home" target="_blank"><div class="card-name">🔴 招商银行</div><div class="card-desc">股份制银行标杆，待遇好</div><div class="card-tag tag-red">股份行</div></a>
       <a class="card" href="https://www.spdb.com.cn/chpage/c502/index.shtml" target="_blank"><div class="card-name">🔵 浦发银行</div><div class="card-desc">浦发官方招聘入口</div><div class="card-tag tag-blue">股份行</div></a>
@@ -5092,10 +5271,10 @@ option{background:var(--bg3);color:var(--text)}
 
     <div class="sec-title">▍证券/保险/基金</div>
     <div class="grid g4">
-      <a class="card" href="https://www.citic.com/about/humanResources/" target="_blank"><div class="card-name">📈 中信证券</div><div class="card-desc">头部券商招聘官方入口</div><div class="card-tag tag-red">证券</div></a>
-      <a class="card" href="https://www.citics.com/about/hr.html" target="_blank"><div class="card-name">📊 中信建投</div><div class="card-desc">中信建投证券招聘入口</div><div class="card-tag tag-teal">证券</div></a>
+      <a class="card" href="https://job.citic.com/recruit" target="_blank"><div class="card-name">📈 中信证券</div><div class="card-desc">头部券商招聘官方入口</div><div class="card-tag tag-red">证券</div></a>
+      <a class="card" href="https://careers.citics.com" target="_blank"><div class="card-name">📊 中信建投</div><div class="card-desc">中信建投证券招聘入口</div><div class="card-tag tag-teal">证券</div></a>
       <a class="card" href="https://talent.pingan.com" target="_blank"><div class="card-name">🛡️ 中国平安</div><div class="card-desc">平安集团保险+金融科技招聘</div><div class="card-tag tag-red">保险</div></a>
-      <a class="card" href="https://www.cicc.com/chs/About/Corporate_Culture/Human_Resources/" target="_blank"><div class="card-name">💼 中金公司</div><div class="card-desc">顶级投行中金官方招聘</div><div class="card-tag tag-blue">投行</div></a>
+      <a class="card" href="https://cicc.zhiye.com" target="_blank"><div class="card-name">💼 中金公司</div><div class="card-desc">顶级投行中金官方招聘</div><div class="card-tag tag-blue">投行</div></a>
     </div>
   </div>
 
@@ -5118,8 +5297,8 @@ option{background:var(--bg3);color:var(--text)}
     <div class="grid g4">
       <a class="card" href="https://chinajob.mohrss.gov.cn" target="_blank"><div class="card-name">📚 教师招聘网</div><div class="card-desc">全国公立学校教师招聘汇总</div><div class="card-tag tag-purple">教育</div></a>
       <a class="card" href="https://www.zhaopin.com/jobs?kw=%E6%95%99%E5%B8%88+%E7%BC%96%E5%88%B6" target="_blank"><div class="card-name">🏫 智联-教师编制</div><div class="card-desc">编制教师岗位搜索</div><div class="card-tag tag-purple">教育</div></a>
-      <a class="card" href="https://www.tal.com/careers.html" target="_blank"><div class="card-name">📖 好未来(TAL)</div><div class="card-desc">好未来教育科技集团招聘</div><div class="card-tag tag-yellow">教育科技</div></a>
-      <a class="card" href="https://job.xdf.cn" target="_blank"><div class="card-name">📝 新东方招聘</div><div class="card-desc">新东方官方招聘入口</div><div class="card-tag tag-orange">培训机构</div></a>
+      <a class="card" href="https://www.zhaopin.com/jobs?kw=%E5%A5%BD%E6%9C%AA%E6%9D%A5+%E6%8B%9B%E8%81%98" target="_blank"><div class="card-name">📖 好未来(TAL)</div><div class="card-desc">好未来教育科技集团招聘</div><div class="card-tag tag-yellow">教育科技</div></a>
+      <a class="card" href="https://hr.xdf.cn" target="_blank"><div class="card-name">📝 新东方招聘</div><div class="card-desc">新东方官方招聘入口</div><div class="card-tag tag-orange">培训机构</div></a>
     </div>
   </div>
 </div><!-- end panel-zhaopin -->
@@ -5193,7 +5372,7 @@ option{background:var(--bg3);color:var(--text)}
     <div class="sec-title">▍院校查询工具</div>
     <div class="grid g3">
       <a class="card" href="https://gaokao.chsi.com.cn/zsjh/dzzp/" target="_blank"><div class="card-name">🔍 阳光高考单招查询</div><div class="card-desc">教育部官方，按省份/院校搜索单招计划</div><div class="card-tag tag-red">官方</div></a>
-      <a class="card" href="https://www.gaokaopai.com/dandao/" target="_blank"><div class="card-name">📊 高考派-单招专区</div><div class="card-desc">院校单招信息、历年分数线、招生计划</div><div class="card-tag tag-blue">聚合</div></a>
+      <a class="card" href="https://www.gaokao.cn/school/dandao" target="_blank"><div class="card-name">📊 高考网-单招专区</div><div class="card-desc">院校单招信息、历年分数线、招生计划</div><div class="card-tag tag-blue">聚合</div></a>
       <a class="card" href="https://www.gaokao.cn/school/dandao" target="_blank"><div class="card-name">🏫 高考网-单招院校库</div><div class="card-desc">按地区专业筛选单招院校</div><div class="card-tag tag-orange">聚合</div></a>
     </div>
 
@@ -5276,7 +5455,7 @@ option{background:var(--bg3);color:var(--text)}
     <div class="sec-title">▍免费真题与复习资料</div>
     <div class="grid g3">
       <a class="card" href="https://www.gaokao.cn/dandao" target="_blank"><div class="card-name">📄 单招100网</div><div class="card-desc">单招真题、模拟题、考试资讯汇总</div><div class="card-tag tag-blue">真题库</div></a>
-      <a class="card" href="https://www.gaokaopai.com/dandao/shiti/" target="_blank"><div class="card-name">📝 高考派-单招题库</div><div class="card-desc">多省单招真题在线练习</div><div class="card-tag tag-orange">真题</div></a>
+      <a class="card" href="https://www.gaokao.cn/dandao/shiti/" target="_blank"><div class="card-name">📝 高考网-单招题库</div><div class="card-desc">多省单招真题在线练习</div><div class="card-tag tag-orange">真题</div></a>
       <a class="card" href="https://www.gaokao.cn/dandao" target="_blank"><div class="card-name">📖 高考网-单招专区</div><div class="card-desc">单招政策·资料·报考指南</div><div class="card-tag tag-green">资料</div></a>
     </div>
 
@@ -5667,7 +5846,7 @@ option{background:var(--bg3);color:var(--text)}
         <a class="card" href="https://www.21cnjy.com" target="_blank"><div class="card-name">二一教育</div><div class="card-desc">中学全科教学资源与题库</div><div class="card-tag tag-purple">资源</div></a>
         <a class="card" href="https://www.jyeoo.com" target="_blank"><div class="card-name">精英猿</div><div class="card-desc">初高中专项练习·知识点梳理</div><div class="card-tag tag-orange">中考</div></a>
         <a class="card" href="https://www.docin.com/gaokao" target="_blank"><div class="card-name">豆丁高考</div><div class="card-desc">历年高考真题·解析·押题卷</div><div class="card-tag tag-red">真题</div></a>
-        <a class="card" href="https://www.xuexin.org.cn" target="_blank"><div class="card-name">学信网题库</div><div class="card-desc">官方备考资源·招生信息权威</div><div class="card-tag tag-gold">官方</div></a>
+        <a class="card" href="https://gaokao.chsi.com.cn" target="_blank"><div class="card-name">学信网题库</div><div class="card-desc">官方备考资源·招生信息权威</div><div class="card-tag tag-gold">官方</div></a>
         <a class="card" href="https://www.gaokao.cn" target="_blank"><div class="card-name">高考网</div><div class="card-desc">高考资讯·真题·志愿填报指导</div><div class="card-tag tag-blue">综合</div></a>
       </div>
     </div>
@@ -5928,7 +6107,7 @@ option{background:var(--bg3);color:var(--text)}
         <a class="card" href="https://www.eol.cn" target="_blank"><div class="card-name">中国教育在线</div><div class="card-desc">志愿填报指南·招生计划·专业介绍</div><div class="card-tag tag-teal">志愿</div></a>
         <a class="card" href="https://gaokao.chsi.com.cn" target="_blank"><div class="card-name">阳光高考</div><div class="card-desc">智能志愿推荐·历年录取数据对比</div><div class="card-tag tag-green">智能</div></a>
         <a class="card" href="http://www.mycos.com.cn" target="_blank"><div class="card-name">麦可思研究</div><div class="card-desc">专业就业前景·薪资水平分析</div><div class="card-tag tag-orange">就业</div></a>
-        <a class="card" href="https://www.usnews.com/best-colleges" target="_blank"><div class="card-name">US News排名</div><div class="card-desc">美国大学综合排名·专业排名参考</div><div class="card-tag tag-purple">排名</div></a>
+        <a class="card" href="https://www.usnews.com/best-graduate-schools" target="_blank"><div class="card-name">US News排名</div><div class="card-desc">美国大学综合排名·专业排名参考</div><div class="card-tag tag-purple">排名</div></a>
         <a class="card" href="https://www.shanghairanking.cn" target="_blank"><div class="card-name">软科排名</div><div class="card-desc">中国大学排名·专业排名·ESI学科</div><div class="card-tag tag-red">排名</div></a>
         <a class="card" href="https://gaokao.chsi.com.cn/gkxx/sxzc/" target="_blank"><div class="card-name">历年分数线库</div><div class="card-desc">学信网·各院校历年录取分数线</div><div class="card-tag tag-blue">数据</div></a>
       </div>
@@ -6946,9 +7125,945 @@ option{background:var(--bg3);color:var(--text)}
   </div><!-- /member-center -->
 </div>
 
+<!-- ===================== 使用教程 ===================== -->
+<div class="panel" id="panel-tutorial">
+<style>
+/* ---- 教程面板专属样式 ---- */
+.tut-wrap { max-width:900px; margin:0 auto; padding:16px 8px 40px; }
+.tut-hero {
+  background: linear-gradient(135deg,#1a6fc4 0%,#0ea5a0 100%);
+  border-radius:16px; padding:28px 32px; margin-bottom:28px;
+  color:#fff; display:flex; align-items:center; gap:24px;
+}
+.tut-hero-icon { font-size:52px; flex-shrink:0; }
+.tut-hero h1 { font-size:22px; font-weight:700; margin:0 0 8px; }
+.tut-hero p  { font-size:13px; opacity:.88; margin:0; line-height:1.7; }
+.tut-toc {
+  background:var(--bg2); border-radius:12px; padding:16px 20px;
+  margin-bottom:28px; display:flex; flex-wrap:wrap; gap:8px;
+}
+.tut-toc-item {
+  background:var(--bg3); border:1px solid var(--border);
+  border-radius:20px; padding:5px 14px; font-size:12px; cursor:pointer;
+  color:var(--text2); transition:all .2s; white-space:nowrap;
+}
+.tut-toc-item:hover { background:var(--accent); color:#fff; border-color:var(--accent); }
+.tut-section { margin-bottom:32px; }
+.tut-section-hd {
+  display:flex; align-items:center; gap:10px;
+  border-bottom:2px solid var(--border); padding-bottom:10px; margin-bottom:18px;
+}
+.tut-section-hd .tut-icon { font-size:24px; }
+.tut-section-hd h2 { font-size:17px; font-weight:700; margin:0; color:var(--text1); }
+.tut-section-hd .tut-badge {
+  background:var(--accent); color:#fff; border-radius:10px;
+  padding:2px 9px; font-size:11px; font-weight:600; margin-left:auto;
+}
+.tut-card {
+  background:var(--bg2); border:1px solid var(--border);
+  border-radius:12px; padding:18px 20px; margin-bottom:14px;
+}
+.tut-card-hd { font-size:14px; font-weight:700; color:var(--text1); margin-bottom:10px; display:flex; align-items:center; gap:6px; }
+.tut-card-body { font-size:13px; color:var(--text2); line-height:1.8; }
+.tut-card-body ul { margin:6px 0 0 18px; padding:0; }
+.tut-card-body li { margin-bottom:4px; }
+.tut-card-body strong { color:var(--text1); }
+.tut-steps { counter-reset:step; }
+.tut-step {
+  display:flex; gap:14px; margin-bottom:14px; align-items:flex-start;
+}
+.tut-step-num {
+  background:var(--accent); color:#fff; border-radius:50%;
+  width:26px; height:26px; display:flex; align-items:center; justify-content:center;
+  font-size:12px; font-weight:700; flex-shrink:0; margin-top:2px;
+}
+.tut-step-body { flex:1; }
+.tut-step-body .tut-step-title { font-size:13px; font-weight:700; color:var(--text1); margin-bottom:4px; }
+.tut-step-body .tut-step-desc { font-size:12.5px; color:var(--text2); line-height:1.7; }
+.tut-mockup {
+  background:var(--bg3); border:1px dashed var(--border2);
+  border-radius:10px; padding:14px 16px; margin:12px 0;
+  font-size:12px; color:var(--text3); line-height:1.9;
+}
+.tut-mockup .mock-bar {
+  background:var(--bg1); border:1px solid var(--border);
+  border-radius:8px; padding:8px 14px; margin-bottom:8px;
+  display:flex; align-items:center; gap:8px; font-size:12px;
+}
+.tut-mockup .mock-btn {
+  background:var(--accent); color:#fff; border:none; border-radius:6px;
+  padding:4px 12px; font-size:11px; cursor:default;
+}
+.tut-mockup .mock-tag {
+  background:var(--bg2); border:1px solid var(--border);
+  border-radius:14px; padding:2px 10px; font-size:11px; color:var(--text2);
+}
+.tut-tip-box {
+  background:rgba(14,165,160,.08); border-left:3px solid #0ea5a0;
+  border-radius:0 8px 8px 0; padding:10px 14px; margin-top:10px;
+  font-size:12.5px; color:var(--text2); line-height:1.7;
+}
+.tut-warn-box {
+  background:rgba(232,64,64,.07); border-left:3px solid #e84040;
+  border-radius:0 8px 8px 0; padding:10px 14px; margin-top:10px;
+  font-size:12.5px; color:var(--text2); line-height:1.7;
+}
+.tut-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+.tut-feature-chip {
+  background:var(--bg2); border:1px solid var(--border);
+  border-radius:10px; padding:12px 14px; font-size:12.5px;
+}
+.tut-feature-chip .chip-icon { font-size:18px; margin-bottom:6px; }
+.tut-feature-chip .chip-name { font-weight:700; color:var(--text1); margin-bottom:4px; }
+.tut-feature-chip .chip-desc { color:var(--text2); font-size:12px; line-height:1.6; }
+.tut-version-badge {
+  background:var(--bg3); border:1px solid var(--border2);
+  border-radius:6px; padding:2px 8px; font-size:11px; color:var(--text3);
+}
+@media(max-width:600px){
+  .tut-hero { flex-direction:column; text-align:center; padding:20px 18px; }
+  .tut-grid { grid-template-columns:1fr; }
+  .tut-wrap { padding:10px 4px 32px; }
+}
+</style>
+
+<div class="tut-wrap">
+
+  <!-- 教程封面 -->
+  <div class="tut-hero">
+    <div class="tut-hero-icon">🎓</div>
+    <div>
+      <h1>易学易升 · 使用教程</h1>
+      <p>从注册到用满所有功能，一步步带你搞定求职 / 升学 / 备考 / 简历全流程<br>
+         无论你是第一次打开，还是想深度挖掘隐藏功能，这里都有答案。</p>
+    </div>
+  </div>
+
+  <!-- 目录 -->
+  <div class="tut-toc">
+    <span style="font-size:12px;color:var(--text3);margin-right:4px">📋 快速跳转：</span>
+    <span class="tut-toc-item" onclick="document.getElementById('tut-s1').scrollIntoView({behavior:'smooth'})">① 注册 & 登录</span>
+    <span class="tut-toc-item" onclick="document.getElementById('tut-s2').scrollIntoView({behavior:'smooth'})">② 首页导航中心</span>
+    <span class="tut-toc-item" onclick="document.getElementById('tut-s3').scrollIntoView({behavior:'smooth'})">③ 招聘求职</span>
+    <span class="tut-toc-item" onclick="document.getElementById('tut-s4').scrollIntoView({behavior:'smooth'})">④ 简历工坊</span>
+    <span class="tut-toc-item" onclick="document.getElementById('tut-s5').scrollIntoView({behavior:'smooth'})">⑤ 升学 & 备考</span>
+    <span class="tut-toc-item" onclick="document.getElementById('tut-s6').scrollIntoView({behavior:'smooth'})">⑥ 考证中心</span>
+    <span class="tut-toc-item" onclick="document.getElementById('tut-s7').scrollIntoView({behavior:'smooth'})">⑦ 会员中心</span>
+    <span class="tut-toc-item" onclick="document.getElementById('tut-s8').scrollIntoView({behavior:'smooth'})">⑧ 云同步</span>
+    <span class="tut-toc-item" onclick="document.getElementById('tut-s9').scrollIntoView({behavior:'smooth'})">⑨ AI 功能</span>
+    <span class="tut-toc-item" onclick="document.getElementById('tut-s10').scrollIntoView({behavior:'smooth'})">⑩ 常见问题</span>
+  </div>
+
+  <!-- ① 注册 & 登录 -->
+  <div class="tut-section" id="tut-s1">
+    <div class="tut-section-hd">
+      <span class="tut-icon">🔐</span>
+      <h2>① 注册 &amp; 登录</h2>
+      <span class="tut-badge">第一步</span>
+    </div>
+
+    <div class="tut-card">
+      <div class="tut-card-hd">🎫 你需要一个激活码才能注册</div>
+      <div class="tut-card-body">
+        本平台采用<strong>邀请制</strong>——注册需要有效的激活码（由管理员发放）。
+        购买激活码后，你将获得一个形如 <code>CPRO-XXXX-XXXX-XXXX</code> 的字符串，妥善保管。
+        <div class="tut-warn-box">⚠️ 每个激活码只能绑定一个账号，且绑定后不可转让。请勿将激活码泄露给他人。</div>
+      </div>
+    </div>
+
+    <div class="tut-card">
+      <div class="tut-card-hd">📝 如何注册</div>
+      <div class="tut-card-body">
+        <div class="tut-steps">
+          <div class="tut-step">
+            <div class="tut-step-num">1</div>
+            <div class="tut-step-body">
+              <div class="tut-step-title">点击右上角「登录 / 注册」</div>
+              <div class="tut-step-desc">弹出登录窗口后，切换到「注册新账号」标签页。</div>
+            </div>
+          </div>
+          <div class="tut-step">
+            <div class="tut-step-num">2</div>
+            <div class="tut-step-body">
+              <div class="tut-step-title">填写用户名、密码和激活码</div>
+              <div class="tut-step-desc">用户名建议6~16位字母/数字，密码至少8位。激活码填入后点击「验证激活码」，系统联网核验有效性。</div>
+            </div>
+          </div>
+          <div class="tut-step">
+            <div class="tut-step-num">3</div>
+            <div class="tut-step-body">
+              <div class="tut-step-title">完成两步注册确认</div>
+              <div class="tut-step-desc">系统自动推送注册通知（步骤1），然后让你确认 Gist ID（步骤2，用于跨设备同步），两步都完成后账号激活成功，自动登录。</div>
+            </div>
+          </div>
+        </div>
+        <div class="tut-tip-box">💡 如果你的激活码已绑定过账号，注册时会提示「已完成身份绑定，无法再次使用」，这是正常的安全保护机制。</div>
+      </div>
+    </div>
+
+    <div class="tut-card">
+      <div class="tut-card-hd">🔑 如何登录</div>
+      <div class="tut-card-body">
+        <ul>
+          <li>点击右上角「登录」按钮，输入用户名和密码即可。</li>
+          <li>首次登录后会弹出「云端同步」询问——建议开启，自动帮你备份数据。</li>
+          <li><strong>换设备了？</strong> 系统会先查本地缓存，再联网验证激活码有效期，只要 Key 未过期就能正常登录。</li>
+        </ul>
+        <div class="tut-tip-box">💡 忘记密码目前只能联系管理员重置（数据存本地，无法通过邮件找回）。建议用浏览器记住密码。</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ② 首页导航中心 -->
+  <div class="tut-section" id="tut-s2">
+    <div class="tut-section-hd">
+      <span class="tut-icon">🏠</span>
+      <h2>② 首页导航中心</h2>
+      <span class="tut-badge">起点</span>
+    </div>
+
+    <div class="tut-card">
+      <div class="tut-card-hd">🔍 英雄区搜索框</div>
+      <div class="tut-card-body">
+        首页最显眼的大搜索框，可以直接输入职位关键词（如「电气工程师」「校招 2026」），然后选择跳转到哪个招聘平台。
+        <div class="tut-mockup">
+          <div class="mock-bar">
+            <span style="flex:1">🔍 输入岗位关键词，例如：应届生 招聘</span>
+            <span class="mock-btn">搜索</span>
+          </div>
+          <span class="mock-tag">热门：</span>&nbsp;
+          <span class="mock-tag">应届生 招聘</span>&nbsp;
+          <span class="mock-tag">国企 管培生</span>&nbsp;
+          <span class="mock-tag">校园招聘 2026</span>&nbsp;
+          <span style="color:var(--gold)">🔄 换一批</span>
+        </div>
+        下方的<strong>「热门」快捷词</strong>是随机从词库里抽取的，点「🔄 换一批」可以随机刷新8个新词，点任意词汇会直接搜索。
+      </div>
+    </div>
+
+    <div class="tut-card">
+      <div class="tut-card-hd">📌 热招横幅</div>
+      <div class="tut-card-body">
+        搜索框下方的滚动横幅，展示当前热门招聘信息（如「🔥 铁路2026校招」「国家电网春招」），点击直接跳到对应招聘页。
+      </div>
+    </div>
+
+    <div class="tut-card">
+      <div class="tut-card-hd">🗂️ 专业方向快捷网格</div>
+      <div class="tut-card-body">
+        首页中部的 9 宫格专业分类（电气 / 计算机 / 机械 / 土木…），点击直接跳转到对应的专业方向岗位搜索页。适合大学生按专业快速找到对口岗位。
+      </div>
+    </div>
+
+    <div class="tut-card">
+      <div class="tut-card-hd">🧭 顶部 Tab 栏导航</div>
+      <div class="tut-card-body">
+        页面上方的一排功能按钮，将全站所有模块组织为几组：
+        <ul>
+          <li><strong>🔵 蓝色组：</strong>招聘求职相关（校招/社招/行业招聘等）</li>
+          <li><strong>🟢 绿色组：</strong>升学考试相关（高考/单招/备考）</li>
+          <li><strong>🟡 金色组：</strong>个人成长相关（简历/考证/时间线）</li>
+          <li><strong>其他：</strong>论坛、贴吧、会员中心、使用教程</li>
+        </ul>
+        <div class="tut-tip-box">💡 手机端可以左右滑动 Tab 栏，或点击右上角汉堡菜单（☰）快速跳转。</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ③ 招聘求职 -->
+  <div class="tut-section" id="tut-s3">
+    <div class="tut-section-hd">
+      <span class="tut-icon">💼</span>
+      <h2>③ 招聘求职</h2>
+      <span class="tut-badge">核心</span>
+    </div>
+
+    <div class="tut-card">
+      <div class="tut-card-hd">🎓 校园招聘（📅 校招季）</div>
+      <div class="tut-card-body">
+        聚合国内主要校招平台、大厂官网直招链接。分为「综合校招」「大厂直招」「央企国企」「行业专属」多个子栏目，按专业方向分类展示。
+        <ul>
+          <li>点击任意平台卡片 → 新窗口打开对应招聘页</li>
+          <li>大厂直招直链（腾讯/华为/百度等）避免你在官网迷路</li>
+          <li>每年秋招（9-11月）和春招（3-4月）是高峰期</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="tut-card">
+      <div class="tut-card-hd">🏢 行业社会招聘（🏭 社招）</div>
+      <div class="tut-card-body">
+        六大行业分类，覆盖应届生毕业后的首份社招岗位：
+        <div class="tut-grid" style="margin-top:10px">
+          <div class="tut-feature-chip">
+            <div class="chip-icon">🌐</div>
+            <div class="chip-name">综合平台</div>
+            <div class="chip-desc">BOSS直聘/智联/51job/拉勾等主流平台直达</div>
+          </div>
+          <div class="tut-feature-chip">
+            <div class="chip-icon">🏛️</div>
+            <div class="chip-name">央企国企</div>
+            <div class="chip-desc">国聘网/铁路招聘/国家电网/南方电网等官方入口</div>
+          </div>
+          <div class="tut-feature-chip">
+            <div class="chip-icon">💻</div>
+            <div class="chip-name">互联网科技</div>
+            <div class="chip-desc">大厂校招官网、实习僧、BOSS技术岗专区</div>
+          </div>
+          <div class="tut-feature-chip">
+            <div class="chip-icon">⚙️</div>
+            <div class="chip-name">制造/能源</div>
+            <div class="chip-desc">机械/电气/新能源行业招聘专区</div>
+          </div>
+          <div class="tut-feature-chip">
+            <div class="chip-icon">🏦</div>
+            <div class="chip-name">金融/银行</div>
+            <div class="chip-desc">银行秋招、证券/基金公司校招直达</div>
+          </div>
+          <div class="tut-feature-chip">
+            <div class="chip-icon">🏥</div>
+            <div class="chip-name">医疗/教育</div>
+            <div class="chip-desc">医院招聘、教师岗位、事业单位入口</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tut-card">
+      <div class="tut-card-hd">🎯 搜索栏使用技巧</div>
+      <div class="tut-card-body">
+        进入任意招聘面板，顶部都有搜索栏：
+        <ul>
+          <li>在「关键词」输入框里打职位名，下拉选择招聘网站，点「🔍 搜索」直接跳转</li>
+          <li>「快捷词」下方有常用热搜词，点一下自动填入并搜索，省去打字步骤</li>
+          <li>支持组合词搜索，如「国企 电气」「铁路 应届生」效果更精准</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="tut-card">
+      <div class="tut-card-hd">🗣️ 贴吧专区 &amp; 论坛社区</div>
+      <div class="tut-card-body">
+        汇集百度贴吧（求职/院校/专业贴吧）和主要求职社区（应届生论坛、知乎职场、脉脉等）的直达链接。看真实的面试经验帖、内推信息、避坑指南首选这里。
+        <div class="tut-tip-box">💡 贴吧搜「公司名+校招」能找到大量真实内推帖和面经。</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ④ 简历工坊 -->
+  <div class="tut-section" id="tut-s4">
+    <div class="tut-section-hd">
+      <span class="tut-icon">📄</span>
+      <h2>④ 简历工坊</h2>
+      <span class="tut-badge">VIP专属</span>
+    </div>
+
+    <div class="tut-card">
+      <div class="tut-card-hd">✍️ 基本使用流程</div>
+      <div class="tut-card-body">
+        <div class="tut-steps">
+          <div class="tut-step">
+            <div class="tut-step-num">1</div>
+            <div class="tut-step-body">
+              <div class="tut-step-title">填写基本信息</div>
+              <div class="tut-step-desc">姓名、联系方式、求职意向、个人简介、教育背景（支持多段）。</div>
+            </div>
+          </div>
+          <div class="tut-step">
+            <div class="tut-step-num">2</div>
+            <div class="tut-step-body">
+              <div class="tut-step-title">添加工作 / 实习经历</div>
+              <div class="tut-step-desc">支持动态添加多段经历，每段有描述文本框，可手动写，也可点「🤖 AI扩写」让 AI 帮你润色。</div>
+            </div>
+          </div>
+          <div class="tut-step">
+            <div class="tut-step-num">3</div>
+            <div class="tut-step-body">
+              <div class="tut-step-title">选主题 / 字体</div>
+              <div class="tut-step-desc">6种配色主题（默认蓝/科技黑/活力橙…）+ 3种字体风格，右侧实时预览效果。</div>
+            </div>
+          </div>
+          <div class="tut-step">
+            <div class="tut-step-num">4</div>
+            <div class="tut-step-body">
+              <div class="tut-step-title">保存 &amp; 导出</div>
+              <div class="tut-step-desc">点「💾 保存草稿」本地存档（无限份），点「📥 下载PDF」导出打印版（需登录）。</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tut-card">
+      <div class="tut-card-hd">🆚 游客 vs 会员权限对比</div>
+      <div class="tut-card-body">
+        <table style="width:100%;border-collapse:collapse;font-size:12px">
+          <tr style="background:var(--bg3)">
+            <th style="padding:7px 10px;text-align:left;border:1px solid var(--border)">功能</th>
+            <th style="padding:7px 10px;text-align:center;border:1px solid var(--border)">游客</th>
+            <th style="padding:7px 10px;text-align:center;border:1px solid var(--border)">会员（登录后）</th>
+          </tr>
+          <tr>
+            <td style="padding:6px 10px;border:1px solid var(--border)">AI 生成简历</td>
+            <td style="padding:6px 10px;border:1px solid var(--border);text-align:center">✅ 可用（含水印）</td>
+            <td style="padding:6px 10px;border:1px solid var(--border);text-align:center">✅ 无水印</td>
+          </tr>
+          <tr style="background:var(--bg2)">
+            <td style="padding:6px 10px;border:1px solid var(--border)">高级 AI 润色</td>
+            <td style="padding:6px 10px;border:1px solid var(--border);text-align:center">🔒 锁定</td>
+            <td style="padding:6px 10px;border:1px solid var(--border);text-align:center">✅ 可用</td>
+          </tr>
+          <tr>
+            <td style="padding:6px 10px;border:1px solid var(--border)">保存简历（本地存档）</td>
+            <td style="padding:6px 10px;border:1px solid var(--border);text-align:center">🔒 锁定</td>
+            <td style="padding:6px 10px;border:1px solid var(--border);text-align:center">✅ 无限份</td>
+          </tr>
+          <tr style="background:var(--bg2)">
+            <td style="padding:6px 10px;border:1px solid var(--border)">下载 PDF</td>
+            <td style="padding:6px 10px;border:1px solid var(--border);text-align:center">🔒 锁定</td>
+            <td style="padding:6px 10px;border:1px solid var(--border);text-align:center">✅ 可用</td>
+          </tr>
+          <tr>
+            <td style="padding:6px 10px;border:1px solid var(--border)">AI 评分 &amp; 建议</td>
+            <td style="padding:6px 10px;border:1px solid var(--border);text-align:center">🔒 锁定</td>
+            <td style="padding:6px 10px;border:1px solid var(--border);text-align:center">✅ 可用</td>
+          </tr>
+        </table>
+        <div class="tut-tip-box">💡 游客可以先试用 AI 生成功能体验效果，满意了再注册激活完整权限。</div>
+      </div>
+    </div>
+
+    <div class="tut-card">
+      <div class="tut-card-hd">🤖 AI 扩写 / 润色 怎么用</div>
+      <div class="tut-card-body">
+        <ul>
+          <li>在经历描述框里<strong>先写出关键点</strong>（哪怕只有几个词），然后点「AI扩写」</li>
+          <li>AI 会根据你的内容结合岗位方向，生成正式简历风格的描述段落</li>
+          <li>生成结果可以直接编辑修改，满意后再保存</li>
+          <li>如果结果不好，再点一次「AI扩写」会重新生成</li>
+        </ul>
+        <div class="tut-warn-box">⚠️ AI 生成内容仅供参考，请结合自身实际情况修改，确保简历真实性。</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ⑤ 升学 & 备考 -->
+  <div class="tut-section" id="tut-s5">
+    <div class="tut-section-hd">
+      <span class="tut-icon">📚</span>
+      <h2>⑤ 升学备考</h2>
+      <span class="tut-badge">新功能</span>
+    </div>
+
+    <div class="tut-card">
+      <div class="tut-card-hd">🎯 高考志愿参谋</div>
+      <div class="tut-card-body">
+        输入你的高考分数和省份，AI 自动推荐匹配的院校和专业方向，并给出理由。
+        <div class="tut-steps">
+          <div class="tut-step">
+            <div class="tut-step-num">1</div>
+            <div class="tut-step-body">
+              <div class="tut-step-title">输入分数 + 选省份</div>
+              <div class="tut-step-desc">在「AI志愿参谋」输入框中填写分数，选择所在省份和文/理科。</div>
+            </div>
+          </div>
+          <div class="tut-step">
+            <div class="tut-step-num">2</div>
+            <div class="tut-step-body">
+              <div class="tut-step-title">点击「AI 推荐院校」</div>
+              <div class="tut-step-desc">AI 分析分数区间，给出「冲刺/稳妥/保底」三梯度院校组合，并解释专业就业方向。</div>
+            </div>
+          </div>
+        </div>
+        <div class="tut-warn-box">⚠️ 历年分数线数据仅供参考，请以官方发布的招生简章为准。</div>
+      </div>
+    </div>
+
+    <div class="tut-card">
+      <div class="tut-card-hd">📊 历年分数线查询</div>
+      <div class="tut-card-body">
+        内置各省历年高考分数线数据，可按年份/省份/科类筛选查看。同时支持按院校名搜索专业录取分数区间。
+      </div>
+    </div>
+
+    <div class="tut-card">
+      <div class="tut-card-hd">📝 单招考试专区</div>
+      <div class="tut-card-body">
+        专为高职单独招生考试（单招）设计，包括：
+        <ul>
+          <li>单招院校查询（可按地区/专业方向筛选）</li>
+          <li>考试科目说明（文化课 + 技能测试）</li>
+          <li>备考资源：复习题库、参考教材、历年真题入口</li>
+          <li>AI志愿参谋（适配单招分数区间）</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="tut-card">
+      <div class="tut-card-hd">🧠 复习题库 &amp; AI 出题</div>
+      <div class="tut-card-body">
+        升学备考 Tab 下的「复习题库」提供：
+        <ul>
+          <li>预设题库：按学科分类的练习题，支持翻页和答题打分</li>
+          <li>AI 出题：输入复习主题，AI 实时生成新题目（需 AI Key）</li>
+          <li>AI 解题：粘贴任意题目，AI 给出解题思路和答案</li>
+        </ul>
+        <div class="tut-tip-box">💡 AI 出题/解题功能需要有 DeepSeek API Key（见「AI 功能」章节），或由管理员在后台内置 Key。</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ⑥ 考证中心 -->
+  <div class="tut-section" id="tut-s6">
+    <div class="tut-section-hd">
+      <span class="tut-icon">🏅</span>
+      <h2>⑥ 考证中心</h2>
+      <span class="tut-badge">实用</span>
+    </div>
+
+    <div class="tut-card">
+      <div class="tut-card-hd">🗂️ 四大证书分类</div>
+      <div class="tut-card-body">
+        <div class="tut-grid">
+          <div class="tut-feature-chip">
+            <div class="chip-icon">🎓</div>
+            <div class="chip-name">职业资格证</div>
+            <div class="chip-desc">初级/中级/高级职称，注册类执业资格（注册电气/建造师等）</div>
+          </div>
+          <div class="tut-feature-chip">
+            <div class="chip-icon">💡</div>
+            <div class="chip-name">技能等级证</div>
+            <div class="chip-desc">国家职业技能等级认定，1V1工种证书考取渠道</div>
+          </div>
+          <div class="tut-feature-chip">
+            <div class="chip-icon">⚡</div>
+            <div class="chip-name">特种作业证</div>
+            <div class="chip-desc">电工证/焊工证/高空作业/危化品等特种作业操作证</div>
+          </div>
+          <div class="tut-feature-chip">
+            <div class="chip-icon">📜</div>
+            <div class="chip-name">学历学位</div>
+            <div class="chip-desc">自考/成考/网教学历提升，学信网验证入口</div>
+          </div>
+        </div>
+        <div style="margin-top:12px;font-size:12.5px;color:var(--text2)">每类证书卡片包含：<strong>考试机构</strong>、<strong>报名官网链接</strong>、<strong>考试时间</strong>（参考）、<strong>适合人群</strong>说明。</div>
+      </div>
+    </div>
+
+    <div class="tut-card">
+      <div class="tut-card-hd">📋 如何使用考证中心</div>
+      <div class="tut-card-body">
+        <ul>
+          <li>进入「🏅 考证中心」Tab，左侧或顶部可按大类切换</li>
+          <li>找到目标证书后点击「官网报名」直达报名页面</li>
+          <li>部分证书有「🤖 AI备考计划」按钮，可生成个性化复习路线</li>
+        </ul>
+        <div class="tut-tip-box">💡 「特种作业证」（电工证等）是很多国企/工厂上岗的硬性要求，建议尽早考取。</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ⑦ 会员中心 -->
+  <div class="tut-section" id="tut-s7">
+    <div class="tut-section-hd">
+      <span class="tut-icon">⭐</span>
+      <h2>⑦ 会员中心</h2>
+      <span class="tut-badge">VIP专属</span>
+    </div>
+
+    <div class="tut-card">
+      <div class="tut-card-hd">🏠 仪表盘</div>
+      <div class="tut-card-body">
+        登录后进入会员中心首先看到仪表盘，展示：账号信息、激活码有效期、收藏夹数量、求职进度等核心数据。也可以在这里配置 AI API Key。
+      </div>
+    </div>
+
+    <div class="tut-card">
+      <div class="tut-card-hd">📋 10 大功能模块一览</div>
+      <div class="tut-card-body">
+        <div class="tut-grid">
+          <div class="tut-feature-chip">
+            <div class="chip-icon">⭐</div>
+            <div class="chip-name">收藏夹</div>
+            <div class="chip-desc">收藏感兴趣的岗位/公司链接，带备注，随时回看</div>
+          </div>
+          <div class="tut-feature-chip">
+            <div class="chip-icon">📊</div>
+            <div class="chip-name">求职看板</div>
+            <div class="chip-desc">可视化追踪每个岗位的投递→面试→录用进度</div>
+          </div>
+          <div class="tut-feature-chip">
+            <div class="chip-icon">⏰</div>
+            <div class="chip-name">面试提醒</div>
+            <div class="chip-desc">记录面试时间/地点/注意事项，避免忘记面试</div>
+          </div>
+          <div class="tut-feature-chip">
+            <div class="chip-icon">📄</div>
+            <div class="chip-name">我的简历</div>
+            <div class="chip-desc">管理所有存档简历，可预览/编辑/删除（无限份）</div>
+          </div>
+          <div class="tut-feature-chip">
+            <div class="chip-icon">📓</div>
+            <div class="chip-name">求职日记</div>
+            <div class="chip-desc">记录每天求职心得、面试复盘，支持按日期筛选</div>
+          </div>
+          <div class="tut-feature-chip">
+            <div class="chip-icon">📈</div>
+            <div class="chip-name">数据统计</div>
+            <div class="chip-desc">投递量/面试量/通过率可视化图表，一眼掌握求职效率</div>
+          </div>
+          <div class="tut-feature-chip">
+            <div class="chip-icon">🤝</div>
+            <div class="chip-name">内推码库</div>
+            <div class="chip-desc">记录收到/发出的内推码，方便分享和追踪进度</div>
+          </div>
+          <div class="tut-feature-chip">
+            <div class="chip-icon">🔍</div>
+            <div class="chip-name">简历对比</div>
+            <div class="chip-desc">对比两份存档简历的差异，找出优化方向</div>
+          </div>
+          <div class="tut-feature-chip">
+            <div class="chip-icon">🎙️</div>
+            <div class="chip-name">AI 面试题</div>
+            <div class="chip-desc">输入目标岗位，AI 生成针对性面试题 + 参考答案</div>
+          </div>
+          <div class="tut-feature-chip">
+            <div class="chip-icon">👤</div>
+            <div class="chip-name">个人主页</div>
+            <div class="chip-desc">查看账号信息、修改密码、查看权益状态</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ⑧ 云端同步 -->
+  <div class="tut-section" id="tut-s8">
+    <div class="tut-section-hd">
+      <span class="tut-icon">☁️</span>
+      <h2>⑧ 云端数据同步</h2>
+      <span class="tut-badge">跨设备</span>
+    </div>
+
+    <div class="tut-card">
+      <div class="tut-card-hd">🔄 什么是云端同步</div>
+      <div class="tut-card-body">
+        易学易升的所有数据默认存在<strong>浏览器本地（localStorage）</strong>。如果你换了电脑或清除了浏览器数据，数据就会丢失。
+        <br><br>
+        <strong>云端同步</strong>通过 GitHub Gist 把你的数据备份到云端，实现跨设备数据恢复。
+        <div class="tut-warn-box">⚠️ 本功能需要你提供一个 GitHub 账号和个人访问令牌（PAT），数据会存在你自己的 Gist 中，平台无法读取。</div>
+      </div>
+    </div>
+
+    <div class="tut-card">
+      <div class="tut-card-hd">🛠️ 如何配置同步</div>
+      <div class="tut-card-body">
+        <div class="tut-steps">
+          <div class="tut-step">
+            <div class="tut-step-num">1</div>
+            <div class="tut-step-body">
+              <div class="tut-step-title">登录后弹出同步询问弹窗</div>
+              <div class="tut-step-desc">选「开启自动同步」→ 登录时自动恢复数据，离开页面前自动备份。</div>
+            </div>
+          </div>
+          <div class="tut-step">
+            <div class="tut-step-num">2</div>
+            <div class="tut-step-body">
+              <div class="tut-step-title">或在「会员中心」手动配置</div>
+              <div class="tut-step-desc">仪表盘 → 「数据同步」模块 → 填入 GitHub Token + Gist ID → 保存，然后手动点「立即备份」或「从云端恢复」。</div>
+            </div>
+          </div>
+        </div>
+        <div class="tut-tip-box">💡 如不配置同步，建议定期在会员中心手动导出数据备份到本地文件。</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ⑨ AI 功能 -->
+  <div class="tut-section" id="tut-s9">
+    <div class="tut-section-hd">
+      <span class="tut-icon">🤖</span>
+      <h2>⑨ AI 功能详解</h2>
+      <span class="tut-badge">核心亮点</span>
+    </div>
+
+    <div class="tut-card">
+      <div class="tut-card-hd">🔑 AI Key 从哪里来</div>
+      <div class="tut-card-body">
+        平台使用 <strong>DeepSeek AI</strong> 接口，有两种使用方式：
+        <ul>
+          <li><strong>内置 Key（推荐）：</strong>如果管理员已在后台内置 API Key，你无需任何配置，AI 功能直接可用。</li>
+          <li><strong>自定义 Key：</strong>去 <a href="https://platform.deepseek.com" target="_blank">DeepSeek 官网</a> 注册并获取 API Key（sk-xxx 格式），然后在「会员中心 → 仪表盘 → AI API Key 配置」处填入。</li>
+        </ul>
+        <div class="tut-tip-box">💡 Key 仅存在你的浏览器本地，不会上传到任何服务器。</div>
+      </div>
+    </div>
+
+    <div class="tut-card">
+      <div class="tut-card-hd">📋 AI 功能清单</div>
+      <div class="tut-card-body">
+        <div class="tut-grid">
+          <div class="tut-feature-chip">
+            <div class="chip-icon">✍️</div>
+            <div class="chip-name">简历 AI 扩写</div>
+            <div class="chip-desc">把简短经历关键词扩写为专业简历段落</div>
+          </div>
+          <div class="tut-feature-chip">
+            <div class="chip-icon">💡</div>
+            <div class="chip-name">简历 AI 润色</div>
+            <div class="chip-desc">优化表达、突出亮点，提升简历专业度</div>
+          </div>
+          <div class="tut-feature-chip">
+            <div class="chip-icon">🏆</div>
+            <div class="chip-name">简历 AI 评分</div>
+            <div class="chip-desc">从完整度/相关性/表达力多维度打分并给出建议</div>
+          </div>
+          <div class="tut-feature-chip">
+            <div class="chip-icon">🎙️</div>
+            <div class="chip-name">AI 面试题生成</div>
+            <div class="chip-desc">根据岗位生成专业面试题 + 参考答案</div>
+          </div>
+          <div class="tut-feature-chip">
+            <div class="chip-icon">🎓</div>
+            <div class="chip-name">AI 志愿参谋</div>
+            <div class="chip-desc">根据分数推荐院校和专业，分析就业前景</div>
+          </div>
+          <div class="tut-feature-chip">
+            <div class="chip-icon">🧠</div>
+            <div class="chip-name">AI 出题/解题</div>
+            <div class="chip-desc">备考题库里的 AI 题目生成和解析功能</div>
+          </div>
+          <div class="tut-feature-chip">
+            <div class="chip-icon">🗺️</div>
+            <div class="chip-name">AI 专业分析</div>
+            <div class="chip-desc">输入专业名，AI 分析就业方向和对口岗位</div>
+          </div>
+          <div class="tut-feature-chip">
+            <div class="chip-icon">📋</div>
+            <div class="chip-name">AI 考证建议</div>
+            <div class="chip-desc">根据专业/岗位推荐最值得考的证书及备考建议</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ⑩ 常见问题 -->
+  <div class="tut-section" id="tut-s10">
+    <div class="tut-section-hd">
+      <span class="tut-icon">❓</span>
+      <h2>⑩ 常见问题</h2>
+      <span class="tut-badge">FAQ</span>
+    </div>
+
+    <div class="tut-card">
+      <div class="tut-card-hd">Q：数据会不会丢？</div>
+      <div class="tut-card-body">
+        数据存在浏览器 localStorage 里。以下情况会丢失：清除浏览器数据、换浏览器、换设备。
+        <strong>解决方法：</strong>开启云端同步（Gist 备份），或在会员中心定期手动导出。
+      </div>
+    </div>
+
+    <div class="tut-card">
+      <div class="tut-card-hd">Q：激活码过期了怎么办？</div>
+      <div class="tut-card-body">
+        激活码到期后，登录时系统会提示 Key 已过期，联系管理员购买新激活码续期即可。旧数据不会丢失。
+      </div>
+    </div>
+
+    <div class="tut-card">
+      <div class="tut-card-hd">Q：AI 功能用不了，显示「无 Key」？</div>
+      <div class="tut-card-body">
+        有两种情况：①管理员未配置内置 Key；②你的自定义 Key 无效/余额不足。
+        解决：在「会员中心→仪表盘→AI Key配置」填入自己的 DeepSeek Key，或联系管理员开启内置 Key。
+      </div>
+    </div>
+
+    <div class="tut-card">
+      <div class="tut-card-hd">Q：手机端某些按钮点不到？</div>
+      <div class="tut-card-body">
+        本平台已适配手机端响应式布局。如遇到按钮显示异常，尝试：①横屏显示；②在浏览器里「请求桌面网站」；③反馈给管理员。
+      </div>
+    </div>
+
+    <div class="tut-card">
+      <div class="tut-card-hd">Q：PDF 下载出来格式乱了？</div>
+      <div class="tut-card-body">
+        PDF 导出使用浏览器原生打印功能。建议：选「A4」纸张、「无页眉页脚」、缩放选「适合页面」或「100%」，效果最佳。推荐在 Chrome/Edge 下导出。
+      </div>
+    </div>
+
+    <div class="tut-card">
+      <div class="tut-card-hd">Q：链接打不开 / 跳转错误？</div>
+      <div class="tut-card-body">
+        部分招聘平台会周期性调整 URL 结构。如遇到打不开的链接，可直接在搜索引擎搜索平台名称找到最新入口。发现死链也欢迎反馈给管理员更新。
+      </div>
+    </div>
+
+    <div style="text-align:center;padding:28px 0 8px;color:var(--text3);font-size:12px">
+      <div style="font-size:28px;margin-bottom:8px">🎉</div>
+      以上就是易学易升全部功能介绍，有问题欢迎联系管理员。<br>
+      <span class="tut-version-badge" style="margin-top:8px;display:inline-block" id="tutVerBadge">加载中…</span>
+      <script>
+        (function(){
+          var b = document.getElementById('tutVerBadge');
+          if(b) b.textContent = (typeof APP_VERSION !== 'undefined' ? APP_VERSION : '') + ' · ' + (typeof BUILD_DATE !== 'undefined' ? BUILD_DATE : '');
+        })();
+      </script>
+    </div>
+  </div>
+
+</div><!-- /tut-wrap -->
+</div><!-- /panel-tutorial -->
+
 </div><!-- /content -->
 
+<!-- ===================== 全站 AI 助手 ===================== -->
+<style>
+/* ---- AI 助手悬浮按钮 ---- */
+#aiFloatBtn {
+  position: fixed; right: 20px; bottom: 80px; z-index: 8000;
+  width: 52px; height: 52px; border-radius: 50%;
+  background: linear-gradient(135deg, #6c3fff, #2a6fc0);
+  color: #fff; font-size: 22px; border: none; cursor: pointer;
+  box-shadow: 0 4px 18px rgba(108,63,255,.45);
+  display: flex; align-items: center; justify-content: center;
+  transition: transform .2s, box-shadow .2s;
+  animation: aiFloat 3s ease-in-out infinite;
+}
+#aiFloatBtn:hover { transform: scale(1.1); box-shadow: 0 6px 24px rgba(108,63,255,.6); }
+@keyframes aiFloat {
+  0%,100% { transform: translateY(0); }
+  50%      { transform: translateY(-5px); }
+}
+#aiFloatBadge {
+  position: absolute; top: -4px; right: -4px;
+  background: #e84040; color: #fff; font-size: 10px; font-weight: 700;
+  border-radius: 10px; min-width: 18px; height: 18px;
+  display: flex; align-items: center; justify-content: center;
+  padding: 0 4px; border: 2px solid var(--bg1);
+}
+/* ---- AI 助手聊天窗口 ---- */
+#aiAssistantWin {
+  position: fixed; right: 20px; bottom: 145px; z-index: 8001;
+  width: 360px; max-width: calc(100vw - 24px);
+  height: 520px; max-height: calc(100vh - 160px);
+  background: var(--bg1); border: 1px solid var(--border);
+  border-radius: 18px; box-shadow: 0 8px 40px rgba(0,0,0,.35);
+  display: none; flex-direction: column; overflow: hidden;
+  transform-origin: bottom right;
+  animation: aiWinOpen .2s ease;
+}
+@keyframes aiWinOpen {
+  from { opacity:0; transform: scale(.9) translateY(10px); }
+  to   { opacity:1; transform: scale(1) translateY(0); }
+}
+.ai-win-hd {
+  background: linear-gradient(135deg, #6c3fff, #2a6fc0);
+  padding: 14px 16px; display: flex; align-items: center; gap: 10px; flex-shrink: 0;
+}
+.ai-win-avatar { font-size: 22px; }
+.ai-win-title { flex:1; }
+.ai-win-title b { color:#fff; font-size:14px; display:block; }
+.ai-win-title span { color:rgba(255,255,255,.7); font-size:11px; }
+.ai-win-actions { display:flex; gap:6px; }
+.ai-win-btn {
+  background: rgba(255,255,255,.15); color: #fff; border: none;
+  border-radius: 8px; padding: 5px 10px; font-size: 11px; cursor: pointer;
+  transition: background .15s;
+}
+.ai-win-btn:hover { background: rgba(255,255,255,.3); }
+#aiMsgList {
+  flex: 1; overflow-y: auto; padding: 14px 12px;
+  display: flex; flex-direction: column; gap: 12px;
+}
+.ai-msg { display: flex; gap: 8px; align-items: flex-start; }
+.ai-msg-user { flex-direction: row-reverse; }
+.ai-avatar { font-size: 20px; flex-shrink: 0; margin-top: 2px; }
+.ai-bubble {
+  background: var(--bg2); border: 1px solid var(--border);
+  border-radius: 12px; padding: 10px 13px;
+  font-size: 13px; color: var(--text1); line-height: 1.75;
+  max-width: 82%; word-break: break-word;
+}
+.ai-bubble-user {
+  background: linear-gradient(135deg, #2a6fc0, #1a5faa);
+  color: #fff; border-color: transparent;
+}
+.ai-chip {
+  background: var(--bg3); border: 1px solid var(--border);
+  border-radius: 14px; padding: 4px 11px; font-size: 12px;
+  color: var(--text2); cursor: pointer; transition: all .15s;
+  white-space: nowrap;
+}
+.ai-chip:hover { border-color: var(--accent); color: var(--accent); background: var(--bg2); }
+.ai-typing-dot {
+  display: inline-block; width: 6px; height: 6px;
+  background: var(--text3); border-radius: 50%; margin: 0 2px;
+  animation: aiDot 1.2s ease-in-out infinite;
+}
+.ai-typing-dot:nth-child(2) { animation-delay: .2s; }
+.ai-typing-dot:nth-child(3) { animation-delay: .4s; }
+@keyframes aiDot { 0%,60%,100%{transform:translateY(0)}30%{transform:translateY(-5px)} }
+.ai-win-ft {
+  padding: 10px 12px; border-top: 1px solid var(--border); flex-shrink: 0;
+  display: flex; gap: 8px; align-items: flex-end; background: var(--bg1);
+}
+#aiAssistantInput {
+  flex: 1; background: var(--bg2); border: 1px solid var(--border);
+  border-radius: 10px; padding: 9px 12px; font-size: 13px;
+  color: var(--text1); font-family: inherit; resize: none;
+  max-height: 80px; min-height: 36px; line-height: 1.5;
+  transition: border-color .15s;
+}
+#aiAssistantInput:focus { outline: none; border-color: var(--accent); }
+#aiSendBtn {
+  background: linear-gradient(135deg, #6c3fff, #2a6fc0);
+  color: #fff; border: none; border-radius: 10px;
+  width: 36px; height: 36px; font-size: 16px; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: opacity .15s; flex-shrink: 0;
+}
+#aiSendBtn:disabled { opacity: .5; cursor: not-allowed; }
+.ai-quota-bar {
+  padding: 4px 14px 8px; font-size:11px; color:var(--text3);
+  text-align: right; flex-shrink: 0;
+}
+@media(max-width:480px){
+  #aiAssistantWin { right:8px; bottom:130px; width:calc(100vw - 16px); height:70vh; }
+  #aiFloatBtn { right:14px; bottom:70px; width:46px; height:46px; font-size:20px; }
+}
+</style>
+
+<!-- 悬浮按钮 -->
+<button id="aiFloatBtn" onclick="openAIAssistant()" title="AI助手小升">
+  🤖
+  <span id="aiFloatBadge" style="display:none">20</span>
+</button>
+
+<!-- 聊天窗口 -->
+<div id="aiAssistantWin">
+  <div class="ai-win-hd">
+    <span class="ai-win-avatar">🤖</span>
+    <div class="ai-win-title">
+      <b>小升 AI 助手</b>
+      <span>写简历 · 出题 · 志愿 · 求职咨询</span>
+    </div>
+    <div class="ai-win-actions">
+      <button class="ai-win-btn" onclick="clearAIContext()" title="清除对话">🗑️</button>
+      <button class="ai-win-btn" onclick="closeAIAssistant()" title="关闭">✕</button>
+    </div>
+  </div>
+  <div id="aiMsgList"></div>
+  <div class="ai-quota-bar" id="aiQuotaBar"></div>
+  <div class="ai-win-ft">
+    <textarea id="aiAssistantInput" placeholder="问我任何关于求职/升学/简历/考证的问题…" rows="1" onkeydown="aiInputKeydown(event)" oninput="this.style.height='auto';this.style.height=Math.min(this.scrollHeight,80)+'px'"></textarea>
+    <button id="aiSendBtn" onclick="sendAIMessage()" title="发送 (Enter)">➤</button>
+  </div>
+</div>
+
 <!-- Footer -->
+
 <footer class="footer">
   <div class="footer-left">
     <span class="footer-logo">✦ CareerPro</span>
@@ -7020,12 +8135,9 @@ function sw(id) {
   pg.style.width = '60%';
   setTimeout(() => { pg.style.width = '100%'; }, 200);
   setTimeout(() => { pg.style.width = '0%'; }, 600);
-  // 搜索区显示/隐藏：首页不需要，招聘面板需要
+  // 搜索区：所有面板均显示
   const szoneBar = document.getElementById('szoneBar');
-  if (szoneBar) {
-    const showSearch = ['general', 'major', 'state', 'rail', 'bbs', 'tieba'].includes(id);
-    szoneBar.style.display = showSearch ? '' : 'none';
-  }
+  if (szoneBar) szoneBar.style.display = '';
   // 会员中心自动初始化
   if (id === 'member') {
     setTimeout(() => { if (typeof mcNav === 'function') mcNav('dashboard'); }, 50);
@@ -7033,6 +8145,19 @@ function sw(id) {
   // 升学备考自动初始化
   if (id === 'exam') {
     setTimeout(() => { if (typeof initExamTab === 'function') initExamTab(); }, 50);
+  }
+  // 简历工坊权限横幅
+  if (id === 'resume') {
+    setTimeout(() => {
+      renderPermBanner('panel-resume', [
+        { icon:'📝', label:'基础简历生成（AI生成，含水印）', guest:true,  normal:true,  supreme:true, guestTip:'游客可用', normalTip:'无水印' },
+        { icon:'✨', label:'AI高级润色/改写',               guest:false, normal:true,  supreme:true, guestTip:'需登录', normalTip:'需配置Key', supremeTip:'平台请客' },
+        { icon:'💾', label:'保存简历（无限份）',            guest:false, normal:true,  supreme:true, guestTip:'需登录' },
+        { icon:'📥', label:'下载PDF',                       guest:false, normal:true,  supreme:true, guestTip:'需登录' },
+        { icon:'🎨', label:'高级主题/专属模板',             guest:false, normal:false, supreme:true, guestTip:'需登录', supremeTip:'至尊专属' },
+        { icon:'🤖', label:'AI逐段深度优化',                guest:false, normal:false, supreme:true, guestTip:'需登录', supremeTip:'至尊专属，平台请客' },
+      ], '简历工坊权限说明');
+    }, 50);
   }
 }
 
@@ -7319,7 +8444,27 @@ function startClock() {
   setInterval(tick, 1000);
 }
 // 时钟提前到 DOMContentLoaded 启动，不等资源加载完
-document.addEventListener('DOMContentLoaded', function(){ startClock(); });
+document.addEventListener('DOMContentLoaded', function(){
+  startClock();
+  // AI 助手初始化
+  setTimeout(() => {
+    updateAIFloatBadge();
+    updateAIKeyBadge();
+    // 配额栏更新
+    const qBar = document.getElementById('aiQuotaBar');
+    if (qBar) {
+      const level = getUserLevel();
+      const userKey = localStorage.getItem(AI_KEY_STORAGE);
+      if (level === 'supreme' && !userKey) {
+        const used = getAIDailyUsed();
+        const left = AI_DAILY_QUOTA - used;
+        qBar.textContent = `今日剩余 ${left} 次`;
+      } else if (userKey) {
+        qBar.textContent = '自填Key · 不限次数';
+      }
+    }
+  }, 300);
+});
 
 // 快捷词一键填入
 function setKw(word) {
@@ -7330,7 +8475,7 @@ function setKw(word) {
 
 // ====== 快捷词词库 & 换一批 ======
 const QUICK_TAG_POOL = [
-  '应届生 招聘','校园招聘 2025','电气工程师','铁路局 招聘','国企 管培生','中专 招聘','实习生','计算机 后端',
+  '应届生 招聘','校园招聘 2026','电气工程师','铁路局 招聘','国企 管培生','中专 招聘','实习生','计算机 后端',
   '财务会计','人力资源','市场营销','销售代表','机械工程师','土木工程','护士 招聘','教师岗位',
   '软件开发','前端工程师','产品经理','运营专员','客服专员','行政文员','物流配送','采购专员',
   '央企校招','国企招聘','事业单位','公务员备考','银行招聘','电力系统','高铁乘务','航空地勤',
@@ -8003,7 +9148,7 @@ function applyTheme(theme) {
 }
 
 // ==================== 版本信息 ====================
-const APP_VERSION   = 'v11.3.30';
+const APP_VERSION   = 'v11.3.44';
 const BUILD_DATE    = '2026-03-27';   // ← 每次修改时同步更新此日期
 (function injectVersion(){
   const badge   = document.getElementById('verBadge');
@@ -8016,14 +9161,105 @@ const BUILD_DATE    = '2026-03-27';   // ← 每次修改时同步更新此日�
 // ==================== AI API 配置 ====================
 const AI_KEY_STORAGE = 'careerpro_ai_key';  // 用户自填的 DeepSeek API Key
 const DEEPSEEK_API   = 'https://api.deepseek.com/v1/chat/completions';
-// ↓ 内置 Key：客户无需任何配置即可使用 AI 功能（用户自定义 Key 优先级更高）
-const BUILTIN_AI_KEY = '';   // ← 把你的 DeepSeek API Key 填在这里（sk-xxx）
+// ↓ 内置 Key 已废弃直接写死，改由至尊会员从 Gist 动态拉取；此常量保留供测试用
+const BUILTIN_AI_KEY = '';   // ← 测试时可填 sk-xxx，正式上线留空
+
+// ==================== 三级会员权限 ====================
+// 等级：'guest'(游客) | 'normal'(普通会员) | 'supreme'(至尊会员)
+
+// 获取当前用户等级（同步，读缓存）
+function getUserLevel() {
+  if (!isLoggedIn()) return 'guest';
+  const cache = getKeyCache();
+  return (cache && cache.level === 'supreme') ? 'supreme' : 'normal';
+}
+
+// 异步获取用户等级（联网验证，最准确）
+async function getUserLevelOnline() {
+  const user = currentUser();
+  if (!user) return 'guest';
+  try {
+    const { valid, level } = await checkUserKeyValidOnline(user);
+    if (!valid) return 'guest';
+    return level === 'supreme' ? 'supreme' : 'normal';
+  } catch(e) {
+    return getUserLevel(); // 降级用缓存
+  }
+}
+
+// ==================== AI Key 获取逻辑 ====================
+// 优先级：用户自填Key > 至尊会员从Gist动态拉取管理员Key > 无Key(跳转豆包)
+// 注意：管理员Key不缓存在localStorage，每次调用前动态拉取，降级立即生效
+
+const ADMIN_AI_KEY_GIST_FILE = 'careerpro-config.json'; // Gist里存管理员Key的文件名
+let _adminKeyCache = null;         // 内存缓存，仅当前会话有效，不写localStorage
+let _adminKeyCacheAt = 0;
+const ADMIN_KEY_CACHE_TTL = 3 * 60 * 1000; // 内存缓存3分钟
+
+async function fetchAdminAIKey() {
+  // 如果内存缓存还新鲜，直接用
+  if (_adminKeyCache && (Date.now() - _adminKeyCacheAt) < ADMIN_KEY_CACHE_TTL) {
+    return _adminKeyCache;
+  }
+  const cfg = getGistCfg();
+  if (!cfg.gistId) return '';
+  try {
+    const res = await fetch(`https://api.github.com/gists/${cfg.gistId}`, {
+      signal: AbortSignal.timeout(6000)
+    });
+    if (!res.ok) return '';
+    const data = await res.json();
+    const file = data.files && data.files[ADMIN_AI_KEY_GIST_FILE];
+    if (!file || !file.content) return '';
+    const cfg2 = JSON.parse(file.content);
+    const key = cfg2.adminAIKey || '';
+    _adminKeyCache = key;
+    _adminKeyCacheAt = Date.now();
+    return key;
+  } catch(e) {
+    return '';
+  }
+}
+
+// 清除内存中的管理员Key缓存（降级时调用）
+function clearAdminKeyCache() {
+  _adminKeyCache = null;
+  _adminKeyCacheAt = 0;
+}
+
+// 获取有效的 AI Key（含权限判断）
+// 返回 { key, source } source: 'user'|'admin'|''
+async function getEffectiveAIKey() {
+  // 1. 用户自填Key（普通会员和至尊会员都可用）
+  const userKey = localStorage.getItem(AI_KEY_STORAGE);
+  if (userKey && isLoggedIn()) return { key: userKey, source: 'user' };
+
+  // 2. 至尊会员：从Gist动态拉取管理员Key
+  const level = getUserLevel();
+  if (level === 'supreme') {
+    // 联网验证等级有效性
+    const onlineLevel = await getUserLevelOnline();
+    if (onlineLevel === 'supreme') {
+      const adminKey = await fetchAdminAIKey();
+      if (adminKey) return { key: adminKey, source: 'admin' };
+    } else {
+      // 已被降级，清缓存
+      clearAdminKeyCache();
+    }
+  }
+  return { key: '', source: '' };
+}
 
 function getAIKey() {
-  // 优先用户自己配置的 Key（localStorage），其次用内置 Key
-  return localStorage.getItem(AI_KEY_STORAGE) || BUILTIN_AI_KEY || '';
+  // 同步版本（向后兼容，仅用于非至尊场景）
+  const userKey = localStorage.getItem(AI_KEY_STORAGE);
+  if (userKey && isLoggedIn()) return userKey;
+  if (BUILTIN_AI_KEY && isLoggedIn()) return BUILTIN_AI_KEY;
+  return '';
 }
+
 function saveAIKey() {
+  if (!isLoggedIn()) { requireLogin(null, 'AI Key配置'); return; }
   const val = (document.getElementById('aiKeyInput').value || '').trim();
   if (!val) { showToast('请输入 API Key'); return; }
   if (!val.startsWith('sk-')) { showToast('Key 格式不正确，应以 sk- 开头'); return; }
@@ -8045,22 +9281,66 @@ function updateAIKeyBadge() {
   const badge = document.getElementById('aiKeyStatusBadge');
   if (!badge) return;
   const userKey = localStorage.getItem(AI_KEY_STORAGE);
+  const level = getUserLevel();
   if (userKey) {
     badge.textContent = '✅ 已自定义Key';
     badge.style.cssText = 'font-size:11px;padding:3px 10px;border-radius:20px;font-weight:600;background:rgba(46,184,122,.15);color:var(--green2)';
-  } else if (BUILTIN_AI_KEY) {
-    badge.textContent = '✅ 内置Key已激活';
-    badge.style.cssText = 'font-size:11px;padding:3px 10px;border-radius:20px;font-weight:600;background:rgba(74,144,217,.15);color:var(--blue2)';
+  } else if (level === 'supreme') {
+    badge.textContent = '👑 至尊会员·平台Key';
+    badge.style.cssText = 'font-size:11px;padding:3px 10px;border-radius:20px;font-weight:600;background:rgba(160,96,240,.15);color:#a060f0';
   } else {
-    badge.textContent = '未配置';
+    badge.textContent = '未配置（跳转模式）';
     badge.style.cssText = 'font-size:11px;padding:3px 10px;border-radius:20px;font-weight:600;background:rgba(255,255,255,.06);color:var(--text3)';
   }
 }
 
-// DeepSeek API 调用（非流式）
-async function callDeepSeek(messages, maxTokens = 1500) {
-  const key = getAIKey();
+// ==================== AI 每日次数限制（至尊会员使用平台Key时） ====================
+const AI_DAILY_QUOTA = 20;          // 至尊会员每天最多调用次数
+const AI_DAILY_KEY   = () => `careerpro_ai_daily_${currentUser()}_${new Date().toISOString().slice(0,10)}`;
+
+function getAIDailyUsed() {
+  return parseInt(localStorage.getItem(AI_DAILY_KEY()) || '0');
+}
+function incrAIDailyUsed() {
+  const cur = getAIDailyUsed();
+  localStorage.setItem(AI_DAILY_KEY(), cur + 1);
+}
+function checkAIDailyQuota(source) {
+  // 用户自填Key不限次
+  if (source === 'user') return true;
+  // 至尊会员平台Key限次
+  if (source === 'admin') return getAIDailyUsed() < AI_DAILY_QUOTA;
+  return false;
+}
+
+// ==================== AI 请求节流（至尊会员平台Key） ====================
+let _lastAICallAt = 0;
+const AI_THROTTLE_MS = 60 * 1000; // 同一功能1分钟内只能触发一次（多次点击只算一次）
+
+function checkAIThrottle(bypass) {
+  if (bypass) return true; // 用户自填Key不节流
+  const now = Date.now();
+  if (now - _lastAICallAt < AI_THROTTLE_MS) return false;
+  _lastAICallAt = now;
+  return true;
+}
+
+// ==================== DeepSeek API 调用（异步，含权限检查） ====================
+async function callDeepSeek(messages, maxTokens = 1500, bypassThrottle = false) {
+  // 权限：必须登录
+  if (!isLoggedIn()) throw new Error('NOT_LOGIN');
+
+  const { key, source } = await getEffectiveAIKey();
   if (!key) throw new Error('NO_KEY');
+
+  // 节流检查（用户自填Key跳过）
+  if (source === 'admin' && !bypassThrottle) {
+    if (!checkAIThrottle(false)) throw new Error('THROTTLE');
+  }
+
+  // 每日次数检查
+  if (!checkAIDailyQuota(source)) throw new Error('DAILY_LIMIT');
+
   const resp = await fetch(DEEPSEEK_API, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${key}` },
@@ -8068,7 +9348,7 @@ async function callDeepSeek(messages, maxTokens = 1500) {
       model: 'deepseek-chat',
       messages,
       max_tokens: maxTokens,
-      temperature: 0.3
+      temperature: 0.7
     })
   });
   if (!resp.ok) {
@@ -8076,7 +9356,311 @@ async function callDeepSeek(messages, maxTokens = 1500) {
     throw new Error(err?.error?.message || `HTTP ${resp.status}`);
   }
   const data = await resp.json();
+
+  // 调用成功，计次（只对平台Key计次）
+  if (source === 'admin') incrAIDailyUsed();
+
   return data.choices?.[0]?.message?.content || '';
+}
+
+// 统一 AI 错误处理（给用户友好提示）
+function handleAIError(e, fallbackFn) {
+  const msg = e.message || '';
+  if (msg === 'NOT_LOGIN') {
+    requireLogin(null, 'AI 功能');
+    return null;
+  }
+  if (msg === 'NO_KEY') {
+    // 无Key → 提示并询问是否跳转豆包
+    showAINoKeyPrompt();
+    return null;
+  }
+  if (msg === 'THROTTLE') {
+    showToast('⏳ 操作太频繁，请1分钟后再试');
+    return null;
+  }
+  if (msg === 'DAILY_LIMIT') {
+    showToast(`📊 今日 AI 次数已用完（${AI_DAILY_QUOTA}次/天），明日恢复`);
+    return null;
+  }
+  if (msg.includes('401')) { showToast('❌ API Key 无效或已过期，请重新配置'); return null; }
+  if (msg.includes('402')) { showToast('💳 API 余额不足，请充值或更换 Key'); return null; }
+  showToast('⚠️ AI 请求失败：' + msg.slice(0, 40));
+  return null;
+}
+
+// 无Key时提示弹窗（跳转豆包 or 配置Key）
+function showAINoKeyPrompt(question) {
+  const level = getUserLevel();
+  let tips = '';
+  if (!isLoggedIn()) {
+    tips = '请先登录，登录后可使用 AI 功能。';
+  } else if (level === 'normal') {
+    tips = `当前为<b>普通会员</b>，AI功能支持两种方式：<br>
+    · <b>跳转豆包</b>（免费，在外部页面回答）<br>
+    · <b>自填 DeepSeek Key</b>（自费，页面内直接出结果）<br>
+    · 升级<b>至尊会员</b>可享受平台请客的页面内AI`;
+  } else {
+    tips = '未检测到可用的 AI Key，请在「会员中心→仪表盘→AI Key配置」填入你的 DeepSeek Key。';
+  }
+
+  // 简单 confirm 式弹窗
+  const modal = document.createElement('div');
+  modal.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:9999;display:flex;align-items:center;justify-content:center';
+  modal.innerHTML = `
+    <div style="background:var(--bg1);border:1px solid var(--border);border-radius:16px;padding:24px 28px;max-width:380px;width:90%;box-shadow:0 8px 32px rgba(0,0,0,.3)">
+      <div style="font-size:28px;text-align:center;margin-bottom:12px">🤖</div>
+      <div style="font-size:14px;font-weight:700;color:var(--text1);margin-bottom:10px;text-align:center">AI 功能提示</div>
+      <div style="font-size:13px;color:var(--text2);line-height:1.8;margin-bottom:18px">${tips}</div>
+      <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+        ${isLoggedIn() && level === 'normal' ? `<button onclick="this.closest('[style]').remove();aiJumpDoubao(${question ? '\''+question.replace(/'/g,"\\'").slice(0,200)+'\'' : '\'\''})" style="background:var(--accent);color:#fff;border:none;border-radius:8px;padding:8px 18px;font-size:13px;cursor:pointer;font-weight:600">🚀 跳转豆包</button>` : ''}
+        ${isLoggedIn() ? `<button onclick="this.closest('[style]').remove();sw('member');setTimeout(()=>mcNav('dashboard'),100)" style="background:var(--bg3);color:var(--text1);border:1px solid var(--border);border-radius:8px;padding:8px 18px;font-size:13px;cursor:pointer">⚙️ 配置 Key</button>` : `<button onclick="this.closest('[style]').remove();showLoginModal()" style="background:var(--accent);color:#fff;border:none;border-radius:8px;padding:8px 18px;font-size:13px;cursor:pointer;font-weight:600">🔑 登录 / 注册</button>`}
+        <button onclick="this.closest('[style]').remove()" style="background:var(--bg3);color:var(--text3);border:1px solid var(--border);border-radius:8px;padding:8px 16px;font-size:13px;cursor:pointer">取消</button>
+      </div>
+    </div>`;
+  document.body.appendChild(modal);
+  modal.addEventListener('click', e => { if(e.target===modal) modal.remove(); });
+}
+
+// 跳转豆包（带问题预填）
+function aiJumpDoubao(question) {
+  const q = (question || '').trim();
+  const url = q
+    ? `https://www.doubao.com/chat/?q=${encodeURIComponent(q)}`
+    : 'https://www.doubao.com/chat/';
+  window.open(url, '_blank');
+}
+
+// ==================== 全站 AI 助手 ====================
+const AI_ASSISTANT_CTX_MAX = 20; // 最多保留20轮（40条）上下文
+let _aiCtx = []; // 对话历史
+let _aiTyping = false;
+
+// 平台专属知识库系统提示词
+const AI_SYSTEM_PROMPT = `你是「易学易升」平台的专属AI助手，名字叫「小升」。你精通以下领域，能给出具体、实用的建议：
+
+【平台功能】
+- 校园招聘：覆盖BOSS直聘/智联招聘/51job/猎聘/拉勾/实习僧/应届生网等主流平台
+- 社会招聘：央企国企/互联网/制造/金融/医疗教育六大行业
+- 简历工坊：AI写简历/扩写/润色/评分，支持6主题3字体，可导出PDF
+- 升学备考：高考志愿/分数线/院校专业分/单招考试/复习题库
+- 考证中心：职业资格/技能等级/特种作业证（电工证/焊工证等）/学历提升
+- 会员中心：收藏夹/求职看板/面试提醒/简历管理/求职日记/AI面试题
+
+【你能做的事】
+1. 帮用户分析专业就业方向，推荐对口岗位
+2. 根据分数和省份给出高考/单招志愿建议
+3. 写简历、改简历，给出具体修改意见
+4. 出题、解题（电工证/单招/职业技能考试等）
+5. 规划备考计划，推荐考证路径
+6. 回答求职、面试相关问题
+
+【回复风格】
+- 简洁清晰，重点突出
+- 用数字/分点列举，方便阅读
+- 专业但不高冷，像一个懂行的学长/学姐
+- 如果用户问的不够具体，主动追问补充信息`;
+
+function openAIAssistant(prefillMsg) {
+  if (!isLoggedIn()) { requireLogin(null, 'AI助手'); return; }
+  const win = document.getElementById('aiAssistantWin');
+  if (!win) return;
+  win.style.display = 'flex';
+  win.classList.add('ai-win-open');
+  document.getElementById('aiAssistantInput').focus();
+  if (prefillMsg) {
+    document.getElementById('aiAssistantInput').value = prefillMsg;
+  }
+  if (_aiCtx.length === 0) {
+    renderAIWelcome();
+  }
+}
+
+function closeAIAssistant() {
+  const win = document.getElementById('aiAssistantWin');
+  if (win) { win.classList.remove('ai-win-open'); setTimeout(() => win.style.display='none', 200); }
+}
+
+function renderAIWelcome() {
+  const list = document.getElementById('aiMsgList');
+  if (!list) return;
+  const level = getUserLevel();
+  const modeText = level === 'supreme'
+    ? '👑 至尊模式 · 平台请客'
+    : localStorage.getItem(AI_KEY_STORAGE)
+      ? '🔑 自填Key模式'
+      : '🚀 跳转模式（无Key）';
+  list.innerHTML = `
+    <div class="ai-msg ai-msg-bot">
+      <div class="ai-avatar">🤖</div>
+      <div class="ai-bubble">
+        你好！我是<b>小升</b>，易学易升的专属AI助手。<br><br>
+        我可以帮你：写简历 · 出题解题 · 志愿建议 · 考证规划 · 求职咨询<br><br>
+        <span style="font-size:11px;color:var(--text3)">当前模式：${modeText}</span>
+        <div style="margin-top:12px;display:flex;flex-wrap:wrap;gap:6px">
+          <button class="ai-chip" onclick="aiSendChip('帮我写一份电气工程师简历')">✍️ 写简历</button>
+          <button class="ai-chip" onclick="aiSendChip('出5道电工证理论考试题')">🧠 出题</button>
+          <button class="ai-chip" onclick="aiSendChip('我430分河南理科，推荐什么院校？')">🎓 志愿建议</button>
+          <button class="ai-chip" onclick="aiSendChip('电气专业应该考哪些证书？')">🏅 考证规划</button>
+          <button class="ai-chip" onclick="aiSendChip('校招面试有什么技巧？')">💼 面试技巧</button>
+        </div>
+      </div>
+    </div>`;
+}
+
+function aiSendChip(text) {
+  document.getElementById('aiAssistantInput').value = text;
+  sendAIMessage();
+}
+
+async function sendAIMessage() {
+  if (_aiTyping) return;
+  const input = document.getElementById('aiAssistantInput');
+  const raw = (input.value || '').trim();
+  if (!raw) return;
+
+  // 字数限制
+  const MAX_INPUT = 800;
+  if (raw.length > MAX_INPUT) {
+    showToast(`输入内容不能超过 ${MAX_INPUT} 字`);
+    return;
+  }
+
+  // 权限检查
+  if (!isLoggedIn()) { requireLogin(null, 'AI助手'); return; }
+
+  input.value = '';
+  appendAIMsg('user', raw);
+
+  // 判断是否有Key
+  const { key, source } = await getEffectiveAIKey();
+
+  if (!key) {
+    // 跳转模式
+    const level = getUserLevel();
+    if (level === 'normal' || level === 'guest') {
+      const jumpHtml = `没有检测到可用的 AI Key，将帮你跳转到豆包来回答这个问题。<br>
+        <button onclick="aiJumpDoubao('${raw.replace(/'/g,"\\'").slice(0,200)}')" style="margin-top:8px;background:var(--accent);color:#fff;border:none;border-radius:8px;padding:6px 16px;font-size:12px;cursor:pointer;font-weight:600">🚀 跳转豆包</button>`;
+      appendAIMsg('bot', jumpHtml, true);
+    } else {
+      showAINoKeyPrompt(raw);
+    }
+    return;
+  }
+
+  // 节流检查
+  if (source === 'admin') {
+    if (!checkAIThrottle(false)) {
+      appendAIMsg('bot', '⏳ 操作太频繁，请稍等1分钟后再试。', false);
+      return;
+    }
+    if (!checkAIDailyQuota(source)) {
+      const used = getAIDailyUsed();
+      appendAIMsg('bot', `📊 今日 AI 次数已用完（${used}/${AI_DAILY_QUOTA}次），明日零点恢复。<br><small style="color:var(--text3)">如需无限使用，可在会员中心配置自己的 DeepSeek Key。</small>`, true);
+      return;
+    }
+  }
+
+  _aiTyping = true;
+  const sendBtn = document.getElementById('aiSendBtn');
+  if (sendBtn) sendBtn.disabled = true;
+
+  // 加载动画
+  const loadId = 'ai-loading-' + Date.now();
+  const list = document.getElementById('aiMsgList');
+  list.innerHTML += `<div id="${loadId}" class="ai-msg ai-msg-bot"><div class="ai-avatar">🤖</div><div class="ai-bubble"><span class="ai-typing-dot"></span><span class="ai-typing-dot"></span><span class="ai-typing-dot"></span></div></div>`;
+  list.scrollTop = list.scrollHeight;
+
+  // 构建上下文消息
+  _aiCtx.push({ role: 'user', content: raw });
+  // 保留最近20轮，始终保留system
+  if (_aiCtx.length > AI_ASSISTANT_CTX_MAX * 2) {
+    _aiCtx = _aiCtx.slice(-AI_ASSISTANT_CTX_MAX * 2);
+  }
+  const messages = [
+    { role: 'system', content: AI_SYSTEM_PROMPT },
+    ..._aiCtx
+  ];
+
+  try {
+    const reply = await callDeepSeek(messages, 1200, source === 'user');
+    _aiCtx.push({ role: 'assistant', content: reply });
+
+    // 移除 loading，插入回复
+    const loadEl = document.getElementById(loadId);
+    if (loadEl) loadEl.remove();
+    appendAIMsg('bot', formatAIReply(reply));
+  } catch(e) {
+    const loadEl = document.getElementById(loadId);
+    if (loadEl) loadEl.remove();
+    _aiCtx.pop(); // 移除刚才加入的user消息（因为失败了）
+    const errMsg = handleAIError(e, null);
+    if (errMsg !== null) appendAIMsg('bot', '❌ ' + (e.message || '请求失败，请重试'));
+  } finally {
+    _aiTyping = false;
+    if (sendBtn) sendBtn.disabled = false;
+    if (input) input.focus();
+  }
+}
+
+function appendAIMsg(role, content, isHtml) {
+  const list = document.getElementById('aiMsgList');
+  if (!list) return;
+  const isBot = role === 'bot' || role === 'assistant';
+  const div = document.createElement('div');
+  div.className = `ai-msg ${isBot ? 'ai-msg-bot' : 'ai-msg-user'}`;
+  if (isBot) {
+    div.innerHTML = `<div class="ai-avatar">🤖</div><div class="ai-bubble">${isHtml ? content : content.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\n/g,'<br>')}</div>`;
+  } else {
+    div.innerHTML = `<div class="ai-bubble ai-bubble-user">${content.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\n/g,'<br>')}</div>`;
+  }
+  list.appendChild(div);
+  list.scrollTop = list.scrollHeight;
+}
+
+function formatAIReply(text) {
+  // 简单 Markdown → HTML（加粗、列表、换行）
+  return text
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+    .replace(/\*\*(.+?)\*\*/g, '<b>$1</b>')
+    .replace(/`([^`]+)`/g, '<code style="background:var(--bg3);padding:1px 5px;border-radius:4px;font-size:12px">$1</code>')
+    .replace(/^(\d+)\.\s/gm, '<b>$1.</b> ')
+    .replace(/^[-•]\s/gm, '· ')
+    .replace(/\n/g, '<br>');
+}
+
+function clearAIContext() {
+  _aiCtx = [];
+  const list = document.getElementById('aiMsgList');
+  if (list) renderAIWelcome();
+  showToast('对话已清除');
+}
+
+function aiInputKeydown(e) {
+  if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendAIMessage(); }
+}
+
+// 带上下文打开（供各模块专属AI调用）
+function openAIAssistantWithContext(prefill) {
+  openAIAssistant(prefill);
+}
+
+// 更新悬浮按钮显示的剩余次数
+function updateAIFloatBadge() {
+  const badge = document.getElementById('aiFloatBadge');
+  if (!badge) return;
+  const level = getUserLevel();
+  const userKey = localStorage.getItem(AI_KEY_STORAGE);
+  if (!isLoggedIn()) { badge.style.display='none'; return; }
+  if (userKey) { badge.style.display='none'; return; } // 自填Key不限次，不显示
+  if (level === 'supreme') {
+    const used = getAIDailyUsed();
+    const left = AI_DAILY_QUOTA - used;
+    badge.textContent = left > 0 ? left : '0';
+    badge.style.display = left > 0 ? '' : 'none';
+  } else {
+    badge.style.display = 'none';
+  }
 }
 
 // ==================== 账号系统 ====================
@@ -8183,9 +9767,10 @@ async function checkUserKeyValidOnline(username) {
           const usedAtMs = k.usedAt || (k.boundAt ? new Date(k.boundAt).getTime() : null);
           const expire = k.days === 0 ? Infinity : (usedAtMs ? usedAtMs + k.days * 86400000 : Infinity);
           const valid  = k.days === 0 || Date.now() < expire;
+          const level  = k.level || 'normal'; // 'normal' | 'supreme'
           // 更新本地缓存（仅存自己的Key信息）
-          saveKeyCache({ keyCode, days: k.days, usedAt: usedAtMs, disabled: k.disabled, expire, cachedAt: Date.now() });
-          return { valid, expire };
+          saveKeyCache({ keyCode, days: k.days, usedAt: usedAtMs, disabled: k.disabled, expire, level, cachedAt: Date.now() });
+          return { valid, expire, level };
         }
       }
     } catch(e) { /* 网络失败，走缓存 */ }
@@ -8195,11 +9780,11 @@ async function checkUserKeyValidOnline(username) {
   const cache = getKeyCache();
   if (cache && cache.keyCode === keyCode && (Date.now() - cache.cachedAt) < 5 * 60 * 1000) {
     const valid = cache.days === 0 || Date.now() < cache.expire;
-    return { valid, expire: cache.expire, offline: true };
+    return { valid, expire: cache.expire, level: cache.level || 'normal', offline: true };
   }
 
   // 无缓存且网络不通：临时放行（不因断网踢人，但显示警告）
-  return { valid: true, offline: true, noCache: true };
+  return { valid: true, level: 'normal', offline: true, noCache: true };
 }
 
 // 同步版本（供initAuth等同步场景用）—— 只查本地缓存，不发网络请求
@@ -9002,13 +10587,20 @@ function swDandao(id, btn) {
 
 // ==================== 单招AI志愿参谋 ====================
 async function dandaoAIAdvise() {
+  // ── 权限前置检查 ──
+  if (!isLoggedIn()) {
+    showToast('🔑 AI志愿参谋需要登录后使用');
+    setTimeout(() => showLoginModal(), 400);
+    return;
+  }
+
   const province = document.getElementById('dandaoProvince').value;
   const score    = document.getElementById('dandaoScore').value;
   const major    = document.getElementById('dandaoMajor').value.trim();
   const extra    = document.getElementById('dandaoExtra').value.trim();
 
   if (!province || !score) {
-    alert('请先填写省份和预估分数！');
+    showToast('请先填写省份和预估分数！');
     return;
   }
 
@@ -9037,23 +10629,13 @@ async function dandaoAIAdvise() {
   const contentEl = document.getElementById('dandaoAIContent');
 
   try {
-    const aiKey = getAIKey();
-    let reply = '';
-    if (aiKey) {
-      reply = await callDeepSeek([{ role: 'user', content: prompt }], 800);
-    } else {
-      // 降级本地建议
-      const scoreNum = parseInt(score) || 0;
-      const tier = scoreNum >= 230 ? '优质' : scoreNum >= 180 ? '稳妥' : '基础';
-      reply = `📊 **院校层次建议（${tier}档）**\n根据 ${score} 分的成绩，建议冲击${scoreNum >= 230 ? '示范性高职院校' : scoreNum >= 180 ? '省级重点高职' : '普通高职'}。\n\n📚 **专业推荐**\n${major ? `你选择的"${major}"方向不错，` : ''}建议优先考虑就业率高的专业：计算机应用技术、机电一体化、护理、建筑工程技术等。\n\n💡 **备考建议**\n- 文化课：重点复习数学基础题型，争取多拿基础分\n- 职业测试：提前了解所报专业大类的测试题型\n- 面试：准备1-2分钟自我介绍，了解专业就业前景\n\n⏰ **时间节点**\n- 尽快确认目标院校，提前关注招生简章\n- 12月-次年1月完成报名，3月参加考试\n\n⚠️ **注意**：已被单招录取不影响参加高考资格，建议两手准备！\n\n（提示：配置AI Key可获得更精准的个性化建议）`;
-    }
-
+    const reply = await callDeepSeek([{ role: 'user', content: prompt }], 800);
     contentEl.textContent = reply;
     resultEl.style.display = 'block';
     resultEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
   } catch(e) {
-    contentEl.textContent = '分析失败，请稍后重试：' + e.message;
-    resultEl.style.display = 'block';
+    handleAIError(e, null);
+    resultEl.style.display = 'none';
   } finally {
     btn.disabled = false;
     btn.textContent = '🤖 AI帮我分析单招方向';
@@ -9079,6 +10661,29 @@ function swExam(id, btn) {
   // 特殊模块初始化
   if (id === 'wrongbook') initWrongBook();
   if (id === 'cert') { renderCertList('law'); }
+  // AI子模块权限横幅
+  if (id === 'aiquiz') {
+    renderPermBanner('exam-sector-aiquiz', [
+      { icon:'📝', label:'复习题库（静态）',  guest:true,  normal:true,  supreme:true },
+      { icon:'🤖', label:'AI出题（本地模板）',  guest:false, normal:true,  supreme:true, guestTip:'需登录' },
+      { icon:'✨', label:'AI出题（DeepSeek真实AI）', guest:false, normal:true,  supreme:true, normalTip:'需配置Key', supremeTip:'平台请客' },
+      { icon:'📄', label:'AI生成完整试卷',     guest:false, normal:true,  supreme:true, normalTip:'需配置Key', supremeTip:'平台请客' },
+    ], 'AI出题权限');
+  }
+  if (id === 'aisolve') {
+    renderPermBanner('exam-sector-aisolve', [
+      { icon:'💡', label:'AI智能解题',          guest:false, normal:true,  supreme:true, guestTip:'需登录', normalTip:'需配置Key', supremeTip:'平台请客' },
+      { icon:'💬', label:'解题追问/多轮对话',   guest:false, normal:true,  supreme:true, guestTip:'需登录', normalTip:'需配置Key', supremeTip:'平台请客' },
+      { icon:'📋', label:'复制解析结果',        guest:false, normal:true,  supreme:true, guestTip:'需登录' },
+    ], 'AI解题权限');
+  }
+  if (id === 'gaokao') {
+    renderPermBanner('exam-sector-gaokao', [
+      { icon:'📊', label:'分数线查询（静态）',  guest:true,  normal:true,  supreme:true },
+      { icon:'🎯', label:'AI志愿建议',          guest:false, normal:true,  supreme:true, guestTip:'需登录', normalTip:'需配置Key', supremeTip:'平台请客' },
+      { icon:'🏫', label:'院校专业对比分析',    guest:false, normal:false, supreme:true, guestTip:'需登录', supremeTip:'至尊专属' },
+    ], '高考填报权限');
+  }
 }
 
 // ====== 题库数据 ======
@@ -10235,6 +11840,273 @@ const COLLEGE_DATA = [
   {name:'宁夏职业技术学院',type:'高职专科',province:'宁夏',major:'机电/建筑/信息',lk:270,wk:null,year:2024},
   {name:'新疆职业大学',type:'高职专科',province:'新疆',major:'商贸/旅游/电子',lk:265,wk:258,year:2024},
   {name:'海南科技职业大学',type:'高职专科',province:'海南',major:'IT/会计/旅游',lk:288,wk:285,year:2024},
+
+  // ===== 985院校补充 =====
+  {name:'电子科技大学',type:'985',province:'四川',major:'电子/通信/信息安全',lk:650,wk:635,year:2024},
+  {name:'电子科技大学',type:'985',province:'四川',major:'电子/通信/信息安全',lk:646,wk:631,year:2023},
+  {name:'中国科学技术大学',type:'985',province:'安徽',major:'理学/工学/信息安全',lk:672,wk:658,year:2024},
+  {name:'中国科学技术大学',type:'985',province:'安徽',major:'理学/工学/信息安全',lk:668,wk:654,year:2023},
+  {name:'大连理工大学',type:'985',province:'辽宁',major:'工学/理学/管理学',lk:618,wk:605,year:2024},
+  {name:'大连理工大学',type:'985',province:'辽宁',major:'工学/理学/管理学',lk:614,wk:601,year:2023},
+  {name:'东北大学',type:'985',province:'辽宁',major:'工学/理学/材料',lk:598,wk:585,year:2024},
+  {name:'东北大学',type:'985',province:'辽宁',major:'工学/理学/材料',lk:594,wk:581,year:2023},
+  {name:'西北工业大学',type:'985',province:'陕西',major:'航空/航天/航海工程',lk:628,wk:615,year:2024},
+  {name:'西北工业大学',type:'985',province:'陕西',major:'航空/航天/航海工程',lk:624,wk:611,year:2023},
+  {name:'中国农业大学',type:'985',province:'北京',major:'农学/生命科学/食品',lk:610,wk:618,year:2024},
+  {name:'中国农业大学',type:'985',province:'北京',major:'农学/生命科学/食品',lk:606,wk:614,year:2023},
+  {name:'厦门大学',type:'985',province:'福建',major:'经济学/管理学/法学',lk:628,wk:626,year:2024},
+  {name:'厦门大学',type:'985',province:'福建',major:'经济学/管理学/法学',lk:624,wk:622,year:2023},
+  {name:'中国海洋大学',type:'985',province:'山东',major:'海洋/水产/环境',lk:588,wk:582,year:2024},
+  {name:'中国海洋大学',type:'985',province:'山东',major:'海洋/水产/环境',lk:584,wk:578,year:2023},
+  {name:'华南理工大学',type:'985',province:'广东',major:'工学/理学',lk:610,wk:600,year:2024},
+  {name:'华南理工大学',type:'985',province:'广东',major:'工学/理学',lk:606,wk:596,year:2023},
+  {name:'西北大学',type:'双一流',province:'陕西',major:'地质/考古/化学',lk:520,wk:518,year:2024},
+  {name:'中国矿业大学',type:'211',province:'江苏',major:'矿业/安全/地质',lk:550,wk:538,year:2024},
+  {name:'中国矿业大学',type:'211',province:'江苏',major:'矿业/安全/地质',lk:546,wk:534,year:2023},
+  {name:'北京交通大学',type:'211',province:'北京',major:'交通运输/计算机/经管',lk:620,wk:610,year:2024},
+  {name:'北京交通大学',type:'211',province:'北京',major:'交通运输/计算机/经管',lk:616,wk:606,year:2023},
+  {name:'西南交通大学',type:'211',province:'四川',major:'交通工程/机械/电气',lk:575,wk:565,year:2024},
+  {name:'西南交通大学',type:'211',province:'四川',major:'交通工程/机械/电气',lk:571,wk:561,year:2023},
+  {name:'中南大学',type:'985',province:'湖南',major:'工学/医学/材料',lk:620,wk:612,year:2024},
+  {name:'中南大学',type:'985',province:'湖南',major:'工学/医学/材料',lk:616,wk:608,year:2023},
+
+  // ===== 211院校补充 =====
+  {name:'华北电力大学',type:'211',province:'北京',major:'电力/电气/自动化',lk:585,wk:572,year:2024},
+  {name:'华北电力大学',type:'211',province:'北京',major:'电力/电气/自动化',lk:581,wk:568,year:2023},
+  {name:'北京化工大学',type:'211',province:'北京',major:'化工/材料/生物',lk:575,wk:568,year:2024},
+  {name:'北京化工大学',type:'211',province:'北京',major:'化工/材料/生物',lk:571,wk:564,year:2023},
+  {name:'北京林业大学',type:'211',province:'北京',major:'林学/风景园林/生物',lk:558,wk:565,year:2024},
+  {name:'北京科技大学',type:'211',province:'北京',major:'材料/冶金/机械',lk:588,wk:575,year:2024},
+  {name:'北京科技大学',type:'211',province:'北京',major:'材料/冶金/机械',lk:584,wk:571,year:2023},
+  {name:'中国传媒大学',type:'211',province:'北京',major:'新闻/传播/艺术',lk:575,wk:588,year:2024},
+  {name:'中国传媒大学',type:'211',province:'北京',major:'新闻/传播/艺术',lk:571,wk:584,year:2023},
+  {name:'中央民族大学',type:'211',province:'北京',major:'民族学/历史/语言',lk:548,wk:558,year:2024},
+  {name:'北京外国语大学',type:'211',province:'北京',major:'外语/翻译/国际关系',lk:612,wk:622,year:2024},
+  {name:'对外经济贸易大学',type:'211',province:'北京',major:'国际贸易/金融/法学',lk:625,wk:632,year:2024},
+  {name:'对外经济贸易大学',type:'211',province:'北京',major:'国际贸易/金融/法学',lk:621,wk:628,year:2023},
+  {name:'中央财经大学',type:'211',province:'北京',major:'金融/会计/经济',lk:638,wk:645,year:2024},
+  {name:'中央财经大学',type:'211',province:'北京',major:'金融/会计/经济',lk:634,wk:641,year:2023},
+  {name:'中国政法大学',type:'211',province:'北京',major:'法学/政治/行政',lk:620,wk:628,year:2024},
+  {name:'中国政法大学',type:'211',province:'北京',major:'法学/政治/行政',lk:616,wk:624,year:2023},
+  {name:'中国人民公安大学',type:'211',province:'北京',major:'公安/刑事侦查/法学',lk:545,wk:548,year:2024},
+  {name:'南开大学',type:'985',province:'天津',major:'数学/化学/经济',lk:632,wk:628,year:2024},
+  {name:'南开大学',type:'985',province:'天津',major:'数学/化学/经济',lk:628,wk:624,year:2023},
+  {name:'天津医科大学',type:'211',province:'天津',major:'临床医学/护理/药学',lk:560,wk:568,year:2024},
+  {name:'南京理工大学',type:'211',province:'江苏',major:'兵器/工学/理学',lk:592,wk:580,year:2024},
+  {name:'南京理工大学',type:'211',province:'江苏',major:'兵器/工学/理学',lk:588,wk:576,year:2023},
+  {name:'河海大学',type:'211',province:'江苏',major:'水利/土木/水文',lk:580,wk:568,year:2024},
+  {name:'河海大学',type:'211',province:'江苏',major:'水利/土木/水文',lk:576,wk:564,year:2023},
+  {name:'江南大学',type:'211',province:'江苏',major:'食品科学/设计/轻工',lk:562,wk:558,year:2024},
+  {name:'中国矿业大学（北京）',type:'211',province:'北京',major:'矿业/地质/安全',lk:540,wk:528,year:2024},
+  {name:'合肥工业大学',type:'211',province:'安徽',major:'工学/管理/汽车',lk:570,wk:558,year:2024},
+  {name:'合肥工业大学',type:'211',province:'安徽',major:'工学/管理/汽车',lk:566,wk:554,year:2023},
+  {name:'华中农业大学',type:'211',province:'湖北',major:'农学/生命科学/食品',lk:548,wk:552,year:2024},
+  {name:'中南财经政法大学',type:'211',province:'湖北',major:'财经/法学/管理',lk:570,wk:578,year:2024},
+  {name:'中南财经政法大学',type:'211',province:'湖北',major:'财经/法学/管理',lk:566,wk:574,year:2023},
+  {name:'武汉理工大学',type:'211',province:'湖北',major:'材料/交通/工学',lk:560,wk:550,year:2024},
+  {name:'武汉理工大学',type:'211',province:'湖北',major:'材料/交通/工学',lk:556,wk:546,year:2023},
+  {name:'华中师范大学',type:'211',province:'湖北',major:'教育学/文学/历史',lk:552,wk:560,year:2024},
+  {name:'中南财经政法大学',type:'211',province:'湖北',major:'财经/法学/管理',lk:570,wk:578,year:2024},
+  {name:'西南大学',type:'211',province:'重庆',major:'农学/心理学/教育',lk:548,wk:555,year:2024},
+  {name:'西南大学',type:'211',province:'重庆',major:'农学/心理学/教育',lk:544,wk:551,year:2023},
+  {name:'四川农业大学',type:'双一流',province:'四川',major:'农学/兽医/食品',lk:520,wk:516,year:2024},
+  {name:'西南财经大学',type:'211',province:'四川',major:'金融/经济/会计',lk:580,wk:588,year:2024},
+  {name:'西南财经大学',type:'211',province:'四川',major:'金融/经济/会计',lk:576,wk:584,year:2023},
+  {name:'暨南大学',type:'211',province:'广东',major:'文学/经济学/医学',lk:570,wk:575,year:2024},
+  {name:'暨南大学',type:'211',province:'广东',major:'文学/经济学/医学',lk:566,wk:571,year:2023},
+  {name:'华南师范大学',type:'211',province:'广东',major:'教育学/心理学/理学',lk:548,wk:555,year:2024},
+  {name:'广州中医药大学',type:'双一流',province:'广东',major:'中医学/针灸/中药',lk:520,wk:528,year:2024},
+  {name:'南昌大学',type:'211',province:'江西',major:'工学/医学/理学',lk:530,wk:525,year:2024},
+  {name:'南昌大学',type:'211',province:'江西',major:'工学/医学/理学',lk:526,wk:521,year:2023},
+  {name:'湘潭大学',type:'双一流',province:'湖南',major:'工学/法学/理学',lk:510,wk:508,year:2024},
+  {name:'中南林业科技大学',type:'普通本科',province:'湖南',major:'林学/家具设计/环境',lk:478,wk:472,year:2024},
+  {name:'河北工业大学',type:'211',province:'河北',major:'工学/理学/管理',lk:548,wk:535,year:2024},
+  {name:'燕山大学',type:'双一流',province:'河北',major:'工学/机械/材料',lk:520,wk:508,year:2024},
+  {name:'山西大学',type:'双一流',province:'山西',major:'理学/历史/工学',lk:505,wk:502,year:2024},
+  {name:'太原理工大学',type:'211',province:'山西',major:'工学/采矿/机械',lk:510,wk:498,year:2024},
+  {name:'太原理工大学',type:'211',province:'山西',major:'工学/采矿/机械',lk:506,wk:494,year:2023},
+  {name:'辽宁大学',type:'211',province:'辽宁',major:'经济学/文学/法学',lk:530,wk:535,year:2024},
+  {name:'辽宁大学',type:'211',province:'辽宁',major:'经济学/文学/法学',lk:526,wk:531,year:2023},
+  {name:'东北师范大学',type:'211',province:'吉林',major:'教育学/文学/理学',lk:545,wk:555,year:2024},
+  {name:'东北师范大学',type:'211',province:'吉林',major:'教育学/文学/理学',lk:541,wk:551,year:2023},
+  {name:'延边大学',type:'211',province:'吉林',major:'医学/语言/文学',lk:462,wk:460,year:2024},
+  {name:'哈尔滨工程大学',type:'211',province:'黑龙江',major:'船舶/核能/海洋工程',lk:568,wk:550,year:2024},
+  {name:'哈尔滨工程大学',type:'211',province:'黑龙江',major:'船舶/核能/海洋工程',lk:564,wk:546,year:2023},
+  {name:'东北农业大学',type:'211',province:'黑龙江',major:'农学/兽医/食品',lk:488,wk:485,year:2024},
+  {name:'东北林业大学',type:'211',province:'黑龙江',major:'林学/木材/野生动物',lk:492,wk:488,year:2024},
+  {name:'广西大学',type:'211',province:'广西',major:'工学/农学/文学',lk:490,wk:486,year:2024},
+  {name:'广西大学',type:'211',province:'广西',major:'工学/农学/文学',lk:486,wk:482,year:2023},
+  {name:'西藏大学',type:'211',province:'西藏',major:'文学/理学/医学',lk:380,wk:372,year:2024},
+  {name:'青海大学',type:'211',province:'青海',major:'工学/农学/医学',lk:390,wk:385,year:2024},
+  {name:'宁夏大学',type:'211',province:'宁夏',major:'工学/农学/文学',lk:420,wk:415,year:2024},
+  {name:'石河子大学',type:'211',province:'新疆',major:'农学/医学/工学',lk:430,wk:426,year:2024},
+  {name:'云南民族大学',type:'双一流',province:'云南',major:'民族学/语言/工学',lk:468,wk:472,year:2024},
+  {name:'西南民族大学',type:'普通本科',province:'四川',major:'民族学/法学/经济',lk:468,wk:472,year:2024},
+  {name:'上海财经大学',type:'211',province:'上海',major:'经济学/金融/会计',lk:648,wk:658,year:2024},
+  {name:'上海财经大学',type:'211',province:'上海',major:'经济学/金融/会计',lk:644,wk:654,year:2023},
+  {name:'华东师范大学',type:'985',province:'上海',major:'教育学/理学/文学',lk:638,wk:645,year:2024},
+  {name:'华东师范大学',type:'985',province:'上海',major:'教育学/理学/文学',lk:634,wk:641,year:2023},
+  {name:'上海外国语大学',type:'211',province:'上海',major:'外语/翻译/国际关系',lk:618,wk:628,year:2024},
+  {name:'东华大学',type:'211',province:'上海',major:'纺织/服装/材料',lk:560,wk:555,year:2024},
+  {name:'上海大学',type:'双一流',province:'上海',major:'工学/理学/文学',lk:540,wk:538,year:2024},
+  {name:'上海大学',type:'双一流',province:'上海',major:'工学/理学/文学',lk:536,wk:534,year:2023},
+  {name:'福建师范大学',type:'双一流',province:'福建',major:'教育学/文学/理学',lk:512,wk:518,year:2024},
+  {name:'华侨大学',type:'普通本科',province:'福建',major:'工学/文学/经济',lk:498,wk:494,year:2024},
+  {name:'海南大学',type:'211',province:'海南',major:'农学/工学/法学',lk:470,wk:458,year:2024},
+  {name:'贵州师范大学',type:'普通本科',province:'贵州',major:'教育学/理学/文学',lk:458,wk:462,year:2024},
+
+  // ===== 普通本科补充 =====
+  {name:'北京工业大学',type:'211',province:'北京',major:'工学/理学/经管',lk:575,wk:565,year:2024},
+  {name:'首都经济贸易大学',type:'普通本科',province:'北京',major:'经济学/财务/管理',lk:538,wk:545,year:2024},
+  {name:'北京建筑大学',type:'普通本科',province:'北京',major:'建筑/土木/城规',lk:528,wk:522,year:2024},
+  {name:'天津工业大学',type:'双一流',province:'天津',major:'纺织/机械/化工',lk:530,wk:522,year:2024},
+  {name:'天津师范大学',type:'普通本科',province:'天津',major:'教育学/文学/理学',lk:515,wk:522,year:2024},
+  {name:'河北大学',type:'普通本科',province:'河北',major:'文学/经济学/理学',lk:490,wk:495,year:2024},
+  {name:'石家庄铁道大学',type:'普通本科',province:'河北',major:'土木/机械/交通',lk:505,wk:495,year:2024},
+  {name:'石家庄铁道大学',type:'普通本科',province:'河北',major:'土木/机械/交通',lk:501,wk:491,year:2023},
+  {name:'华北科技学院',type:'普通本科',province:'河北',major:'矿业/安全/工学',lk:468,wk:460,year:2024},
+  {name:'内蒙古工业大学',type:'普通本科',province:'内蒙古',major:'工学/理学/经管',lk:435,wk:428,year:2024},
+  {name:'沈阳工业大学',type:'普通本科',province:'辽宁',major:'工学/理学/经管',lk:480,wk:470,year:2024},
+  {name:'辽宁工程技术大学',type:'普通本科',province:'辽宁',major:'矿业/地质/工学',lk:468,wk:458,year:2024},
+  {name:'沈阳建筑大学',type:'普通本科',province:'辽宁',major:'建筑/土木/城规',lk:475,wk:468,year:2024},
+  {name:'大连海洋大学',type:'普通本科',province:'辽宁',major:'水产/航海/食品',lk:455,wk:450,year:2024},
+  {name:'长春工业大学',type:'普通本科',province:'吉林',major:'工学/材料/机械',lk:448,wk:440,year:2024},
+  {name:'哈尔滨理工大学',type:'普通本科',province:'黑龙江',major:'电气/机械/材料',lk:458,wk:448,year:2024},
+  {name:'哈尔滨商业大学',type:'普通本科',province:'黑龙江',major:'经济学/管理/食品',lk:442,wk:448,year:2024},
+  {name:'安徽大学',type:'211',province:'安徽',major:'信息/文学/经济',lk:540,wk:545,year:2024},
+  {name:'安徽大学',type:'211',province:'安徽',major:'信息/文学/经济',lk:536,wk:541,year:2023},
+  {name:'安徽工业大学',type:'普通本科',province:'安徽',major:'冶金/材料/机械',lk:470,wk:460,year:2024},
+  {name:'淮北师范大学',type:'普通本科',province:'安徽',major:'教育/化学/理学',lk:445,wk:448,year:2024},
+  {name:'福建工程学院',type:'普通本科',province:'福建',major:'土木/机械/电子',lk:462,wk:455,year:2024},
+  {name:'集美大学',type:'普通本科',province:'福建',major:'航海/水产/工学',lk:468,wk:462,year:2024},
+  {name:'山东理工大学',type:'普通本科',province:'山东',major:'工学/理学/管理',lk:480,wk:472,year:2024},
+  {name:'青岛大学',type:'普通本科',province:'山东',major:'工学/医学/文学',lk:490,wk:488,year:2024},
+  {name:'山东农业大学',type:'普通本科',province:'山东',major:'农学/生命/园艺',lk:468,wk:462,year:2024},
+  {name:'齐鲁工业大学',type:'普通本科',province:'山东',major:'轻工/化工/机械',lk:475,wk:468,year:2024},
+  {name:'郑州轻工业大学',type:'普通本科',province:'河南',major:'轻工/机械/化工',lk:458,wk:452,year:2024},
+  {name:'河南大学',type:'双一流',province:'河南',major:'文学/历史/生命科学',lk:520,wk:525,year:2024},
+  {name:'河南大学',type:'双一流',province:'河南',major:'文学/历史/生命科学',lk:516,wk:521,year:2023},
+  {name:'武汉大学',type:'985',province:'湖北',major:'法学/工学/理学',lk:642,wk:640,year:2024},
+  {name:'湖北大学',type:'普通本科',province:'湖北',major:'工学/文学/理学',lk:488,wk:492,year:2024},
+  {name:'湘南学院',type:'普通本科',province:'湖南',major:'医学/师范/工学',lk:430,wk:435,year:2024},
+  {name:'广东工业大学',type:'普通本科',province:'广东',major:'工学/理学/管理',lk:528,wk:520,year:2024},
+  {name:'广东财经大学',type:'普通本科',province:'广东',major:'财经/经济/管理',lk:515,wk:520,year:2024},
+  {name:'广西师范大学',type:'双一流',province:'广西',major:'教育/文学/理学',lk:482,wk:488,year:2024},
+  {name:'西南石油大学',type:'双一流',province:'四川',major:'石油/化工/工学',lk:510,wk:498,year:2024},
+  {name:'重庆邮电大学',type:'普通本科',province:'重庆',major:'通信/电子/信息',lk:512,wk:500,year:2024},
+  {name:'重庆交通大学',type:'普通本科',province:'重庆',major:'交通/土木/机械',lk:498,wk:488,year:2024},
+  {name:'昆明理工大学',type:'普通本科',province:'云南',major:'冶金/采矿/工学',lk:480,wk:472,year:2024},
+  {name:'贵州医科大学',type:'普通本科',province:'贵州',major:'临床医学/护理/药学',lk:468,wk:475,year:2024},
+  {name:'西北师范大学',type:'普通本科',province:'甘肃',major:'教育/文学/理学',lk:462,wk:468,year:2024},
+  {name:'兰州交通大学',type:'普通本科',province:'甘肃',major:'交通/机械/电气',lk:478,wk:468,year:2024},
+  {name:'兰州交通大学',type:'普通本科',province:'甘肃',major:'交通/机械/电气',lk:474,wk:464,year:2023},
+  {name:'新疆师范大学',type:'普通本科',province:'新疆',major:'教育/文学/数学',lk:405,wk:410,year:2024},
+  {name:'西安工业大学',type:'普通本科',province:'陕西',major:'工学/兵器/机械',lk:468,wk:455,year:2024},
+  {name:'长安大学',type:'211',province:'陕西',major:'交通/公路/地质',lk:552,wk:540,year:2024},
+  {name:'长安大学',type:'211',province:'陕西',major:'交通/公路/地质',lk:548,wk:536,year:2023},
+  {name:'西安建筑科技大学',type:'普通本科',province:'陕西',major:'建筑/土木/材料',lk:520,wk:508,year:2024},
+  {name:'西安科技大学',type:'普通本科',province:'陕西',major:'矿业/安全/机械',lk:468,wk:455,year:2024},
+
+  // ===== 铁路/交通类院校专区（重点扩充）=====
+  {name:'辽宁铁道职业技术学院',type:'高职专科',province:'辽宁',major:'铁道车辆/机车/运输管理',lk:305,wk:null,year:2024},
+  {name:'辽宁铁道职业技术学院',type:'高职专科',province:'辽宁',major:'铁道车辆/机车/运输管理',lk:298,wk:null,year:2023},
+  {name:'辽宁铁道职业技术学院',type:'高职专科',province:'辽宁',major:'铁道车辆/机车/运输管理',lk:302,wk:null,year:2022},
+  {name:'广州铁路职业技术学院',type:'高职专科',province:'广东',major:'铁道交通/机电/信息',lk:350,wk:345,year:2024},
+  {name:'广州铁路职业技术学院',type:'高职专科',province:'广东',major:'铁道交通/机电/信息',lk:346,wk:340,year:2023},
+  {name:'贵州铁道职业技术学院',type:'高职专科',province:'贵州',major:'铁路机械/工务/运输',lk:295,wk:null,year:2024},
+  {name:'贵州铁道职业技术学院',type:'高职专科',province:'贵州',major:'铁路机械/工务/运输',lk:290,wk:null,year:2023},
+  {name:'四川铁道职业学院',type:'高职专科',province:'四川',major:'铁道工程/机车/运营',lk:318,wk:null,year:2024},
+  {name:'四川铁道职业学院',type:'高职专科',province:'四川',major:'铁道工程/机车/运营',lk:312,wk:null,year:2023},
+  {name:'陕西铁路工程职业技术学院',type:'高职专科',province:'陕西',major:'铁道/土建/机电',lk:338,wk:null,year:2023},
+  {name:'陕西铁路工程职业技术学院',type:'高职专科',province:'陕西',major:'铁道/土建/机电',lk:342,wk:null,year:2022},
+  {name:'湖南铁道职业技术学院',type:'高职专科',province:'湖南',major:'铁道运输/电气/机械',lk:342,wk:null,year:2023},
+  {name:'郑州铁路职业技术学院',type:'高职专科',province:'河南',major:'铁道/机电/建筑',lk:346,wk:null,year:2023},
+  {name:'北京铁路电气化学校',type:'高职专科',province:'北京',major:'电气化铁路/供配电',lk:368,wk:360,year:2024},
+  {name:'上海铁路工程学校',type:'高职专科',province:'上海',major:'铁道工程/机电',lk:358,wk:null,year:2024},
+  {name:'武汉铁路职业技术学院',type:'高职专科',province:'湖北',major:'铁道机车/工务/运营',lk:338,wk:null,year:2024},
+  {name:'武汉铁路职业技术学院',type:'高职专科',province:'湖北',major:'铁道机车/工务/运营',lk:332,wk:null,year:2023},
+  {name:'包头铁道职业技术学院',type:'高职专科',province:'内蒙古',major:'铁道运营/机电/工务',lk:280,wk:null,year:2024},
+  {name:'包头铁道职业技术学院',type:'高职专科',province:'内蒙古',major:'铁道运营/机电/工务',lk:275,wk:null,year:2023},
+  {name:'哈尔滨铁道职业技术学院',type:'高职专科',province:'黑龙江',major:'铁道车辆/通信/工务',lk:295,wk:null,year:2024},
+  {name:'哈尔滨铁道职业技术学院',type:'高职专科',province:'黑龙江',major:'铁道车辆/通信/工务',lk:288,wk:null,year:2023},
+  {name:'南宁铁路职业技术学院',type:'高职专科',province:'广西',major:'铁道运营/机电/工务',lk:298,wk:null,year:2024},
+  {name:'南宁铁路职业技术学院',type:'高职专科',province:'广西',major:'铁道运营/机电/工务',lk:292,wk:null,year:2023},
+  {name:'乌鲁木齐铁道职业技术学院',type:'高职专科',province:'新疆',major:'铁路运营/机械/工务',lk:258,wk:null,year:2024},
+  {name:'兰州铁道职业技术学院',type:'高职专科',province:'甘肃',major:'铁路机械/通信/运营',lk:272,wk:null,year:2024},
+  {name:'兰州铁道职业技术学院',type:'高职专科',province:'甘肃',major:'铁路机械/通信/运营',lk:265,wk:null,year:2023},
+  {name:'昆明铁道职业技术学院',type:'高职专科',province:'云南',major:'铁道运营/机电/土建',lk:285,wk:null,year:2024},
+  {name:'昆明铁道职业技术学院',type:'高职专科',province:'云南',major:'铁道运营/机电/土建',lk:278,wk:null,year:2023},
+  {name:'江西铁路职业技术学院',type:'高职专科',province:'江西',major:'铁道车辆/通信/工务',lk:305,wk:null,year:2024},
+  {name:'安徽铁道工程技师学院',type:'高职专科',province:'安徽',major:'铁路工程/机电/运营',lk:292,wk:null,year:2024},
+  {name:'济南铁道职业技术学院',type:'高职专科',province:'山东',major:'铁道工程/机电/运营',lk:315,wk:null,year:2024},
+  {name:'济南铁道职业技术学院',type:'高职专科',province:'山东',major:'铁道工程/机电/运营',lk:308,wk:null,year:2023},
+  {name:'重庆铁道职业学院',type:'高职专科',province:'重庆',major:'铁路机械/工务/运营',lk:318,wk:null,year:2024},
+  {name:'重庆铁道职业学院',type:'高职专科',province:'重庆',major:'铁路机械/工务/运营',lk:312,wk:null,year:2023},
+
+  // ===== 更多高职专科（各省补充）=====
+  {name:'北京工业职业技术学院',type:'高职专科',province:'北京',major:'机电/建材/能源',lk:340,wk:338,year:2024},
+  {name:'北京电子科技职业学院',type:'高职专科',province:'北京',major:'电子信息/自动化/数控',lk:352,wk:348,year:2024},
+  {name:'北京劳动保障职业学院',type:'高职专科',province:'北京',major:'社会保险/人力资源/会计',lk:338,wk:342,year:2024},
+  {name:'天津职业技术师范大学',type:'普通本科',province:'天津',major:'机电/职业教育',lk:495,wk:485,year:2024},
+  {name:'天津交通职业学院',type:'高职专科',province:'天津',major:'交通运输/汽车/物流',lk:330,wk:null,year:2024},
+  {name:'天津电子信息职业技术学院',type:'高职专科',province:'天津',major:'电子/通信/软件',lk:335,wk:null,year:2024},
+  {name:'河北交通职业技术学院',type:'高职专科',province:'河北',major:'道路/桥梁/运营',lk:318,wk:null,year:2024},
+  {name:'石家庄职业技术学院',type:'高职专科',province:'河北',major:'机电/建筑/财经',lk:305,wk:300,year:2024},
+  {name:'保定职业技术学院',type:'高职专科',province:'河北',major:'机电/建筑/旅游',lk:295,wk:290,year:2024},
+  {name:'内蒙古机电职业技术学院',type:'高职专科',province:'内蒙古',major:'机电/能源/建筑',lk:272,wk:null,year:2024},
+  {name:'赤峰工业职业技术学院',type:'高职专科',province:'内蒙古',major:'机械/煤炭/建筑',lk:262,wk:null,year:2024},
+  {name:'大连航运职业技术学院',type:'高职专科',province:'辽宁',major:'航海/船舶/港口',lk:332,wk:null,year:2024},
+  {name:'沈阳职业技术学院',type:'高职专科',province:'辽宁',major:'机电/建筑/财务',lk:318,wk:310,year:2024},
+  {name:'锦州师范高等专科学校',type:'高职专科',province:'辽宁',major:'教育/医护/旅游',lk:295,wk:300,year:2024},
+  {name:'吉林工业职业技术学院',type:'高职专科',province:'吉林',major:'汽车/机电/建筑',lk:308,wk:null,year:2024},
+  {name:'长春汽车工业高等专科学校',type:'高职专科',province:'吉林',major:'汽车技术/机电/销售',lk:322,wk:null,year:2024},
+  {name:'长春职业技术学院',type:'高职专科',province:'吉林',major:'机电/建筑/信息',lk:305,wk:298,year:2024},
+  {name:'黑龙江交通职业技术学院',type:'高职专科',province:'黑龙江',major:'交通/汽车/建筑',lk:288,wk:null,year:2024},
+  {name:'哈尔滨职业技术学院',type:'高职专科',province:'黑龙江',major:'机电/建筑/会计',lk:295,wk:288,year:2024},
+  {name:'上海城建职业学院',type:'高职专科',province:'上海',major:'土木/建筑/测量',lk:365,wk:358,year:2024},
+  {name:'上海电子信息职业技术学院',type:'高职专科',province:'上海',major:'电子/通信/软件',lk:372,wk:null,year:2024},
+  {name:'上海健康医学院',type:'普通本科',province:'上海',major:'护理/医学技术/康复',lk:480,wk:488,year:2024},
+  {name:'南京工业职业技术大学',type:'普通本科',province:'江苏',major:'机电/建材/自动化',lk:498,wk:488,year:2024},
+  {name:'常州机电职业技术学院',type:'高职专科',province:'江苏',major:'机械/数控/自动化',lk:358,wk:null,year:2024},
+  {name:'徐州工业职业技术学院',type:'高职专科',province:'江苏',major:'化工/机电/建材',lk:345,wk:null,year:2024},
+  {name:'扬州工业职业技术学院',type:'高职专科',province:'江苏',major:'机电/建筑/旅游',lk:340,wk:335,year:2024},
+  {name:'浙江机电职业技术学院',type:'高职专科',province:'浙江',major:'机电/数控/自动化',lk:358,wk:null,year:2024},
+  {name:'浙江建设职业技术学院',type:'高职专科',province:'浙江',major:'建筑/土木/城规',lk:352,wk:345,year:2024},
+  {name:'温州职业技术学院',type:'高职专科',province:'浙江',major:'机电/商贸/IT',lk:345,wk:340,year:2024},
+  {name:'安徽职业技术学院',type:'高职专科',province:'安徽',major:'机电/纺织/建筑',lk:315,wk:308,year:2024},
+  {name:'安徽交通职业技术学院',type:'高职专科',province:'安徽',major:'道路桥梁/机电/运营',lk:322,wk:null,year:2024},
+  {name:'福建交通职业技术学院',type:'高职专科',province:'福建',major:'道路/桥梁/机电',lk:328,wk:null,year:2024},
+  {name:'泉州职业技术大学',type:'普通本科',province:'福建',major:'机电/工学/商务',lk:468,wk:458,year:2024},
+  {name:'江西工业职业技术学院',type:'高职专科',province:'江西',major:'机电/建材/信息',lk:308,wk:302,year:2024},
+  {name:'赣州职业技术学院',type:'高职专科',province:'江西',major:'机电/建筑/财经',lk:295,wk:290,year:2024},
+  {name:'山东交通职业学院',type:'高职专科',province:'山东',major:'道路/汽车/机电',lk:332,wk:null,year:2024},
+  {name:'潍坊职业学院',type:'高职专科',province:'山东',major:'机电/建筑/IT',lk:328,wk:322,year:2024},
+  {name:'河南工业职业技术学院',type:'高职专科',province:'河南',major:'机电/数控/建筑',lk:325,wk:null,year:2024},
+  {name:'洛阳职业技术学院',type:'高职专科',province:'河南',major:'机电/建筑/化工',lk:318,wk:312,year:2024},
+  {name:'黄河水利职业技术学院',type:'高职专科',province:'河南',major:'水利/土木/机电',lk:335,wk:null,year:2024},
+  {name:'黄冈职业技术学院',type:'高职专科',province:'湖北',major:'机电/建筑/农业',lk:328,wk:322,year:2024},
+  {name:'湖北工业职业技术学院',type:'高职专科',province:'湖北',major:'工业/机电/建材',lk:322,wk:null,year:2024},
+  {name:'娄底职业技术学院',type:'高职专科',province:'湖南',major:'机电/建筑/化工',lk:312,wk:308,year:2024},
+  {name:'湖南交通职业技术学院',type:'高职专科',province:'湖南',major:'道路/汽车/物流',lk:325,wk:null,year:2024},
+  {name:'湖南工程职业技术学院',type:'高职专科',province:'湖南',major:'建筑/工程/机电',lk:318,wk:null,year:2024},
+  {name:'广州城市职业学院',type:'高职专科',province:'广东',major:'财经/IT/旅游',lk:348,wk:345,year:2024},
+  {name:'东莞职业技术学院',type:'高职专科',province:'广东',major:'机电/建筑/商务',lk:355,wk:348,year:2024},
+  {name:'珠海城市职业技术学院',type:'高职专科',province:'广东',major:'IT/旅游/经管',lk:345,wk:340,year:2024},
+  {name:'广西职业技术学院',type:'高职专科',province:'广西',major:'农业/机电/商务',lk:305,wk:298,year:2024},
+  {name:'柳州职业技术学院',type:'高职专科',province:'广西',major:'汽车/机电/建筑',lk:312,wk:null,year:2024},
+  {name:'重庆建筑工程职业学院',type:'高职专科',province:'重庆',major:'建筑/土木/测量',lk:328,wk:320,year:2024},
+  {name:'重庆城市管理职业学院',type:'高职专科',province:'重庆',major:'民政/旅游/财经',lk:322,wk:318,year:2024},
+  {name:'成都农业科技职业学院',type:'高职专科',province:'四川',major:'农业技术/园艺/食品',lk:308,wk:302,year:2024},
+  {name:'四川建筑职业技术学院',type:'高职专科',province:'四川',major:'建筑/土木/工程测量',lk:325,wk:318,year:2024},
+  {name:'贵州电子信息职业技术学院',type:'高职专科',province:'贵州',major:'电子/通信/软件',lk:285,wk:null,year:2024},
+  {name:'云南交通职业技术学院',type:'高职专科',province:'云南',major:'道路/桥梁/汽车',lk:292,wk:null,year:2024},
+  {name:'云南经济管理学院',type:'普通本科',province:'云南',major:'经管/会计/电商',lk:420,wk:428,year:2024},
+  {name:'西藏职业技术学院',type:'高职专科',province:'西藏',major:'机电/建筑/农牧',lk:258,wk:252,year:2024},
+  {name:'西安职业技术学院',type:'高职专科',province:'陕西',major:'机电/建筑/IT',lk:338,wk:330,year:2024},
+  {name:'甘肃建筑职业技术学院',type:'高职专科',province:'甘肃',major:'建筑/土木/测量',lk:272,wk:265,year:2024},
+  {name:'青海交通职业技术学院',type:'高职专科',province:'青海',major:'交通/公路/机电',lk:262,wk:null,year:2024},
+  {name:'宁夏建设职业技术学院',type:'高职专科',province:'宁夏',major:'建筑/土木/工程',lk:260,wk:255,year:2024},
+  {name:'新疆轻工职业技术学院',type:'高职专科',province:'新疆',major:'轻工/化工/建筑',lk:255,wk:248,year:2024},
 ];
 
 function renderCollegeTable() {
@@ -10370,6 +12242,13 @@ function updateQuizProvince() {
 }
 
 async function generateAIQuiz() {
+  // ── 权限前置检查：游客不可使用 ──
+  if (!isLoggedIn()) {
+    showToast('🔑 AI出题功能需要登录后使用');
+    setTimeout(() => showLoginModal(), 400);
+    return;
+  }
+
   // 兼容旧版字段名（aiQuizLevel）和新版字段名（aiQuizExamType）
   const examTypeEl = document.getElementById('aiQuizExamType') || document.getElementById('aiQuizLevel');
   const provinceEl = document.getElementById('aiQuizProvince');
@@ -10395,11 +12274,10 @@ async function generateAIQuiz() {
   aiQuizAnswers = {};
   aiQuizScoreCount = 0;
 
-  const aiKey = getAIKey();
   let usedAI = false;
 
-  if (aiKey) {
-    try {
+  // ===== 尝试真实 AI 路径（callDeepSeek 内部处理三级权限） =====
+  try {
       const topicHint = topic ? `，重点考查「${topic}」知识点` : '';
       const provinceContext = province && province !== '全国通用'
         ? `\n- 题目风格参考${province}${level}真题，符合该省考纲要求和命题特点`
@@ -10454,9 +12332,10 @@ async function generateAIQuiz() {
         }));
         usedAI = true;
       }
-    } catch(e) {
-      console.warn('AI出题失败，降级到题库:', e.message);
-    }
+  } catch(e) {
+    // NO_KEY / THROTTLE / DAILY_LIMIT → 统一处理，然后降级到本地题库
+    handleAIError(e, null);
+    // NO_KEY 时提示跳豆包，但题目还是用本地题库给用户
   }
 
   if (!usedAI) {
@@ -10477,6 +12356,13 @@ async function generateAIQuiz() {
 
 // ===== AI 出完整试卷 =====
 async function generateAIPaper() {
+  // ── 权限前置检查：游客不可使用 ──
+  if (!isLoggedIn()) {
+    showToast('🔑 AI生成试卷功能需要登录后使用');
+    setTimeout(() => showLoginModal(), 400);
+    return;
+  }
+
   const examTypeEl = document.getElementById('aiQuizExamType') || document.getElementById('aiQuizLevel');
   const provinceEl = document.getElementById('aiQuizProvince');
   const level = examTypeEl ? examTypeEl.value : '高考';
@@ -10484,20 +12370,20 @@ async function generateAIPaper() {
   const subject = document.getElementById('aiQuizSubject').value;
   const diff = document.getElementById('aiQuizDiff').value;
 
-  const aiKey = getAIKey();
-  if (!aiKey) {
-    alert('⚠️ 请先在【会员中心→仪表盘→AI API Key 配置】填入 DeepSeek API Key，才能使用出完整试卷功能。');
-    return;
-  }
-
+  // —— UI：进入 loading 状态 ——
+  const genBtn = document.getElementById('aiQuizGenBtn');
+  const paperBtn = document.querySelector('[onclick="generateAIPaper()"]');
   const paperArea = document.getElementById('aiQuizArea');
   const loading = document.getElementById('aiQuizLoading');
+
   document.getElementById('aiQuizEmpty').style.display = 'none';
   paperArea.style.display = 'none';
   loading.style.display = 'block';
-  document.getElementById('aiQuizLoadingDetail').textContent = `📄 AI正在生成${province}·${subject}完整模拟试卷，内容较多请稍候（约15-30秒）…`;
+  if (genBtn) { genBtn.disabled = true; genBtn.style.opacity = '0.6'; }
+  if (paperBtn) { paperBtn.disabled = true; paperBtn.style.opacity = '0.6'; }
 
   const provinceHint = province !== '全国通用' ? `${province}` : '全国';
+  document.getElementById('aiQuizLoadingDetail').textContent = `📄 AI正在生成${provinceHint}·${level}·${subject}完整模拟试卷，内容较多请稍候（约15-30秒）…`;
 
   const paperPrompt = `你是一位资深的${level}${subject}命题专家。请为${provinceHint}的考生生成一份完整的${subject}模拟试卷。
 
@@ -10507,7 +12393,7 @@ async function generateAIPaper() {
 - 严格按照${provinceHint}${level}考试大纲和真实考试结构命题
 - 题型和分值参考真实考试
 
-请按以下格式生成（直接输出文本，不需要JSON，用Markdown格式）：
+请按以下格式生成（直接输出文本，用Markdown格式）：
 
 # ${provinceHint}${level}${subject}模拟试卷
 
@@ -10538,15 +12424,23 @@ A. [选项A]  B. [选项B]  C. [选项C]  D. [选项D]
 
 要求题目真实、有梯度、覆盖核心考点，解析清晰易懂。`;
 
+  // —— 恢复 UI 状态的辅助函数 ——
+  function restoreUI() {
+    loading.style.display = 'none';
+    paperArea.style.display = 'block';
+    if (genBtn) { genBtn.disabled = false; genBtn.style.opacity = '1'; }
+    if (paperBtn) { paperBtn.disabled = false; paperBtn.style.opacity = '1'; }
+  }
+
   try {
     const raw = await callDeepSeek([
       { role: 'system', content: '你是专业的高考/中考命题专家，生成的试卷内容完整专业，符合真实考试标准。' },
       { role: 'user', content: paperPrompt }
     ], 8000);
 
-    loading.style.display = 'none';
+    restoreUI();
 
-    // 渲染试卷内容
+    // 渲染试卷内容（Markdown → HTML）
     const paperHtml = raw
       .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
       .replace(/^# (.+)$/gm, '<h2 style="color:var(--accent);margin:0 0 8px">$1</h2>')
@@ -10563,12 +12457,13 @@ A. [选项A]  B. [选项B]  C. [选项C]  D. [选项D]
 
     const summary = document.getElementById('aiQuizSummary');
     if (summary) summary.style.display = 'none';
-    paperArea.style.display = 'block';
+
   } catch(e) {
+    // 统一错误处理（自动处理 NOT_LOGIN/NO_KEY/THROTTLE/DAILY_LIMIT/401/402 等）
+    handleAIError(e, null);
     loading.style.display = 'none';
-    paperArea.style.display = 'block';
-    const listEl = document.getElementById('aiQuizList');
-    if (listEl) listEl.innerHTML = `<div style="padding:20px;color:var(--danger);background:rgba(255,95,95,.08);border-radius:10px;border:1px solid rgba(255,95,95,.2)">⚠️ 试卷生成失败：${e.message}<br><span style="font-size:12px;color:var(--text3)">请检查API Key是否有效，或稍后重试。</span></div>`;
+    if (genBtn) { genBtn.disabled = false; genBtn.style.opacity = '1'; }
+    if (paperBtn) { paperBtn.disabled = false; paperBtn.style.opacity = '1'; }
   }
 }
 
@@ -10779,12 +12674,20 @@ let lastSolveQuestion = '';
 let solveContext = [];
 
 async function solveWithAI() {
+  // ── 权限前置检查（优先于内容检查，游客一点即弹登录框）──
+  if (!isLoggedIn()) {
+    showToast('🔑 AI解题功能需要登录后使用');
+    setTimeout(() => showLoginModal(), 400);
+    return;
+  }
+
   const question = document.getElementById('aiSolveInput').value.trim();
   if (!question) {
     document.getElementById('aiSolveInput').style.borderColor = 'var(--red)';
     setTimeout(() => document.getElementById('aiSolveInput').style.borderColor = 'var(--border)', 1500);
     return;
   }
+
   const subject = document.getElementById('aiSolveSubject').value;
   const style = document.getElementById('aiSolveStyle').value;
 
@@ -10801,21 +12704,19 @@ async function solveWithAI() {
 
   let result = '';
   let usedAI = false;
-  const aiKey = getAIKey();
 
-  if (aiKey) {
-    // ===== 真实 AI 路径 =====
-    try {
-      if (loadingDetail) loadingDetail.textContent = '正在连接 DeepSeek AI，分析题目…';
-      const stylePromptMap = {
-        '通俗易懂': '请用通俗易懂的语言解释，多举生活中的例子，步骤清晰，让初学者也能理解。',
-        '详细步骤': '请逐步详细推导，每一步都要写明依据和公式来源。',
-        '简洁精炼': '请简洁给出核心解题步骤和最终答案，不要过多废话。',
-        '深度拓展': '请在解答题目后，额外拓展相关知识点、背景和应用场景。'
-      };
-      const subjectHint = (subject && subject !== '自动识别') ? `科目：${subject}。` : '';
-      const styleHint = stylePromptMap[style] || '';
-      const sysPrompt = `你是一位专业的学科解题助手，覆盖小学到研究生、工作考证等所有学科。${subjectHint}${styleHint}
+  // ===== 真实 AI 路径（callDeepSeek 内部处理三级权限+Key获取） =====
+  try {
+    if (loadingDetail) loadingDetail.textContent = '正在连接 DeepSeek AI，分析题目…';
+    const stylePromptMap = {
+      '通俗易懂': '请用通俗易懂的语言解释，多举生活中的例子，步骤清晰，让初学者也能理解。',
+      '详细步骤': '请逐步详细推导，每一步都要写明依据和公式来源。',
+      '简洁精炼': '请简洁给出核心解题步骤和最终答案，不要过多废话。',
+      '深度拓展': '请在解答题目后，额外拓展相关知识点、背景和应用场景。'
+    };
+    const subjectHint = (subject && subject !== '自动识别') ? `科目：${subject}。` : '';
+    const styleHint = stylePromptMap[style] || '';
+    const sysPrompt = `你是一位专业的学科解题助手，覆盖小学到研究生、工作考证等所有学科。${subjectHint}${styleHint}
 解题要求：
 1. 先识别题目类型和考查知识点
 2. 列出用到的公式或定理（如有）
@@ -10823,29 +12724,22 @@ async function solveWithAI() {
 4. 最后用"【最终答案】"标出答案
 5. 输出纯文本，用换行和序号排版，不要使用Markdown符号`;
 
-      const aiText = await callDeepSeek([
-        { role: 'system', content: sysPrompt },
-        { role: 'user', content: `请解答以下题目：\n${question}` }
-      ], 2000);
+    const aiText = await callDeepSeek([
+      { role: 'system', content: sysPrompt },
+      { role: 'user', content: `请解答以下题目：\n${question}` }
+    ], 2000);
 
-      result = formatAIAnswer(aiText, subject !== '自动识别' ? subject : detectSubject(question, subject), style);
-      usedAI = true;
-      solveContext.push({role:'assistant', content: aiText});
-    } catch(e) {
-      if (e.message === 'NO_KEY') {
-        // 不应出现，保险处理
-      } else {
-        result = buildSolveError(e.message, question, subject, style);
-        usedAI = false;
-      }
-    }
-  }
+    result = formatAIAnswer(aiText, subject !== '自动识别' ? subject : detectSubject(question, subject), style);
+    usedAI = true;
+    solveContext.push({role:'assistant', content: aiText});
 
-  if (!usedAI && !result) {
-    // ===== 本地模板路径（无Key / API报错时降级） =====
-    await new Promise(r => setTimeout(r, 800 + Math.random()*400));
-    result = generateSolution(question, subject, style);
-    solveContext.push({role:'assistant', content: document.createElement('div').appendChild(document.createTextNode('')).textContent});
+  } catch(e) {
+    document.getElementById('aiSolveLoading').style.display = 'none';
+    document.getElementById('aiSolveBtn').disabled = false;
+    document.getElementById('aiSolveBtn').style.opacity = '1';
+    // 统一错误处理（NO_KEY 会弹豆包提示，NOT_LOGIN 会弹登录框，THROTTLE/DAILY_LIMIT 会 toast）
+    handleAIError(e, null);
+    return;
   }
 
   document.getElementById('aiSolveLoading').style.display = 'none';
@@ -10911,6 +12805,11 @@ function buildSolveError(errMsg, question, subject, style) {
 }
 
 async function followUpSolve() {
+  if (!isLoggedIn()) {
+    showToast('🔑 追问功能需要登录后使用');
+    setTimeout(() => showLoginModal(), 400);
+    return;
+  }
   const follow = document.getElementById('aiFollowInput').value.trim();
   if (!follow) return;
 
@@ -10919,23 +12818,19 @@ async function followUpSolve() {
   document.getElementById('aiSolveLoading').style.display = 'block';
 
   let followAns = '';
-  const aiKey = getAIKey();
 
-  if (aiKey) {
-    try {
-      const msgs = [
-        { role: 'system', content: '你是一位专业解题助手，请针对用户的追问简洁清晰地回答，结合之前的解题上下文。输出纯文本，用换行和序号排版。' },
-        ...solveContext
-      ];
-      const aiText = await callDeepSeek(msgs, 1000);
-      followAns = `<div style="line-height:1.9">${aiText.split('\n').filter(l=>l.trim()).map(l=>`<div style="margin:3px 0">${l.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}</div>`).join('')}</div>`;
-      solveContext.push({role:'assistant', content: aiText});
-    } catch(e) {
-      followAns = generateFollowUp(follow, lastSolveQuestion, solveContext);
-    }
-  } else {
-    await new Promise(r => setTimeout(r, 800 + Math.random()*400));
-    followAns = generateFollowUp(follow, lastSolveQuestion, solveContext);
+  try {
+    const msgs = [
+      { role: 'system', content: '你是一位专业解题助手，请针对用户的追问简洁清晰地回答，结合之前的解题上下文。输出纯文本，用换行和序号排版。' },
+      ...solveContext
+    ];
+    const aiText = await callDeepSeek(msgs, 1000);
+    followAns = `<div style="line-height:1.9">${aiText.split('\n').filter(l=>l.trim()).map(l=>`<div style="margin:3px 0">${l.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}</div>`).join('')}</div>`;
+    solveContext.push({role:'assistant', content: aiText});
+  } catch(e) {
+    handleAIError(e, null);
+    document.getElementById('aiSolveLoading').style.display = 'none';
+    return;
   }
 
   const existing = document.getElementById('aiSolveContent').innerHTML;
@@ -11451,7 +13346,18 @@ async function evalMajorAI() {
     el.innerHTML = '<div style="color:var(--red2);font-size:13px">请先选择专业</div>';
     return;
   }
-  // 本地兜底数据
+  // ── 权限前置检查：游客不可使用 ──
+  if (!isLoggedIn()) {
+    el.style.display = 'block';
+    el.innerHTML = `<div style="background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:16px;text-align:center">
+      <div style="font-size:14px;font-weight:700;color:var(--text);margin-bottom:8px">🔑 AI专业评价需要登录</div>
+      <div style="font-size:12px;color:var(--text3);margin-bottom:12px">登录后可使用 AI 深度评价，普通会员需配置 DeepSeek Key，至尊会员平台请客</div>
+      <button onclick="showLoginModal()" style="background:var(--gold-grad);border:none;color:#1a1510;font-weight:700;padding:8px 20px;border-radius:8px;cursor:pointer;font-size:13px">🔑 登录 / 注册</button>
+    </div>`;
+    return;
+  }
+
+  // 本地兜底数据（无AI Key时降级展示）
   const majorData = {
     '计算机科学与技术':  {score:'⭐⭐⭐⭐⭐',salary:'20~45k/月(应届)',employ:'极强',diff:'高',crowd:'逻辑强、耐得住坐牢写码',tips:'互联网核心专业，就业最广泛。学好数据结构+算法，进大厂不难。'},
     '软件工程':         {score:'⭐⭐⭐⭐⭐',salary:'18~40k/月',employ:'极强',diff:'中高',crowd:'喜欢工程实践、项目能力强',tips:'与CS高度重叠，更注重工程实践。'},
@@ -11469,45 +13375,50 @@ async function evalMajorAI() {
   el.style.display = 'block';
   el.innerHTML = `<div style="text-align:center;padding:20px;color:var(--purple2)"><span style="font-size:24px;animation:spin 1.2s linear infinite;display:inline-block">🤖</span><div style="margin-top:8px;font-size:13px">AI 深度分析「${sel}」专业中…</div></div>`;
 
-  const aiKey = getAIKey();
-  if (aiKey) {
-    try {
-      const aiText = await callDeepSeek([
-        { role: 'system', content: `你是一位高考志愿规划专家和职业发展顾问，请对以下专业做深度评价。要求：
+  // 统一走 callDeepSeek（自动支持用户Key/至尊平台Key）
+  try {
+    const aiText = await callDeepSeek([
+      { role: 'system', content: `你是一位高考志愿规划专家和职业发展顾问，请对以下专业做深度评价。要求：
 1. 就业前景评分（⭐1~5颗星）
-2. 应届薪资范围（月薪，参考2024~2025年数据）
+2. 应届薪资范围（月薪，参考2025~2026年数据）
 3. 就业率评级（极强/强/中强/中/弱）
 4. 学习难度（极高/高/中高/中/低）
 5. 适合人群（2~3句话）
 6. 详细点评（150~200字，包括：该专业核心竞争力、就业方向、当前市场供需、备考/在校建议）
 7. 配套证书建议
 请用结构化纯文本输出，每项用【】标注，不要Markdown符号。` },
-        { role: 'user', content: `请深度评价专业：${sel}` }
-      ], 1200);
+      { role: 'user', content: `请深度评价专业：${sel}` }
+    ], 1200);
 
-      // 格式化AI输出
-      const lines = aiText.split('\n').filter(l => l.trim());
-      el.innerHTML = `
-        <div style="background:var(--bg4);border-radius:12px;padding:18px;border:1px solid var(--border)">
-          <div style="font-size:15px;font-weight:800;color:var(--gold2);margin-bottom:10px">📊 ${sel} · AI深度评价</div>
-          <div style="font-size:10px;background:rgba(74,144,217,.12);color:var(--blue2);padding:2px 8px;border-radius:10px;display:inline-block;margin-bottom:12px">🤖 DeepSeek AI 实时分析</div>
-          <div style="line-height:1.9">${lines.map(l => {
-            l = l.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-            if (/^【/.test(l)) return `<div style="font-weight:700;color:var(--gold2);margin:10px 0 4px">${l}</div>`;
-            return `<div style="font-size:13px;color:var(--text2);margin:3px 0">${l}</div>`;
-          }).join('')}</div>
-        </div>`;
-      return;
-    } catch(e) {
-      console.warn('AI专业评价失败，降级本地:', e.message);
+    // 格式化AI输出
+    const lines = aiText.split('\n').filter(l => l.trim());
+    el.innerHTML = `
+      <div style="background:var(--bg4);border-radius:12px;padding:18px;border:1px solid var(--border)">
+        <div style="font-size:15px;font-weight:800;color:var(--gold2);margin-bottom:10px">📊 ${sel} · AI深度评价</div>
+        <div style="font-size:10px;background:rgba(74,144,217,.12);color:var(--blue2);padding:2px 8px;border-radius:10px;display:inline-block;margin-bottom:12px">🤖 DeepSeek AI 实时分析</div>
+        <div style="line-height:1.9">${lines.map(l => {
+          l = l.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+          if (/^【/.test(l)) return `<div style="font-weight:700;color:var(--gold2);margin:10px 0 4px">${l}</div>`;
+          return `<div style="font-size:13px;color:var(--text2);margin:3px 0">${l}</div>`;
+        }).join('')}</div>
+      </div>`;
+    return;
+  } catch(e) {
+    // NO_KEY → 降级本地数据；其他错误走统一处理
+    if (e.message !== 'NO_KEY') {
+      handleAIError(e);
+      // 提示后再渲染本地数据兜底
     }
   }
 
-  // 降级本地数据
+  // 降级本地数据（无可用Key时）
   const d = majorData[sel] || {score:'⭐⭐⭐',salary:'参考同类专业',employ:'中',diff:'中',crowd:'具备学科基础',tips:`${sel}是一门综合性较强的专业，建议结合院校实力和就业方向综合评估。`};
   el.innerHTML = `
     <div style="background:var(--bg4);border-radius:12px;padding:18px;border:1px solid var(--border)">
-      <div style="font-size:15px;font-weight:800;color:var(--gold2);margin-bottom:14px">📊 ${sel} · 参考评价</div>
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
+        <div style="font-size:15px;font-weight:800;color:var(--gold2)">📊 ${sel} · 参考评价</div>
+        <span style="font-size:10px;background:rgba(212,175,55,.1);color:var(--text3);padding:2px 8px;border-radius:10px">📚 本地参考数据</span>
+      </div>
       <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px;margin-bottom:14px">
         <div style="background:var(--bg2);border-radius:8px;padding:10px;text-align:center">
           <div style="font-size:18px">${d.score}</div>
@@ -11528,10 +13439,18 @@ async function evalMajorAI() {
       </div>
       <div style="font-size:12px;color:var(--text2);margin-bottom:6px">👤 适合人群：${d.crowd}</div>
       <div style="font-size:13px;color:var(--text);line-height:1.7;background:rgba(212,175,55,.05);border-left:3px solid var(--gold);padding:10px 14px;border-radius:0 8px 8px 0">💡 ${d.tips}</div>
+      <div style="margin-top:10px;font-size:11px;color:var(--text3);text-align:center">🔑 配置 DeepSeek Key 或升级至尊会员可解锁完整 AI 评价</div>
     </div>`;
 }
 
 async function gaokaoProfileRecommend() {
+  // ── 权限前置检查 ──
+  if (!isLoggedIn()) {
+    showToast('🔑 AI志愿建议需要登录后使用');
+    setTimeout(() => showLoginModal(), 400);
+    return;
+  }
+
   const input = document.getElementById('gaokaoProfileInput').value.trim();
   const el    = document.getElementById('gaokaoProfileResult');
   if (!input || input.length < 10) {
@@ -11543,78 +13462,33 @@ async function gaokaoProfileRecommend() {
   el.style.display = 'block';
   el.innerHTML = `<div style="text-align:center;padding:20px;color:var(--purple2)"><span style="font-size:24px;animation:spin 1.2s linear infinite;display:inline-block">🤖</span><div style="margin-top:8px;font-size:13px">AI 正在分析你的情况，生成个性化建议…</div></div>`;
 
-  const aiKey = getAIKey();
-  if (aiKey) {
-    try {
-      const aiText = await callDeepSeek([
-        { role: 'system', content: `你是一位专业的高考志愿规划师，根据学生描述的个人情况给出填报建议。要求：
+  try {
+    const aiText = await callDeepSeek([
+      { role: 'system', content: `你是一位专业的高考志愿规划师，根据学生描述的个人情况给出填报建议。要求：
 1. 识别学生的兴趣方向、特长、约束条件（地域/分数段/目标等）
 2. 推荐2~4个最适合的专业方向，每个专业说明：适合理由、就业前景、注意事项
 3. 给出冲/稳/保三档院校策略
 4. 给出3~5条个性化填报注意事项
 5. 用结构化纯文本输出，每节用【】标注，不要Markdown符号` },
-        { role: 'user', content: `我的情况：${input}` }
-      ], 1500);
+      { role: 'user', content: `我的情况：${input}` }
+    ], 1500);
 
-      const lines = aiText.split('\n').filter(l => l.trim());
-      el.innerHTML = `
-        <div style="background:var(--bg4);border-radius:12px;padding:18px;border:1px solid var(--border)">
-          <div style="font-size:14px;font-weight:800;color:var(--gold2);margin-bottom:8px">✨ AI个性化填报建议</div>
-          <div style="font-size:10px;background:rgba(46,184,122,.12);color:var(--green2);padding:2px 8px;border-radius:10px;display:inline-block;margin-bottom:12px">🤖 DeepSeek AI 实时生成</div>
-          <div style="line-height:1.9">${lines.map(l => {
-            l = l.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-            if (/^【/.test(l)) return `<div style="font-weight:700;color:var(--gold2);margin:10px 0 4px">${l}</div>`;
-            if (/^[①②③④⑤⑥⑦⑧⑨⑩]|^\d+[、\.\)）]/.test(l)) return `<div style="font-size:13px;color:var(--text);margin:5px 0">${l}</div>`;
-            return `<div style="font-size:13px;color:var(--text2);margin:3px 0">${l}</div>`;
-          }).join('')}</div>
-        </div>`;
-      return;
-    } catch(e) {
-      console.warn('AI个性化推荐失败，降级本地:', e.message);
-    }
+    const lines = aiText.split('\n').filter(l => l.trim());
+    el.innerHTML = `
+      <div style="background:var(--bg4);border-radius:12px;padding:18px;border:1px solid var(--border)">
+        <div style="font-size:14px;font-weight:800;color:var(--gold2);margin-bottom:8px">✨ AI个性化填报建议</div>
+        <div style="font-size:10px;background:rgba(46,184,122,.12);color:var(--green2);padding:2px 8px;border-radius:10px;display:inline-block;margin-bottom:12px">🤖 DeepSeek AI 实时生成</div>
+        <div style="line-height:1.9">${lines.map(l => {
+          l = l.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+          if (/^【/.test(l)) return `<div style="font-weight:700;color:var(--gold2);margin:10px 0 4px">${l}</div>`;
+          if (/^[①②③④⑤⑥⑦⑧⑨⑩]|^\d+[、\.\)）]/.test(l)) return `<div style="font-size:13px;color:var(--text);margin:5px 0">${l}</div>`;
+          return `<div style="font-size:13px;color:var(--text2);margin:3px 0">${l}</div>`;
+        }).join('')}</div>
+      </div>`;
+  } catch(e) {
+    handleAIError(e, null);
+    el.style.display = 'none';
   }
-
-  // 降级本地关键词匹配
-  const hasIT    = /计算机|编程|代码|软件|it|互联网|ai|人工智能/i.test(input);
-  const hasFinan = /金融|经济|会计|财务|银行|证券/i.test(input);
-  const hasMed   = /医学|临床|医院|护士|医生/i.test(input);
-  const hasEdu   = /教师|教育|师范|支教/i.test(input);
-  const hasLaw   = /法律|法学|律师|司法/i.test(input);
-  const hasArt   = /设计|美术|音乐|艺术|建筑/i.test(input);
-  const noGo     = /不想出省|留本省|本地/i.test(input);
-  const wantGrad = /研究生|读研|考研|深造/i.test(input);
-
-  let suggests = [];
-  if (hasIT)    suggests.push({ major:'计算机/软件工程/人工智能', reason:'IT方向就业最好，互联网/大厂为主要目标' });
-  if (hasFinan) suggests.push({ major:'金融学/经济学/会计学',    reason:'财经方向，建议985名校+CPA/CFA备考同步' });
-  if (hasMed)   suggests.push({ major:'临床医学/口腔/护理',       reason:'医疗方向，注意学制长（5~8年），职业稳定' });
-  if (hasEdu)   suggests.push({ major:'师范类专业',               reason:'教师编制需求旺盛，建议选师范类本科' });
-  if (hasLaw)   suggests.push({ major:'法学',                     reason:'需过法考，建议985/211名校' });
-  if (hasArt)   suggests.push({ major:'视觉传达/动画/建筑',       reason:'创意类专业，关注院校教学资源和就业' });
-  if (!suggests.length) suggests.push({ major:'综合推荐：根据兴趣方向精选', reason:'建议配置AI Key后获取更精准的个性化建议' });
-
-  const tips = [
-    wantGrad ? '✅ 你有读研意向，本科阶段重视GPA，早做规划' : null,
-    noGo     ? '📌 不想出省：优先选本省优质院校' : null,
-    '🎯 填报策略：冲1~2所（略高于分数），稳2~3所（历年线附近），保1~2所（低20分以上）',
-    '⚠️ 以上为本地关键词分析，配置AI Key可获取更精准的个性化建议',
-  ].filter(Boolean);
-
-  el.innerHTML = `
-    <div style="background:var(--bg4);border-radius:12px;padding:18px;border:1px solid var(--border)">
-      <div style="font-size:14px;font-weight:800;color:var(--gold2);margin-bottom:12px">✨ 个性化填报建议（本地分析）</div>
-      ${suggests.map(s=>`
-        <div style="background:var(--bg2);border-radius:10px;padding:12px 16px;margin-bottom:8px;display:flex;align-items:flex-start;gap:10px">
-          <span style="font-size:20px">🎓</span>
-          <div>
-            <div style="font-size:13px;font-weight:700;color:var(--text);margin-bottom:3px">${s.major}</div>
-            <div style="font-size:12px;color:var(--text2)">${s.reason}</div>
-          </div>
-        </div>`).join('')}
-      <div style="margin-top:12px;display:flex;flex-direction:column;gap:6px">
-        ${tips.map(t=>`<div style="font-size:12px;color:var(--text2)">${t}</div>`).join('')}
-      </div>
-    </div>`;
 }
 
 // ==================== 考证中心模块 ====================
@@ -12206,9 +14080,32 @@ function closeProfileModal() {
 // 会员权益墙
 function showVipWall() {
   document.getElementById('vipWallModal').classList.add('show');
+  // 高亮当前用户等级列
+  _highlightVipColumn();
 }
 function closeVipWall() {
   document.getElementById('vipWallModal').classList.remove('show');
+}
+
+// 根据当前等级高亮对应列，方便用户看清自己在哪一档
+function _highlightVipColumn() {
+  const table = document.getElementById('vipCompareTable');
+  if (!table) return;
+  const level = getUserLevel(); // 'guest'|'normal'|'supreme'
+  // 移除旧标记
+  table.querySelectorAll('.vip-col-active').forEach(el => el.classList.remove('vip-col-active'));
+  // 确定要高亮的列索引（0=功能名,1=游客,2=普通,3=至尊）
+  const colIdx = level === 'supreme' ? 3 : level === 'normal' ? 2 : 1;
+  // 高亮对应列的所有 th/td
+  table.querySelectorAll(`th:nth-child(${colIdx+1}), td:nth-child(${colIdx+1})`).forEach(el => {
+    el.classList.add('vip-col-active');
+  });
+  // 更新副标题提示
+  const sub = document.querySelector('.vip-wall-sub');
+  if (sub) {
+    const tips = { guest:'当前：游客 · 注册后解锁大量功能', normal:'当前：⭐ 普通会员 · 升级至尊享用平台AI', supreme:'当前：👑 至尊会员 · 已解锁全部特权' };
+    sub.textContent = tips[level] || '选择适合你的会员等级 · 解锁专属功能与特权';
+  }
 }
 
 // 会员中心Tab入口：游客看权益墙，已登录直接进
@@ -12223,11 +14120,78 @@ function handleMemberTab() {
 // 检查登录后再执行操作
 function requireLogin(fn, featureName) {
   if (isLoggedIn()) {
-    fn();
+    if (typeof fn === 'function') fn();
   } else {
     showToast('🔑 ' + (featureName || '该功能') + '需要登录后使用');
     setTimeout(() => showLoginModal(), 500);
   }
+}
+
+// 检查至尊会员权限后再执行（普通会员提示升级，游客提示登录）
+function requireSupreme(fn, featureName) {
+  if (!isLoggedIn()) {
+    showToast('🔑 ' + (featureName || '该功能') + '需要登录后使用');
+    setTimeout(() => showLoginModal(), 400);
+    return;
+  }
+  const level = getUserLevel();
+  if (level === 'supreme') {
+    fn();
+  } else {
+    showToast('👑 ' + (featureName || '该功能') + '为至尊会员专属，请联系管理员升级');
+  }
+}
+
+/**
+ * 在指定容器最前面渲染权限说明横幅（若已存在则更新）
+ * @param {string} containerId  容器 ID
+ * @param {Array}  rows         [{icon, label, guest, normal, supreme}]
+ * @param {string} title        横幅标题（可选）
+ */
+function renderPermBanner(containerId, rows, title) {
+  const container = document.getElementById(containerId);
+  if (!container) return;
+  const level = getUserLevel();
+  const levelLabel = level === 'supreme' ? '至尊会员' : level === 'normal' ? '普通会员' : '游客';
+  const levelColor = level === 'supreme' ? 'var(--gold)' : level === 'normal' ? 'var(--blue)' : 'var(--text3)';
+  const bannerId = containerId + '_permBanner';
+  let el = document.getElementById(bannerId);
+  if (!el) {
+    el = document.createElement('div');
+    el.id = bannerId;
+    container.insertBefore(el, container.firstChild);
+  }
+  const rowsHtml = rows.map(r => {
+    const gIcon = r.guest ? '✅' : '❌';
+    const nIcon = r.normal ? (r.normalTip ? '🔶' : '✅') : '❌';
+    const sIcon = r.supreme ? '✅' : (r.supremeTip ? '🔶' : '❌');
+    const gStyle = r.guest ? 'color:var(--green)' : 'color:var(--text3)';
+    const nStyle = r.normal ? 'color:var(--blue)' : 'color:var(--text3)';
+    const sStyle = r.supreme ? 'color:var(--gold)' : 'color:var(--text3)';
+    const highlightSelf = (level === 'guest' && r.guest) || (level === 'normal' && r.normal) || (level === 'supreme' && r.supreme);
+    return `<tr style="${highlightSelf ? 'background:rgba(255,255,255,.04)' : ''}">
+      <td style="padding:5px 10px;font-size:12px;color:var(--text2)">${r.icon || ''} ${r.label}</td>
+      <td style="padding:5px 10px;text-align:center;font-size:12px;${gStyle}">${gIcon}${r.guestTip ? `<br><span style="font-size:10px;color:var(--text3)">${r.guestTip}</span>` : ''}</td>
+      <td style="padding:5px 10px;text-align:center;font-size:12px;${nStyle}">${nIcon}${r.normalTip ? `<br><span style="font-size:10px;color:var(--text3)">${r.normalTip}</span>` : ''}</td>
+      <td style="padding:5px 10px;text-align:center;font-size:12px;${sStyle}">${sIcon}${r.supremeTip ? `<br><span style="font-size:10px;color:var(--text3)">${r.supremeTip}</span>` : ''}</td>
+    </tr>`;
+  }).join('');
+  el.innerHTML = `<div style="background:var(--bg3);border:1px solid var(--border);border-radius:12px;padding:12px 16px;margin-bottom:16px;font-size:12px">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;flex-wrap:wrap;gap:6px">
+      <span style="font-weight:700;color:var(--text);font-size:13px">🔐 ${title || '功能权限说明'}</span>
+      <span style="padding:3px 10px;border-radius:20px;background:var(--gold-dim);color:${levelColor};font-weight:700;border:1px solid ${levelColor}40">当前：${levelLabel}</span>
+    </div>
+    <table style="width:100%;border-collapse:collapse">
+      <thead><tr style="border-bottom:1px solid var(--border)">
+        <th style="padding:4px 10px;text-align:left;font-size:11px;color:var(--text3);font-weight:600">功能</th>
+        <th style="padding:4px 10px;text-align:center;font-size:11px;color:var(--text3);font-weight:600">游客</th>
+        <th style="padding:4px 10px;text-align:center;font-size:11px;color:var(--blue);font-weight:600">普通会员</th>
+        <th style="padding:4px 10px;text-align:center;font-size:11px;color:var(--gold);font-weight:600">👑 至尊</th>
+      </tr></thead>
+      <tbody>${rowsHtml}</tbody>
+    </table>
+    ${!isLoggedIn() ? `<div style="margin-top:10px;text-align:center"><button onclick="showLoginModal()" style="padding:6px 20px;background:var(--blue);color:#fff;border:none;border-radius:20px;font-size:12px;cursor:pointer;font-family:inherit">🔑 立即登录解锁更多功能</button></div>` : level !== 'supreme' ? `<div style="margin-top:10px;text-align:center;font-size:11px;color:var(--text3)">👑 升级至尊会员解锁所有功能，请联系管理员</div>` : ''}
+  </div>`;
 }
 
 const RESUME_TEMPLATES = {
@@ -12238,8 +14202,8 @@ const RESUME_TEMPLATES = {
     lang: '英语CET-6（565分）', gpa: 'GPA 3.7/4.0，专业排名前10%',
     cert: '计算机二级、华为云HCIA认证', salary: '18-25K',
     expItems: [
-      { company:'XX互联网公司', role:'后端开发实习生', startDate:'2025.07', endDate:'2025.09', desc:'负责用户中心微服务开发，使用Spring Boot+MySQL，参与代码review和单测编写' },
-      { company:'校内算法竞赛项目', role:'算法工程师/队长', startDate:'2025.03', endDate:'2025.05', desc:'带队参加全国大学生编程竞赛，负责动态规划和图论算法模块，最终获全国一等奖' },
+      { company:'XX互联网公司', role:'后端开发实习生', startDate:'2026.01', endDate:'2026.04', desc:'负责用户中心微服务开发，使用Spring Boot+MySQL，参与代码review和单测编写' },
+      { company:'校内算法竞赛项目', role:'算法工程师/队长', startDate:'2025.09', endDate:'2025.12', desc:'带队参加全国大学生编程竞赛，负责动态规划和图论算法模块，最终获全国一等奖' },
     ]
   },
   finance: {
@@ -12249,8 +14213,8 @@ const RESUME_TEMPLATES = {
     lang: '英语CET-6（550分）、可撰写英文商务报告', gpa: 'GPA 3.8/4.0，专业排名前8%',
     cert: 'CFA一级备考中、CPA在考（已过2科）', salary: '15-22K',
     expItems: [
-      { company:'四大会计师事务所', role:'审计实习生', startDate:'2025.07', endDate:'2025.10', desc:'参与上市公司年报审计，完成底稿整理和业务流程梳理，审阅财务数据超千万元' },
-      { company:'校内FinTech竞赛项目', role:'财务建模负责人', startDate:'2025.02', endDate:'2025.05', desc:'使用DCF模型对目标公司进行估值分析，建立三张表联动财务模型，获竞赛三等奖' },
+      { company:'四大会计师事务所', role:'审计实习生', startDate:'2026.01', endDate:'2026.04', desc:'参与上市公司年报审计，完成底稿整理和业务流程梳理，审阅财务数据超千万元' },
+      { company:'校内FinTech竞赛项目', role:'财务建模负责人', startDate:'2025.09', endDate:'2025.12', desc:'使用DCF模型对目标公司进行估值分析，建立三张表联动财务模型，获竞赛三等奖' },
     ]
   },
   engineer: {
@@ -12260,8 +14224,8 @@ const RESUME_TEMPLATES = {
     lang: '英语CET-4、可阅读专业英文技术资料', gpa: 'GPA 3.5/4.0',
     cert: '电工上岗证（高压）、安全生产考核合格证', salary: '面议',
     expItems: [
-      { company:'国网某省供电局', role:'电气工程实习生', startDate:'2025.06', endDate:'2025.09', desc:'参与配网自动化改造项目，协助完成现场勘测和图纸审核，熟悉变电站运维规范' },
-      { company:'毕业设计项目', role:'项目负责人', startDate:'2025.09', endDate:'2026.05', desc:'设计并仿真智能微电网控制系统，使用MATLAB/Simulink建模，仿真结果达到预期指标' },
+      { company:'国网某省供电局', role:'电气工程实习生', startDate:'2025.07', endDate:'2025.10', desc:'参与配网自动化改造项目，协助完成现场勘测和图纸审核，熟悉变电站运维规范' },
+      { company:'毕业设计项目', role:'项目负责人', startDate:'2025.10', endDate:'2026.05', desc:'设计并仿真智能微电网控制系统，使用MATLAB/Simulink建模，仿真结果达到预期指标' },
     ]
   },
   management: {
@@ -12271,8 +14235,8 @@ const RESUME_TEMPLATES = {
     lang: '英语CET-6、可撰写英文邮件', gpa: 'GPA 3.6/4.0',
     cert: '人力资源管理师三级、普通话二甲', salary: '10-15K',
     expItems: [
-      { company:'某大型央企', role:'HR实习生', startDate:'2025.06', endDate:'2025.09', desc:'参与校招全流程，包括岗位发布、简历筛选、面试邀约，协助完成200+份简历筛选' },
-      { company:'校学生会', role:'主席/组织者', startDate:'2024.09', endDate:'2025.06', desc:'组织大型校园活动5场，协调300+人参与，锻炼了出色的组织协调和沟通表达能力' },
+      { company:'某大型央企', role:'HR实习生', startDate:'2025.07', endDate:'2025.10', desc:'参与校招全流程，包括岗位发布、简历筛选、面试邀约，协助完成200+份简历筛选' },
+      { company:'校学生会', role:'主席/组织者', startDate:'2024.09', endDate:'2025.07', desc:'组织大型校园活动5场，协调300+人参与，锻炼了出色的组织协调和沟通表达能力' },
     ]
   },
   public: {
@@ -12282,7 +14246,7 @@ const RESUME_TEMPLATES = {
     lang: '普通话二甲（测试成绩88分）', gpa: 'GPA 3.5/4.0',
     cert: '计算机二级（Office）、驾驶证C1', salary: '8-12K',
     expItems: [
-      { company:'街道政务服务中心', role:'行政实习生', startDate:'2025.07', endDate:'2025.09', desc:'辅助窗口办理市民事务，熟悉政务服务流程，协助完成档案整理和报告撰写' },
+      { company:'街道政务服务中心', role:'行政实习生', startDate:'2025.07', endDate:'2025.10', desc:'辅助窗口办理市民事务，熟悉政务服务流程，协助完成档案整理和报告撰写' },
     ]
   },
   sales: {
@@ -12302,7 +14266,7 @@ const RESUME_TEMPLATES = {
     lang: '普通话二甲', gpa: 'GPA 3.3/4.0',
     cert: '铁路行业安全培训证书、CET-4', salary: '面议',
     expItems: [
-      { company:'某铁路局', role:'运输调度实习生', startDate:'2025.06', endDate:'2025.09', desc:'协助调度员完成日常运行图调整，熟悉客运调度流程，参与应急演练2次' },
+      { company:'某铁路局', role:'运输调度实习生', startDate:'2025.07', endDate:'2025.10', desc:'协助调度员完成日常运行图调整，熟悉客运调度流程，参与应急演练2次' },
     ]
   },
   intern: {
@@ -12312,7 +14276,7 @@ const RESUME_TEMPLATES = {
     lang: '英语流利（备考托福中）', gpa: '专业排名前15%',
     cert: 'PS设计师认证、腾讯广告营销师', salary: '150-200/天',
     expItems: [
-      { company:'校内创业项目', role:'运营负责人', startDate:'2025.03', endDate:'至今', desc:'负责产品运营和用户增长，运营小红书/抖音账号，粉丝从0增长至5000+，月GMV破万' },
+      { company:'校内创业项目', role:'运营负责人', startDate:'2025.09', endDate:'至今', desc:'负责产品运营和用户增长，运营小红书/抖音账号，粉丝从0增长至5000+，月GMV破万' },
     ]
   }
 };
@@ -14010,6 +15974,13 @@ const IQ_BANK = {
 };
 
 async function genInterviewQ() {
+  // ── 权限前置检查 ──
+  if (!isLoggedIn()) {
+    showToast('🔑 AI面试题功能需要登录后使用');
+    setTimeout(() => showLoginModal(), 400);
+    return;
+  }
+
   const job = (document.getElementById('iqJob')||{}).value.trim() || '通用岗位';
   const skills = (document.getElementById('iqSkills')||{}).value.trim();
   const level = (document.getElementById('iqLevel')||{}).value || '应届生';
@@ -14024,14 +15995,12 @@ async function genInterviewQ() {
   const loadText = document.getElementById('iqLoadingText');
   if (loadEl) loadEl.style.display = 'block';
 
-  const aiKey = getAIKey();
   let questions = [];
   let usedAI = false;
 
-  if (aiKey) {
-    try {
-      if (loadText) loadText.textContent = `🤖 DeepSeek AI 正在为「${job}·${level}」定制面试题…`;
-      const sysPrompt = `你是一位资深的HR和面试官，请为「${job}」岗位（经验层次：${level}）生成 ${count} 道面试题。${skills ? `候选人核心技能：${skills}。` : ''}
+  try {
+    if (loadText) loadText.textContent = `🤖 DeepSeek AI 正在为「${job}·${level}」定制面试题…`;
+    const sysPrompt = `你是一位资深的HR和面试官，请为「${job}」岗位（经验层次：${level}）生成 ${count} 道面试题。${skills ? `候选人核心技能：${skills}。` : ''}
 
 严格按照以下JSON格式输出，不要有任何额外文字：
 [
@@ -14054,22 +16023,22 @@ async function genInterviewQ() {
 - 答案模板用结构化表述，实用可直接套用
 - 仅输出JSON数组`;
 
-      const raw = await callDeepSeek([
-        { role: 'system', content: sysPrompt },
-        { role: 'user', content: `请生成${count}道面试题` }
-      ], 3000);
+    const raw = await callDeepSeek([
+      { role: 'system', content: sysPrompt },
+      { role: 'user', content: `请生成${count}道面试题` }
+    ], 3000);
 
-      const jsonMatch = raw.match(/\[[\s\S]*\]/);
-      if (jsonMatch) {
-        const parsed = JSON.parse(jsonMatch[0]);
-        if (Array.isArray(parsed) && parsed.length > 0) {
-          questions = parsed;
-          usedAI = true;
-        }
+    const jsonMatch = raw.match(/\[[\s\S]*\]/);
+    if (jsonMatch) {
+      const parsed = JSON.parse(jsonMatch[0]);
+      if (Array.isArray(parsed) && parsed.length > 0) {
+        questions = parsed;
+        usedAI = true;
       }
-    } catch(e) {
-      console.warn('AI面试题生成失败，降级题库:', e.message);
     }
+  } catch(e) {
+    // NO_KEY / THROTTLE / DAILY_LIMIT → 统一提示，然后降级到本地题库
+    handleAIError(e, null);
   }
 
   if (!usedAI) {
