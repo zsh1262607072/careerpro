@@ -57,14 +57,14 @@
   --shadow-gold: 0 4px 24px rgba(212,175,55,.12);
 }
 
-/* ====== 日间主题 ====== */
+/* ====== 日间主题（护眼绿）====== */
 [data-theme="light"]{
-  --bg:        #f5f0e8;
-  --bg2:       #ffffff;
-  --bg3:       #faf7f2;
-  --bg4:       #f0ebe0;
-  --border:    #e0d8c8;
-  --border2:   #c8bea8;
+  --bg:        #d6eeda;
+  --bg2:       #e8f5eb;
+  --bg3:       #ddf0e1;
+  --bg4:       #c8e3cc;
+  --border:    #a8ccac;
+  --border2:   #88b08c;
   --border-gold: rgba(160,120,20,.3);
   --gold:      #9a7010;
   --gold2:     #c09020;
@@ -78,13 +78,13 @@
   --teal:      #158098;--teal2:#106878;
   --pink:      #a02870;--pink2:#802058;
   --yellow:    #806010;--yellow2:#604008;
-  --text:      #1a1510;
-  --text2:     #5a5048;
-  --text3:     #9a9080;
-  --glass:     rgba(255,255,255,.85);
-  --glass2:    rgba(245,240,232,.7);
-  --shadow-sm: 0 2px 12px rgba(0,0,0,.1);
-  --shadow-md: 0 6px 30px rgba(0,0,0,.12);
+  --text:      #1a2a1e;
+  --text2:     #48584c;
+  --text3:     #889a8c;
+  --glass:     rgba(245,251,246,.88);
+  --glass2:    rgba(234,244,236,.75);
+  --shadow-sm: 0 2px 12px rgba(0,0,0,.08);
+  --shadow-md: 0 6px 30px rgba(0,0,0,.10);
   --shadow-gold: 0 4px 24px rgba(160,120,20,.1);
 }
 
@@ -840,7 +840,7 @@ option{background:var(--bg3);color:var(--text)}
   font-weight:700;
   box-shadow:var(--shadow-gold);
 }
-[data-theme="light"] .snav-btn.snav-active{color:#fff}
+[data-theme="light"] .snav-btn.snav-active{color:#3a2a0a}
 
 /* ====== 题库分类按钮 ====== */
 .quiz-cat-btn{
@@ -2587,15 +2587,15 @@ option{background:var(--bg3);color:var(--text)}
   --border-gold: rgba(200,164,53,.25);
 }
 [data-theme="light"] {
-  --bg:    #f7f5f0;
-  --bg2:   #ffffff;
-  --bg3:   #f2f0ea;
-  --bg4:   #ebe8e0;
-  --border: #e0dbd0;
-  --border2:#c8c0b0;
-  --text:  #18150e;
-  --text2: #5a5448;
-  --text3: #9a9488;
+  --bg:    #d6eeda;
+  --bg2:   #e8f5eb;
+  --bg3:   #ddf0e1;
+  --bg4:   #c8e3cc;
+  --border: #a8ccac;
+  --border2:#88b08c;
+  --text:  #1a2a1e;
+  --text2: #48584c;
+  --text3: #889a8c;
   --accent:       #1a6fd4;
   --accent-dim:   rgba(26,111,212,.08);
   --accent-glow:  0 0 20px rgba(26,111,212,.15);
@@ -3195,13 +3195,13 @@ option{background:var(--bg3);color:var(--text)}
 
 /* --- Tab 分组底色（三组视觉区分）--- */
 /* 招聘求职组：蓝色微底 */
-#tab-general,#tab-major,#tab-state,#tab-rail,#tab-zhaopin {
+#tab-general,#tab-major,#tab-state,#tab-rail,#tab-zhaopin,#tab-policy {
   background: rgba(42,112,192,.04);
 }
-#tab-general:hover,#tab-major:hover,#tab-state:hover,#tab-rail:hover,#tab-zhaopin:hover {
+#tab-general:hover,#tab-major:hover,#tab-state:hover,#tab-rail:hover,#tab-zhaopin:hover,#tab-policy:hover {
   background: rgba(42,112,192,.1);
 }
-#tab-general.active,#tab-major.active,#tab-state.active,#tab-rail.active,#tab-zhaopin.active {
+#tab-general.active,#tab-major.active,#tab-state.active,#tab-rail.active,#tab-zhaopin.active,#tab-policy.active {
   background: var(--accent-dim);
 }
 /* 升学考试组：绿色微底 */
@@ -3231,7 +3231,7 @@ option{background:var(--bg3);color:var(--text)}
 
 [data-theme="light"] #tab-general,[data-theme="light"] #tab-major,
 [data-theme="light"] #tab-state,[data-theme="light"] #tab-rail,
-[data-theme="light"] #tab-zhaopin { background: rgba(42,112,192,.05); }
+[data-theme="light"] #tab-zhaopin,[data-theme="light"] #tab-policy { background: rgba(42,112,192,.05); }
 [data-theme="light"] #tab-dandao,[data-theme="light"] #tab-education,
 [data-theme="light"] #tab-exam { background: rgba(20,140,70,.05); }
 [data-theme="light"] #tab-resume,[data-theme="light"] #tab-timeline,
@@ -3535,7 +3535,7 @@ option{background:var(--bg3);color:var(--text)}
           <td>🤖 AI逐段深度优化</td>
           <td class="vip-cross">✗</td>
           <td class="vip-cross">✗</td>
-          <td class="td-supreme">✅ 至尊专属</td>
+          <td class="td-supreme">🚧 开发中</td>
         </tr>
 
         <!-- 会员中心 -->
@@ -3607,7 +3607,7 @@ option{background:var(--bg3);color:var(--text)}
           <td>🏫 院校专业AI对比分析</td>
           <td class="vip-cross">✗</td>
           <td class="vip-cross">✗</td>
-          <td class="td-supreme">✅ 至尊专属</td>
+          <td class="td-supreme">🚧 开发中</td>
         </tr>
         <tr>
           <td>⚡ AI每日调用额度</td>
@@ -3998,6 +3998,7 @@ option{background:var(--bg3);color:var(--text)}
   <div class="tab" onclick="sw('state')" id="tab-state">🏛️ 国企央企</div>
   <div class="tab" onclick="sw('rail')" id="tab-rail">🚄 行业专项</div>
   <div class="tab" onclick="sw('zhaopin')" id="tab-zhaopin">💼 社会招聘<span class="tbadge new-badge" style="margin-left:4px">NEW</span></div>
+  <div class="tab" onclick="sw('policy')" id="tab-policy">🎓 就业政策<span class="tbadge" style="margin-left:4px;background:rgba(46,184,122,.2);color:var(--green2);font-size:10px;padding:1px 6px;border-radius:8px;font-weight:800">2026</span></div>
   <div class="tabbar-sep"></div>
   <!-- 升学考试 -->
   <div class="tab" onclick="sw('dandao')" id="tab-dandao">📝 单招考试<span class="tbadge new-badge" style="margin-left:4px">NEW</span></div>
@@ -4490,7 +4491,7 @@ option{background:var(--bg3);color:var(--text)}
   <div class="grid g4">
     <a class="card" href="https://career.huawei.com/reccampsite/PC/CampusIndex/index.html" target="_blank"><div class="card-name">华为</div><div class="card-desc">华为校招官方入口</div><div class="card-tag tag-red">科技</div></a>
     <a class="card" href="https://job.zte.com.cn" target="_blank"><div class="card-name">中兴通讯</div><div class="card-desc">5G通信龙头央企</div><div class="card-tag tag-blue">通信</div></a>
-    <a class="card" href="https://zglt.zhaopin.com/" target="_blank"><div class="card-name">中国联通</div><div class="card-desc">联通集团官方校招（新苗计划）</div><div class="card-tag tag-blue">通信</div></a>
+    <a class="card" href="https://www.chinaunicom.com.cn/hr/" target="_blank"><div class="card-name">中国联通</div><div class="card-desc">联通集团官方校招（新苗计划）</div><div class="card-tag tag-blue">通信</div></a>
     <a class="card" href="https://job.chinatelecom.com.cn" target="_blank"><div class="card-name">中国电信</div><div class="card-desc">电信集团招聘入口</div><div class="card-tag tag-blue">通信</div></a>
     <a class="card" href="https://zgyd.iguopin.com/job" target="_blank"><div class="card-name">中国移动</div><div class="card-desc">移动集团人才招聘（国聘官方入口）</div><div class="card-tag tag-green">通信</div></a>
     <a class="card" href="https://www.iguopin.com/job/list?keyword=%E4%B8%AD%E5%9B%BD%E8%8A%82%E8%83%BD" target="_blank"><div class="card-name">中国节能</div><div class="card-desc">中国节能环保集团</div><div class="card-tag tag-green">环保</div></a>
@@ -4570,7 +4571,7 @@ option{background:var(--bg3);color:var(--text)}
       <a class="card" href="https://job.csair.com" target="_blank"><div class="card-name">南方航空</div><div class="card-desc">南航官方人才招聘系统</div><div class="card-tag tag-blue">三大航</div></a>
       <a class="card" href="https://zhaopin.airchina.com.cn" target="_blank"><div class="card-name">中国国际航空</div><div class="card-desc">国航官方招聘入口</div><div class="card-tag tag-red">三大航</div></a>
       <a class="card" href="https://job.ceair.com" target="_blank"><div class="card-name">中国东方航空</div><div class="card-desc">东航官方招聘系统</div><div class="card-tag tag-blue">三大航</div></a>
-      <a class="card" href="http://recruitment.hnair.com/HRCandidateManageAir/home.aspx" target="_blank"><div class="card-name">海南航空</div><div class="card-desc">海航集团人才招聘</div><div class="card-tag tag-teal">四大航</div></a>
+      <a class="card" href="https://recruitment.hnair.com/HRCandidateManageAir/home.aspx" target="_blank"><div class="card-name">海南航空</div><div class="card-desc">海航集团人才招聘</div><div class="card-tag tag-teal">四大航</div></a>
       <a class="card" href="https://hr.xiamenair.com" target="_blank"><div class="card-name">厦门航空</div><div class="card-desc">厦航官方招聘入口</div><div class="card-tag tag-blue">地方航</div></a>
       <a class="card" href="https://www.shenzhenair.com/careers/" target="_blank"><div class="card-name">深圳航空</div><div class="card-desc">深航官方招聘系统</div><div class="card-tag tag-green">地方航</div></a>
       <a class="card" href="https://wecruit.hotjob.cn/SU62ea129d0dcad4075c8525ca/pb/index.html" target="_blank"><div class="card-name">吉祥航空</div><div class="card-desc">吉航人才招聘入口</div><div class="card-tag tag-orange">地方航</div></a>
@@ -4583,16 +4584,16 @@ option{background:var(--bg3);color:var(--text)}
       <a class="card" href="https://www.shairport.com/index.html" target="_blank"><div class="card-name">上海机场集团</div><div class="card-desc">浦东/虹桥机场人才招聘</div><div class="card-tag tag-blue">机场</div></a>
       <a class="card" href="https://gaazp.gdairport.com:10443/web/" target="_blank"><div class="card-name">广州白云机场</div><div class="card-desc">广东机场集团官方招聘</div><div class="card-tag tag-green">机场</div></a>
       <a class="card" href="https://szairport.hotjob.cn/" target="_blank"><div class="card-name">深圳宝安机场</div><div class="card-desc">宝安国际机场招聘</div><div class="card-tag tag-teal">机场</div></a>
-      <a class="card" href="http://www.scairports.com/" target="_blank"><div class="card-name">成都双流/天府机场</div><div class="card-desc">四川省机场集团招聘</div><div class="card-tag tag-orange">机场</div></a>
-      <a class="card" href="http://www.hbairport.com/xxgk/rlzy/" target="_blank"><div class="card-name">武汉天河机场</div><div class="card-desc">湖北机场集团招聘</div><div class="card-tag tag-purple">机场</div></a>
+      <a class="card" href="https://www.scairports.com/" target="_blank"><div class="card-name">成都双流/天府机场</div><div class="card-desc">四川省机场集团招聘</div><div class="card-tag tag-orange">机场</div></a>
+      <a class="card" href="https://www.hbairport.com/xxgk/rlzy/" target="_blank"><div class="card-name">武汉天河机场</div><div class="card-desc">湖北机场集团招聘</div><div class="card-tag tag-purple">机场</div></a>
       <a class="card" href="https://www.cwag.com/rczx/zpxx.htm" target="_blank"><div class="card-name">西安咸阳机场</div><div class="card-desc">西部机场集团招聘</div><div class="card-tag tag-yellow">机场</div></a>
       <a class="card" href="https://www.caac.gov.cn" target="_blank"><div class="card-name">民航局信息公告</div><div class="card-desc">民航局官方公文/招聘公告</div><div class="card-tag tag-red">监管</div></a>
     </div>
 
     <div class="sec-title">▍民航综合招聘平台</div>
     <div class="grid g4">
-      <a class="card" href="http://www.caachr.com.cn" target="_blank"><div class="card-name">中国民航人才网</div><div class="card-desc">民航行业综合招聘平台</div><div class="card-tag tag-blue">聚合</div></a>
-      <a class="card" href="https://job.carnoc.com/" target="_blank"><div class="card-name">航空HR网</div><div class="card-desc">航空/航天人力资源平台</div><div class="card-tag tag-blue">专业</div></a>
+      <a class="card" href="https://job.carnoc.com/" target="_blank"><div class="card-name">民航招聘网</div><div class="card-desc">民航行业综合招聘平台</div><div class="card-tag tag-blue">聚合</div></a>
+      <a class="card" href="https://job.carnoc.com/" target="_blank"><div class="card-name">民航HR网</div><div class="card-desc">民航/航天人力资源平台</div><div class="card-tag tag-blue">专业</div></a>
       <a class="card" href="https://www.zhaopin.com/jobs?kw=%E6%B0%91%E8%88%AA+%E6%8B%9B%E8%81%98" target="_blank"><div class="card-name">智联-民航岗</div><div class="card-desc">各类民航岗位聚合搜索</div><div class="card-tag tag-teal">聚合</div></a>
       <a class="card" href="https://www.iguopin.com/job/list?keyword=%E6%B0%91%E8%88%AA" target="_blank"><div class="card-name">国聘-民航专栏</div><div class="card-desc">民航国企央企岗位</div><div class="card-tag tag-orange">官方</div></a>
     </div>
@@ -4630,7 +4631,7 @@ option{background:var(--bg3);color:var(--text)}
     <div class="grid g4">
       <a class="card" href="https://zhaopin.cnpc.com.cn" target="_blank"><div class="card-name">中国石油</div><div class="card-desc">中石油校招官方系统</div><div class="card-tag tag-orange">油气</div></a>
       <a class="card" href="https://job.sinopec.com" target="_blank"><div class="card-name">中国石化</div><div class="card-desc">中石化校招&社招入口</div><div class="card-tag tag-orange">油气</div></a>
-      <a class="card" href="https://cnooc.zhaopin.com" target="_blank"><div class="card-name">中国海油</div><div class="card-desc">中海油官方招聘入口</div><div class="card-tag tag-blue">油气</div></a>
+      <a class="card" href="https://cnooc.com.cn/col/col107/index.html" target="_blank"><div class="card-name">中国海油</div><div class="card-desc">中海油官方招聘入口</div><div class="card-tag tag-blue">油气</div></a>
       <a class="card" href="https://www.iguopin.com/job/list?keyword=%E7%85%A4%E7%82%AD" target="_blank"><div class="card-name">国聘-煤炭/矿业</div><div class="card-desc">煤炭国企央企岗位聚合</div><div class="card-tag tag-yellow">煤炭</div></a>
     </div>
   </div>
@@ -5167,62 +5168,22 @@ option{background:var(--bg3);color:var(--text)}
       <a class="card" href="https://hr.163.com" target="_blank"><div class="card-name">🎵 网易招聘</div><div class="card-desc">网易社招+校招官方入口</div><div class="card-tag tag-red">互联网</div></a>
     </div>
 
-    <!-- 🆕 国家帮大学生找工作政策提示条 -->
-    <div style="background:linear-gradient(135deg,rgba(46,184,122,.12),rgba(74,144,217,.08));border:1px solid rgba(46,184,122,.35);border-radius:12px;padding:14px 18px;margin-bottom:16px">
-      <div style="display:flex;align-items:flex-start;gap:12px">
-        <span style="font-size:22px;line-height:1">🎓</span>
-        <div>
-          <div style="font-size:14px;font-weight:800;color:var(--green2);margin-bottom:4px">国家帮大学生找工作！2026年重磅就业政策落地</div>
-          <div style="font-size:12px;color:var(--text2);line-height:1.8">
-            2026年3月，人社部、财政部联合发布《关于做好2026年高校毕业生等青年就业工作的通知》，对未就业毕业生提供<strong>「1131」帮扶服务</strong>：<br>
-            📌 1次政策宣介 · 1次职业指导 · 3次岗位推荐 · 1次培训或见习机会<br>
-            👉 <strong>未就业毕业生可在国务院客户端小程序登记求职信息，人社局将主动联系帮扶！</strong>
+    <!-- 就业政策引导卡 -->
+    <div onclick="sw('policy')" style="cursor:pointer;background:linear-gradient(135deg,rgba(46,184,122,.12),rgba(74,144,217,.08));border:1.5px solid rgba(46,184,122,.4);border-radius:12px;padding:14px 18px;margin-bottom:20px;transition:transform .15s,box-shadow .15s" onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 6px 18px rgba(46,184,122,.2)'" onmouseout="this.style.transform='';this.style.boxShadow=''">
+      <div style="display:flex;align-items:center;justify-content:space-between">
+        <div style="display:flex;align-items:center;gap:12px">
+          <span style="font-size:26px">🎓</span>
+          <div>
+            <div style="font-size:14px;font-weight:800;color:var(--green2);margin-bottom:3px">国家帮大学生找工作！2026年重磅就业政策落地</div>
+            <div style="font-size:12px;color:var(--text2)">「1131」帮扶服务 · 国务院客户端求职登记 · 国家24365就业平台 · 点击查看完整政策详情</div>
           </div>
         </div>
+        <span style="font-size:20px;color:var(--green2);margin-left:12px">›</span>
       </div>
     </div>
+  </div><!-- end sector-zhaopin-general -->
 
-    <div class="sec-title">▍国家官方就业服务（教育部 / 人社部）</div>
-    <div class="grid g3" style="margin-bottom:12px">
-      <a class="card" href="https://www.ncss.cn" target="_blank" style="border:1.5px solid rgba(46,184,122,.4)">
-        <div style="display:flex;align-items:center;gap:6px;margin-bottom:4px">
-          <span style="font-size:16px">🎓</span>
-          <div class="card-name" style="color:var(--green2)">国家24365大学生就业服务平台</div>
-        </div>
-        <div class="card-desc">教育部官方 · 24小时365天 · 海量岗位 · 就业政策 · 求职指导</div>
-        <div style="display:flex;gap:4px;margin-top:6px;flex-wrap:wrap">
-          <div class="card-tag tag-green">教育部官方</div>
-          <div class="card-tag tag-blue">免费</div>
-        </div>
-      </a>
-      <a class="card" href="https://mp.weixin.qq.com/s/guoyuan-zhenfu-app" target="_blank" style="border:1.5px solid rgba(74,144,217,.4)" onclick="event.preventDefault();showToast('请在微信中搜索【国务院客户端】小程序，进入【就业服务专区】→【未就业毕业生求职登记】')">
-        <div style="display:flex;align-items:center;gap:6px;margin-bottom:4px">
-          <span style="font-size:16px">📱</span>
-          <div class="card-name" style="color:var(--blue2)">国务院客户端（微信小程序）</div>
-        </div>
-        <div class="card-desc">微信搜索"国务院客户端" · 就业服务专区 · 未就业毕业生求职登记 · 人社部主动帮扶</div>
-        <div style="display:flex;gap:4px;margin-top:6px;flex-wrap:wrap">
-          <div class="card-tag tag-blue">人社部官方</div>
-          <div class="card-tag" style="background:rgba(212,175,55,.15);color:var(--gold2);font-size:11px;padding:2px 8px;border-radius:10px">🆕 2026新政</div>
-        </div>
-      </a>
-      <a class="card" href="https://chinajob.mohrss.gov.cn" target="_blank">
-        <div style="display:flex;align-items:center;gap:6px;margin-bottom:4px">
-          <span style="font-size:16px">🏛️</span>
-          <div class="card-name">中国公共招聘网</div>
-        </div>
-        <div class="card-desc">人社部官方 · 全国公益性岗位 · 免费投递</div>
-        <div style="display:flex;gap:4px;margin-top:6px"><div class="card-tag tag-red">官方</div><div class="card-tag tag-teal">免费</div></div>
-      </a>
-    </div>
 
-    <div class="sec-title">▍其他政府公益就业渠道</div>
-    <div class="grid g3">
-      <a class="card" href="https://job.mohrss.gov.cn" target="_blank"><div class="card-name">🏛️ 人社部招聘服务</div><div class="card-desc">全国公共就业服务官网</div><div class="card-tag tag-red">官方</div></a>
-      <a class="card" href="https://www.iguopin.com" target="_blank"><div class="card-name">🏛️ 国聘平台</div><div class="card-desc">国资委指导央企招聘汇总平台</div><div class="card-tag tag-teal">央企聚合</div></a>
-      <a class="card" href="https://www.mohrss.gov.cn/SYrlzyhshbzb/fwyd/SYkaoshizhaopin/zyhgjjgsydwgkzp/" target="_blank"><div class="card-name">🏛️ 中央事业单位招聘</div><div class="card-desc">中央和国家机关所属事业单位公开招聘</div><div class="card-tag tag-red">官方</div></a>
-    </div>
-  </div>
 
   <!-- ===== 央企国企 ===== -->
   <div class="sector-panel sector-hidden" id="sector-zhaopin-央企国企">
@@ -5251,7 +5212,7 @@ option{background:var(--bg3);color:var(--text)}
 
     <div class="sec-title">▍通信/科技/金融央企</div>
     <div class="grid g4">
-      <a class="card" href="https://zglt.zhaopin.com/" target="_blank"><div class="card-name">📱 中国联通</div><div class="card-desc">联通招聘官方入口（智联合作）</div><div class="card-tag tag-blue">通讯央企</div></a>
+      <a class="card" href="https://zglt.iguopin.com/" target="_blank"><div class="card-name">📱 中国联通</div><div class="card-desc">联通招聘官方入口（国聘合作）</div><div class="card-tag tag-blue">通讯央企</div></a>
       <a class="card" href="https://job.chinatelecom.com.cn" target="_blank"><div class="card-name">📡 中国电信</div><div class="card-desc">电信集团招聘平台</div><div class="card-tag tag-blue">通讯央企</div></a>
       <a class="card" href="https://job.icbc.com.cn/pc/index.html" target="_blank"><div class="card-name">🏦 中国工商银行</div><div class="card-desc">四大行之一官方招聘</div><div class="card-tag tag-red">金融央企</div></a>
       <a class="card" href="https://www.bankofchina.com/aboutboc/ab6/" target="_blank"><div class="card-name">🏦 中国银行</div><div class="card-desc">中行招聘官方入口</div><div class="card-tag tag-red">金融央企</div></a>
@@ -5317,7 +5278,7 @@ option{background:var(--bg3);color:var(--text)}
 
     <div class="sec-title">▍新能源/环保</div>
     <div class="grid g4">
-      <a class="card" href="https://www.longi.com/cn/talent/recruit/" target="_blank"><div class="card-name">☀️ 隆基绿能</div><div class="card-desc">全球最大光伏企业招聘</div><div class="card-tag tag-green">光伏</div></a>
+      <a class="card" href="https://longi.hotjob.cn/" target="_blank"><div class="card-name">☀️ 隆基绿能</div><div class="card-desc">全球最大光伏企业招聘</div><div class="card-tag tag-green">光伏</div></a>
       <a class="card" href="https://www.catl.com/solution/join/" target="_blank"><div class="card-name">🔋 宁德时代</div><div class="card-desc">全球动力电池龙头招聘</div><div class="card-tag tag-green">电池</div></a>
       <a class="card" href="https://www.chng.com.cn/list_zpxx/-/article/cQQKaBtwslFy/list/23524.html" target="_blank"><div class="card-name">💡 华能集团</div><div class="card-desc">华能发电央企招聘</div><div class="card-tag tag-orange">能源</div></a>
       <a class="card" href="https://zhaopin.china-cdt.com" target="_blank"><div class="card-name">🌊 大唐集团</div><div class="card-desc">大唐电力集团招聘公告</div><div class="card-tag tag-orange">能源</div></a>
@@ -5376,6 +5337,165 @@ option{background:var(--bg3);color:var(--text)}
     </div>
   </div>
 </div><!-- end panel-zhaopin -->
+
+
+<!-- ===================== 就业政策 ===================== -->
+<div class="panel" id="panel-policy">
+  <div class="tip">🎓 汇聚2026年国家最新毕业生就业帮扶政策 + 官方求职平台，让你第一时间享受到国家福利</div>
+
+  <!-- 核心政策横幅 -->
+  <div style="background:linear-gradient(135deg,rgba(46,184,122,.15),rgba(74,144,217,.1));border:1.5px solid rgba(46,184,122,.45);border-radius:16px;padding:22px 24px;margin-bottom:22px">
+    <div style="display:flex;align-items:flex-start;gap:14px">
+      <span style="font-size:36px;line-height:1;flex-shrink:0">🎓</span>
+      <div style="flex:1">
+        <div style="font-size:17px;font-weight:900;color:var(--green2);margin-bottom:8px">国家帮大学生找工作！2026年重磅就业政策全面落地</div>
+        <div style="font-size:13px;color:var(--text2);line-height:2;margin-bottom:12px">
+          2026年3月，人社部、财政部联合发布《关于做好2026年高校毕业生等青年就业工作的通知》，对<strong>未就业毕业生</strong>提供「<strong style="color:var(--gold2)">1131</strong>」帮扶服务：
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;margin-bottom:14px">
+          <div style="background:rgba(46,184,122,.1);border:1px solid rgba(46,184,122,.3);border-radius:10px;padding:10px 14px;text-align:center">
+            <div style="font-size:22px;font-weight:900;color:var(--green2)">1</div>
+            <div style="font-size:12px;color:var(--text2);margin-top:2px">次政策宣介</div>
+          </div>
+          <div style="background:rgba(74,144,217,.1);border:1px solid rgba(74,144,217,.3);border-radius:10px;padding:10px 14px;text-align:center">
+            <div style="font-size:22px;font-weight:900;color:var(--blue2)">1</div>
+            <div style="font-size:12px;color:var(--text2);margin-top:2px">次职业指导</div>
+          </div>
+          <div style="background:rgba(212,175,55,.12);border:1px solid rgba(212,175,55,.35);border-radius:10px;padding:10px 14px;text-align:center">
+            <div style="font-size:22px;font-weight:900;color:var(--gold2)">3</div>
+            <div style="font-size:12px;color:var(--text2);margin-top:2px">次岗位推荐</div>
+          </div>
+          <div style="background:rgba(136,85,212,.1);border:1px solid rgba(136,85,212,.3);border-radius:10px;padding:10px 14px;text-align:center">
+            <div style="font-size:22px;font-weight:900;color:var(--purple)">1</div>
+            <div style="font-size:12px;color:var(--text2);margin-top:2px">次培训或见习</div>
+          </div>
+        </div>
+        <div style="background:rgba(255,200,0,.08);border:1px solid rgba(255,200,0,.3);border-radius:10px;padding:10px 16px;font-size:13px;color:var(--text2);line-height:1.8">
+          💡 <strong>如何享受帮扶？</strong> 在国务院客户端小程序登记求职信息 → 当地人社局将主动联系 → 安排专属就业顾问一对一帮扶
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 官方求职平台 -->
+  <div class="sec-title">▍国家官方就业服务平台（教育部 / 人社部）</div>
+  <div class="grid g3" style="margin-bottom:20px">
+    <a class="card" href="https://www.ncss.cn" target="_blank" style="border:1.5px solid rgba(46,184,122,.4)">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">
+        <span style="font-size:20px">🎓</span>
+        <div class="card-name" style="color:var(--green2)">国家24365大学生就业服务平台</div>
+      </div>
+      <div class="card-desc">教育部官方 · 24小时365天不打烊 · 海量岗位直投 · 就业政策查询 · 求职技巧指导</div>
+      <div style="display:flex;gap:4px;margin-top:8px;flex-wrap:wrap">
+        <div class="card-tag tag-green">教育部官方</div>
+        <div class="card-tag tag-blue">免费</div>
+        <div class="card-tag" style="background:rgba(46,184,122,.15);color:var(--green2);font-size:11px;padding:2px 8px;border-radius:10px">毕业生首选</div>
+      </div>
+    </a>
+    <a class="card" href="#" style="border:1.5px solid rgba(74,144,217,.4);cursor:pointer" onclick="event.preventDefault();showToast('请在微信中搜索【国务院客户端】小程序，进入【就业服务专区】→【未就业毕业生求职登记】，人社局将主动联系你！')">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">
+        <span style="font-size:20px">📱</span>
+        <div class="card-name" style="color:var(--blue2)">国务院客户端（微信小程序）</div>
+      </div>
+      <div class="card-desc">微信搜索「国务院客户端」→ 就业服务专区 → 未就业毕业生求职登记，人社部主动帮扶上门</div>
+      <div style="display:flex;gap:4px;margin-top:8px;flex-wrap:wrap">
+        <div class="card-tag tag-blue">人社部官方</div>
+        <div class="card-tag" style="background:rgba(212,175,55,.15);color:var(--gold2);font-size:11px;padding:2px 8px;border-radius:10px">🆕 2026新政</div>
+        <div class="card-tag" style="background:rgba(255,100,100,.12);color:#e05050;font-size:11px;padding:2px 8px;border-radius:10px">点击看操作说明</div>
+      </div>
+    </a>
+    <a class="card" href="https://chinajob.mohrss.gov.cn" target="_blank">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">
+        <span style="font-size:20px">🏛️</span>
+        <div class="card-name">中国公共招聘网</div>
+      </div>
+      <div class="card-desc">人社部官方 · 全国公益性岗位 · 免费投递 · 覆盖基层公共服务岗位</div>
+      <div style="display:flex;gap:4px;margin-top:8px;flex-wrap:wrap">
+        <div class="card-tag tag-red">官方</div>
+        <div class="card-tag tag-teal">免费</div>
+      </div>
+    </a>
+    <a class="card" href="https://job.mohrss.gov.cn" target="_blank">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">
+        <span style="font-size:20px">🏛️</span>
+        <div class="card-name">人社部招聘服务</div>
+      </div>
+      <div class="card-desc">全国公共就业服务官网 · 就业政策法规 · 创业扶持查询</div>
+      <div style="display:flex;gap:4px;margin-top:8px">
+        <div class="card-tag tag-red">官方</div>
+      </div>
+    </a>
+    <a class="card" href="https://www.iguopin.com" target="_blank">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">
+        <span style="font-size:20px">🏛️</span>
+        <div class="card-name">国聘平台</div>
+      </div>
+      <div class="card-desc">国资委指导 · 央企国企招聘汇总平台 · 国企求职首选渠道</div>
+      <div style="display:flex;gap:4px;margin-top:8px">
+        <div class="card-tag tag-teal">央企聚合</div>
+        <div class="card-tag tag-blue">免费</div>
+      </div>
+    </a>
+    <a class="card" href="https://www.mohrss.gov.cn/SYrlzyhshbzb/fwyd/SYkaoshizhaopin/zyhgjjgsydwgkzp/" target="_blank">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">
+        <span style="font-size:20px">🏛️</span>
+        <div class="card-name">中央事业单位招聘</div>
+      </div>
+      <div class="card-desc">中央和国家机关所属事业单位公开招聘信息统一发布</div>
+      <div style="display:flex;gap:4px;margin-top:8px">
+        <div class="card-tag tag-red">官方</div>
+      </div>
+    </a>
+  </div>
+
+  <!-- 2026重点政策清单 -->
+  <div class="sec-title">▍2026年毕业生专项扶持政策清单</div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px;margin-bottom:22px">
+    <div style="background:var(--bg3);border:1px solid var(--border);border-radius:12px;padding:16px">
+      <div style="font-size:13px;font-weight:800;color:var(--green2);margin-bottom:8px">📋 求职补贴</div>
+      <div style="font-size:12px;color:var(--text2);line-height:2">
+        ✅ 离校未就业毕业生可申请<strong>一次性求职创业补贴</strong>（各省标准不同，一般500~2000元）<br>
+        ✅ 参加政府组织的职业技能培训，可申请<strong>培训补贴</strong><br>
+        ✅ 到基层就业（村官/西部计划等）可享受<strong>学费补偿和助学贷款代偿</strong>
+      </div>
+    </div>
+    <div style="background:var(--bg3);border:1px solid var(--border);border-radius:12px;padding:16px">
+      <div style="font-size:13px;font-weight:800;color:var(--blue2);margin-bottom:8px">🎯 岗位专项</div>
+      <div style="font-size:12px;color:var(--text2);line-height:2">
+        ✅ <strong>三支一扶</strong>（支教/支农/支医/帮扶农村）：服务期满后享受加分政策<br>
+        ✅ <strong>特岗教师</strong>：中央财政补助，补充农村学校师资<br>
+        ✅ <strong>大学生志愿服务西部计划</strong>：志愿服务期满可享受就业优惠
+      </div>
+    </div>
+    <div style="background:var(--bg3);border:1px solid var(--border);border-radius:12px;padding:16px">
+      <div style="font-size:13px;font-weight:800;color:var(--gold2);margin-bottom:8px">💼 创业扶持</div>
+      <div style="font-size:12px;color:var(--text2);line-height:2">
+        ✅ 毕业5年内可申请<strong>最高50万元</strong>创业担保贷款（合伙创业最高300万）<br>
+        ✅ 工商注册减免费用，享受<strong>税收优惠政策</strong><br>
+        ✅ 各地创业孵化基地提供<strong>免费场地和导师支持</strong>
+      </div>
+    </div>
+    <div style="background:var(--bg3);border:1px solid var(--border);border-radius:12px;padding:16px">
+      <div style="font-size:13px;font-weight:800;color:var(--purple);margin-bottom:8px">🔖 档案/户籍</div>
+      <div style="font-size:12px;color:var(--text2);line-height:2">
+        ✅ 未就业毕业生档案可免费托管在<strong>县级以上公共就业服务机构</strong><br>
+        ✅ 户籍可在<strong>入学前户籍地</strong>保留2年择业期<br>
+        ✅ 国企/央企/机关单位可为应届生<strong>办理户籍迁入</strong>
+      </div>
+    </div>
+  </div>
+
+  <!-- 官方政策查询入口 -->
+  <div class="sec-title">▍官方政策查询 & 权威信息渠道</div>
+  <div class="grid g3" style="margin-bottom:16px">
+    <a class="card" href="https://www.mohrss.gov.cn" target="_blank"><div class="card-name">🏛️ 人力资源和社会保障部</div><div class="card-desc">就业政策权威发布渠道</div><div class="card-tag tag-red">官方</div></a>
+    <a class="card" href="https://www.moe.gov.cn/jyb_xwfb/s5147/" target="_blank"><div class="card-name">🎓 教育部就业指导</div><div class="card-desc">高校毕业生就业工作专题</div><div class="card-tag tag-green">教育部</div></a>
+    <a class="card" href="https://www.ncss.cn/" target="_blank"><div class="card-name">📋 24365就业平台</div><div class="card-desc">教育部24365全国高校毕业生就业平台</div><div class="card-tag tag-blue">官方平台</div></a>
+  </div>
+  <div style="background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:12px 16px;font-size:12px;color:var(--text3);line-height:1.8">
+    ⚠️ <strong>温馨提示</strong>：以上政策信息基于2026年3月公开发布的文件整理，各地实施细则可能略有差异，<strong>建议以当地人社局官网或12333热线为准</strong>。政策福利有时效性，请尽早咨询落实！
+  </div>
+</div><!-- end panel-policy -->
 
 
 <!-- ===================== 单招考试 ===================== -->
@@ -5672,7 +5792,7 @@ option{background:var(--bg3);color:var(--text)}
     </div>
     <div class="sec-title">▍选校 & 申请平台</div>
     <div class="grid g4">
-      <a class="card" href="http://www.cscse.edu.cn" target="_blank"><div class="card-name">教育部留学服务中心</div><div class="card-desc">留学信息·学历认证·官方咨询</div><div class="card-tag tag-red">官方</div></a>
+      <a class="card" href="https://www.cscse.edu.cn" target="_blank"><div class="card-name">教育部留学服务中心</div><div class="card-desc">留学信息·学历认证·官方咨询</div><div class="card-tag tag-red">官方</div></a>
       <a class="card" href="https://sa.csc.edu.cn" target="_blank"><div class="card-name">国家留学基金委</div><div class="card-desc">公派留学申请平台·奖学金</div><div class="card-tag tag-red">奖学金</div></a>
       <a class="card" href="https://www.shanghairanking.cn/rankings/arwu/2024" target="_blank"><div class="card-name">软科世界大学排名</div><div class="card-desc">ARWU全球院校排名工具</div><div class="card-tag tag-blue">排名</div></a>
       <a class="card" href="https://www.timeshighereducation.com/world-university-rankings" target="_blank"><div class="card-name">THE世界大学排名</div><div class="card-desc">泰晤士·世界大学综合排名</div><div class="card-tag tag-blue">排名</div></a>
@@ -6187,7 +6307,7 @@ option{background:var(--bg3);color:var(--text)}
         <a class="card" href="https://www.gaokao.cn/colleges" target="_blank"><div class="card-name">高考网·院校库</div><div class="card-desc">全国高校信息·录取分数线汇总</div><div class="card-tag tag-blue">查分</div></a>
         <a class="card" href="https://www.eol.cn" target="_blank"><div class="card-name">中国教育在线</div><div class="card-desc">志愿填报指南·招生计划·专业介绍</div><div class="card-tag tag-teal">志愿</div></a>
         <a class="card" href="https://gaokao.chsi.com.cn" target="_blank"><div class="card-name">阳光高考</div><div class="card-desc">智能志愿推荐·历年录取数据对比</div><div class="card-tag tag-green">智能</div></a>
-        <a class="card" href="http://www.mycos.com.cn" target="_blank"><div class="card-name">麦可思研究</div><div class="card-desc">专业就业前景·薪资水平分析</div><div class="card-tag tag-orange">就业</div></a>
+        <a class="card" href="https://www.mycos.com.cn" target="_blank"><div class="card-name">麦可思研究</div><div class="card-desc">专业就业前景·薪资水平分析</div><div class="card-tag tag-orange">就业</div></a>
         <a class="card" href="https://www.usnews.com/best-graduate-schools" target="_blank"><div class="card-name">US News排名</div><div class="card-desc">美国大学综合排名·专业排名参考</div><div class="card-tag tag-purple">排名</div></a>
         <a class="card" href="https://www.shanghairanking.cn" target="_blank"><div class="card-name">软科排名</div><div class="card-desc">中国大学排名·专业排名·ESI学科</div><div class="card-tag tag-red">排名</div></a>
         <a class="card" href="https://gaokao.chsi.com.cn/gkxx/sxzc/" target="_blank"><div class="card-name">历年分数线库</div><div class="card-desc">学信网·各院校历年录取分数线</div><div class="card-tag tag-blue">数据</div></a>
@@ -6767,7 +6887,7 @@ option{background:var(--bg3);color:var(--text)}
       <a class="card" href="https://www.koolearn.com" target="_blank"><div class="card-name">新东方在线</div><div class="card-desc">高考全科精品课程·名师直播</div><div class="card-tag tag-orange">课程</div></a>
       <a class="card" href="https://www.xueersi.com" target="_blank"><div class="card-name">学而思</div><div class="card-desc">中小学全科辅导·同步提分</div><div class="card-tag tag-blue">辅导</div></a>
       <a class="card" href="https://www.yuanfudao.com" target="_blank"><div class="card-name">猿辅导</div><div class="card-desc">AI个性化辅导·高考专项突破</div><div class="card-tag tag-green">AI辅导</div></a>
-      <a class="card" href="https://www.zuoyebang.com" target="_blank"><div class="card-name">作业帮</div><div class="card-desc">拍照搜题·全科解析·模拟考试</div><div class="card-tag tag-teal">搜题</div></a>
+      <a class="card" href="https://www.zuoyebang.com/" target="_blank"><div class="card-name">作业帮</div><div class="card-desc">拍照搜题·全科解析·模拟考试</div><div class="card-tag tag-teal">搜题</div></a>
       <a class="card" href="https://paper.jyb.cn" target="_blank"><div class="card-name">中国教育报</div><div class="card-desc">高考政策资讯·招生改革动态（官方数字报）</div><div class="card-tag tag-red">资讯</div></a>
       <a class="card" href="https://www.ncss.cn" target="_blank"><div class="card-name">国家课程标准</div><div class="card-desc">教育部课程标准官方文件</div><div class="card-tag tag-gold">官方</div></a>
       <a class="card" href="https://www.jyeoo.com" target="_blank"><div class="card-name">精英猿</div><div class="card-desc">中考备考·知识点精讲</div><div class="card-tag tag-purple">中考</div></a>
@@ -6942,10 +7062,10 @@ option{background:var(--bg3);color:var(--text)}
           <select class="rform-select" id="resumeTheme" onchange="applyResumeTheme(this.value)" title="主题">
             <option value="classic">经典蓝</option>
             <option value="modern">现代黑</option>
-            <option value="elegant">典雅金</option>
             <option value="fresh">清新绿</option>
-            <option value="tech">科技紫</option>
-            <option value="minimal">简约白</option>
+            <option value="elegant">👑 典雅金（至尊）</option>
+            <option value="tech">👑 科技紫（至尊）</option>
+            <option value="minimal">👑 简约白（至尊）</option>
           </select>
           <select class="rform-select-sm" id="resumeFont" onchange="applyResumeFont(this.value)" title="字体">
             <option value="yahei">黑体</option>
@@ -8256,7 +8376,7 @@ option{background:var(--bg3);color:var(--text)}
     <span class="footer-dot">·</span>
     <a class="footer-link" href="https://www.iguopin.com" target="_blank">国聘网</a>
     <span class="footer-dot">·</span>
-    <span style="color:var(--text3)" id="footerVer">v11.3.6</span>
+    <span style="color:var(--text3)" id="footerVer">加载中...</span>
   </div>
   <!-- 版权声明行 -->
   <div style="width:100%;border-top:1px solid var(--border);padding-top:10px;margin-top:4px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px">
@@ -8332,8 +8452,8 @@ function sw(id) {
         { icon:'✨', label:'AI高级润色/改写',               guest:false, normal:true,  supreme:true, guestTip:'需登录', normalTip:'需配置Key', supremeTip:'平台请客' },
         { icon:'💾', label:'保存简历（无限份）',            guest:false, normal:true,  supreme:true, guestTip:'需登录' },
         { icon:'📥', label:'下载PDF',                       guest:false, normal:true,  supreme:true, guestTip:'需登录' },
-        { icon:'🎨', label:'高级主题/专属模板',             guest:false, normal:false, supreme:true, guestTip:'需登录', supremeTip:'至尊专属' },
-        { icon:'🤖', label:'AI逐段深度优化',                guest:false, normal:false, supreme:true, guestTip:'需登录', supremeTip:'至尊专属，平台请客' },
+        { icon:'🎨', label:'高级主题/专属模板',             guest:false, normal:false, supreme:true, guestTip:'需登录', supremeTip:'至尊专属（已实装）' },
+        { icon:'🤖', label:'AI逐段深度优化',                guest:false, normal:false, supreme:false, guestTip:'需登录', supremeTip:'🚧 开发中' },
       ], '简历工坊权限说明');
     }, 50);
   }
@@ -9338,8 +9458,8 @@ function applyTheme(theme) {
 }
 
 // ==================== 版本信息 ====================
-const APP_VERSION   = 'v11.3.60';
-const BUILD_DATE    = '2026-03-28';   // ← 每次修改时同步更新此日期
+const APP_VERSION   = 'v11.3.68';
+const BUILD_DATE    = '2026-04-02';   // ← 每次修改时同步更新此日期
 (function injectVersion(){
   const badge   = document.getElementById('verBadge');
   const footer  = document.getElementById('footerVer');
@@ -10871,7 +10991,7 @@ function swExam(id, btn) {
     renderPermBanner('exam-sector-gaokao', [
       { icon:'📊', label:'分数线查询（静态）',  guest:true,  normal:true,  supreme:true },
       { icon:'🎯', label:'AI志愿建议',          guest:false, normal:true,  supreme:true, guestTip:'需登录', normalTip:'需配置Key', supremeTip:'平台请客' },
-      { icon:'🏫', label:'院校专业对比分析',    guest:false, normal:false, supreme:true, guestTip:'需登录', supremeTip:'至尊专属' },
+      { icon:'🏫', label:'院校专业对比分析',    guest:false, normal:false, supreme:false, guestTip:'需登录', supremeTip:'🚧 开发中' },
     ], '高考填报权限');
   }
 }
@@ -15077,21 +15197,17 @@ function gaokaoRecommend() {
 }
 
 async function evalMajorAI() {
+  // ── 权限前置检查：游客点击立即弹登录 ──
+  if (!isLoggedIn()) {
+    showToast('🔑 AI专业评价需要登录后使用');
+    setTimeout(() => showLoginModal(), 300);
+    return;
+  }
   const sel = document.getElementById('majorEvalSelect').value;
   const el  = document.getElementById('majorEvalResult');
   if (!sel) {
     el.style.display = 'block';
     el.innerHTML = '<div style="color:var(--red2);font-size:13px">请先选择专业</div>';
-    return;
-  }
-  // ── 权限前置检查：游客不可使用 ──
-  if (!isLoggedIn()) {
-    el.style.display = 'block';
-    el.innerHTML = `<div style="background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:16px;text-align:center">
-      <div style="font-size:14px;font-weight:700;color:var(--text);margin-bottom:8px">🔑 AI专业评价需要登录</div>
-      <div style="font-size:12px;color:var(--text3);margin-bottom:12px">登录后可使用 AI 深度评价，普通会员需配置 DeepSeek Key，至尊会员平台请客</div>
-      <button onclick="showLoginModal()" style="background:var(--gold-grad);border:none;color:#1a1510;font-weight:700;padding:8px 20px;border-radius:8px;cursor:pointer;font-size:13px">🔑 登录 / 注册</button>
-    </div>`;
     return;
   }
 
@@ -15260,7 +15376,7 @@ const CERT_DATA = {
     { name:'银行从业资格', level:'行业', org:'中国银行业协会', desc:'银行柜员/客户经理入职必备证书', diff:'易', worth:'⭐⭐⭐', link:'https://www.china-cba.net' },
     { name:'理财规划师', level:'国家职业', org:'人社部', desc:'银行/保险/私行财富管理人员资格', diff:'中', worth:'⭐⭐⭐', link:'https://www.osta.org.cn' },
     { name:'期货从业资格', level:'行业', org:'中国期货业协会', desc:'期货经纪公司从业人员必须持证', diff:'中', worth:'⭐⭐⭐', link:'https://www.cfachina.org' },
-    { name:'保险代理人资格', level:'行业', org:'中国银保监会', desc:'寿险/财险销售从业基本资格，门槛低', diff:'易', worth:'⭐⭐', link:'https://www.cbirc.gov.cn' },
+    { name:'保险代理人资格', level:'行业', org:'国家金融监管总局', desc:'寿险/财险销售从业基本资格，门槛低', diff:'易', worth:'⭐⭐', link:'https://www.nfra.gov.cn' },
     { name:'ACCA（国际注册会计师）', level:'国际', org:'英格兰及威尔士特许会计师协会', desc:'财会领域国际资格，13门考试，全球认可', diff:'极难', worth:'⭐⭐⭐⭐⭐', link:'https://www.accaglobal.com' },
     { name:'FRM（金融风险管理师）', level:'国际', org:'全球风险协会(GARP)', desc:'风险管理领域国际顶级认证，银行/基金/监管部门均适用', diff:'极难', worth:'⭐⭐⭐⭐⭐', link:'https://www.garp.org' },
     { name:'CFP（国际金融理财师）', level:'国际', org:'FPSB国际金融理财师标准委员会', desc:'个人理财规划全球认证，银行/第三方财富管理必备', diff:'难', worth:'⭐⭐⭐⭐', link:'https://www.fpsb.org' },
@@ -15274,11 +15390,11 @@ const CERT_DATA = {
   edu: [
     { name:'教师资格证', level:'国家级', org:'教育部', desc:'中小幼教师必备，分笔试+面试', diff:'中', worth:'⭐⭐⭐⭐⭐', link:'https://www.jszg.edu.cn' },
     { name:'普通话水平测试（PSC）', level:'国家级', org:'教育部', desc:'教师从业必须二甲及以上', diff:'易', worth:'⭐⭐⭐', link:'https://www.cltt.org' },
-    { name:'英语教师资格（TEM-4/8）', level:'高校', org:'教育部', desc:'英语专业学生必考', diff:'中', worth:'⭐⭐⭐', link:'https://tem.neea.edu.cn' },
+    { name:'英语教师资格（TEM-4/8）', level:'高校', org:'教育部', desc:'英语专业学生必考', diff:'中', worth:'⭐⭐⭐', link:'https://www.neea.edu.cn/' },
     { name:'职业技能培训师', level:'国家职业', org:'人社部', desc:'职业培训学校/企业培训师从业资格', diff:'中', worth:'⭐⭐⭐', link:'https://www.osta.org.cn' },
     { name:'高校教师资格证', level:'国家级', org:'教育部', desc:'高等院校教学必备，需具备硕士及以上学历', diff:'中', worth:'⭐⭐⭐⭐', link:'https://www.jszg.edu.cn' },
     { name:'心理健康教育教师资格', level:'行业', org:'中国心理学会', desc:'学校心理老师专项资格，需心理学相关专业背景', diff:'中', worth:'⭐⭐⭐', link:'https://www.cps.org.cn' },
-    { name:'汉语国际教育资格证（CTCSOL）', level:'国家级', org:'教育部', desc:'对外汉语教师（汉办认证），出国教汉语必备', diff:'中', worth:'⭐⭐⭐⭐', link:'https://www.ctcsol.com' },
+    { name:'汉语国际教育资格证（CTCSOL）', level:'国家级', org:'教育部', desc:'对外汉语教师（汉办认证），出国教汉语必备', diff:'中', worth:'⭐⭐⭐⭐', link:'https://www.chinesetest.cn' },
     { name:'特殊教育教师资格', level:'国家级', org:'教育部', desc:'培智/聋哑/盲校教师资格，国家政策重点支持', diff:'中', worth:'⭐⭐⭐⭐', link:'https://www.jszg.edu.cn' },
     { name:'学前教育教师资格（幼儿园）', level:'国家级', org:'教育部', desc:'幼儿园教师准入证，含笔试（保教知识+综合素质）+面试', diff:'中', worth:'⭐⭐⭐⭐⭐', link:'https://www.jszg.edu.cn' },
     { name:'小学教师资格证', level:'国家级', org:'教育部', desc:'小学任教必备，含教育综合知识+学科知识+面试', diff:'中', worth:'⭐⭐⭐⭐⭐', link:'https://www.jszg.edu.cn' },
@@ -15304,7 +15420,7 @@ const CERT_DATA = {
   ],
   lang: [
     { name:'英语六级（CET-6）', level:'高校', org:'教育部考试中心', desc:'求职简历基础加分项', diff:'中', worth:'⭐⭐⭐⭐', link:'https://cet.neea.edu.cn' },
-    { name:'雅思（IELTS）', level:'国际', org:'英国文化协会', desc:'留学移民必备，国内知名企业也认可', diff:'中高', worth:'⭐⭐⭐⭐⭐', link:'https://www.chinaielts.org' },
+    { name:'雅思（IELTS）', level:'国际', org:'英国文化协会', desc:'留学移民必备，国内知名企业也认可', diff:'中高', worth:'⭐⭐⭐⭐⭐', link:'https://ielts.neea.cn/' },
     { name:'托福（TOEFL）', level:'国际', org:'ETS', desc:'赴美留学主流考试', diff:'中高', worth:'⭐⭐⭐⭐⭐', link:'https://www.toefl.cn' },
     { name:'日语N1/N2', level:'国际', org:'国际交流基金会', desc:'日资企业就职、赴日留学必备', diff:'中高', worth:'⭐⭐⭐⭐', link:'https://www.jlpt.jp' },
     { name:'德语TestDaF/DSH', level:'国际', org:'德国教育交流中心', desc:'赴德留学必须通过', diff:'难', worth:'⭐⭐⭐⭐', link:'https://www.testdaf.de' },
@@ -15485,7 +15601,7 @@ const CERT_DATA = {
     { name:'阿拉伯语能力测试（AOLPT）', level:'国际', org:'北京外国语大学', desc:'外交/中东贸易/维和/援助领域稀缺语种，高薪方向', diff:'难', worth:'⭐⭐⭐⭐⭐', link:'https://www.bfsu.edu.cn' },
     { name:'葡萄牙语水平测试（CAPLE/CELPE-Bras）', level:'国际', org:'里斯本大学/巴西文化部', desc:'非洲葡语国家（安哥拉/莫桑比克）及巴西市场需求大', diff:'中', worth:'⭐⭐⭐⭐', link:'https://caple.letras.ulisboa.pt' },
     { name:'商务英语证书（BEC高级）', level:'国际', org:'剑桥大学', desc:'外企职场英语，BEC高级+雅思互补，求职认可度高', diff:'中高', worth:'⭐⭐⭐⭐', link:'https://www.cambridgeenglish.org' },
-    { name:'英语专业八级（TEM-8）', level:'国家级', org:'教育部外语专业指导委员会', desc:'英语专业最高水平测试，写作/翻译/阅读综合考查', diff:'难', worth:'⭐⭐⭐⭐⭐', link:'https://tem.neea.edu.cn' },
+    { name:'英语专业八级（TEM-8）', level:'国家级', org:'教育部外语专业指导委员会', desc:'英语专业最高水平测试，写作/翻译/阅读综合考查', diff:'难', worth:'⭐⭐⭐⭐⭐', link:'https://www.neea.edu.cn/' },
     { name:'翻译专业资格考试（CATTI）', level:'国家级', org:'人社部', desc:'笔译/口译专业资格，二级及以上在翻译行业含金量高', diff:'极难', worth:'⭐⭐⭐⭐⭐', link:'https://www.catticenter.com' },
     { name:'意大利语水平测试（CELI/CILS）', level:'国际', org:'意大利外国语大学/锡耶纳大学', desc:'留意/意大利设计/时尚行业/意企就业', diff:'中', worth:'⭐⭐⭐', link:'https://www.unistrapg.it' },
     { name:'汉语水平考试（HSK 6级）', level:'国际', org:'汉办/中国国际中文教育基金会', desc:'外籍人士汉语能力认证，在华就业/高校录取标准', diff:'中（外国人）', worth:'⭐⭐⭐⭐', link:'https://www.chinesetest.cn' },
@@ -15494,14 +15610,14 @@ const CERT_DATA = {
   // ===== 人力资源/行政类 =====
   hr: [
     { name:'人力资源管理师（四/三/二/一级）', level:'国家职业', org:'人社部', desc:'HR从业人员必备，含招聘/培训/薪酬/劳动关系模块', diff:'中', worth:'⭐⭐⭐⭐', link:'https://www.osta.org.cn' },
-    { name:'绩效管理师', level:'行业', org:'中国人力资源开发研究会', desc:'企业绩效体系设计与落地，高阶HR必备', diff:'中高', worth:'⭐⭐⭐⭐', link:'https://www.chrr.com.cn' },
-    { name:'薪酬管理师', level:'行业', org:'中国人力资源开发研究会', desc:'薪酬设计/福利管理专项资格，HR垂直方向', diff:'中高', worth:'⭐⭐⭐⭐', link:'https://www.chrr.com.cn' },
-    { name:'职业规划师/生涯发展顾问（GCDF）', level:'国际', org:'CCE/GCDF', desc:'生涯咨询/职业规划行业国际证书，高校/咨询公司适用', diff:'中高', worth:'⭐⭐⭐⭐', link:'https://www.ccdaglobal.com' },
-    { name:'行政管理师', level:'行业', org:'中国行政管理学会', desc:'企业行政管理岗位职业资格，行政总监晋升参考', diff:'中', worth:'⭐⭐⭐', link:'https://www.csam.org.cn' },
+    { name:'绩效管理师', level:'行业', org:'中国人力资源开发研究会', desc:'企业绩效体系设计与落地，高阶HR必备', diff:'中高', worth:'⭐⭐⭐⭐', link:'https://www.hrdchina.org' },
+    { name:'薪酬管理师', level:'行业', org:'中国人力资源开发研究会', desc:'薪酬设计/福利管理专项资格，HR垂直方向', diff:'中高', worth:'⭐⭐⭐⭐', link:'https://www.hrdchina.org' },
+    { name:'职业规划师/生涯发展顾问（GCDF）', level:'国际', org:'CCE/GCDF', desc:'生涯咨询/职业规划行业国际证书，高校/咨询公司适用', diff:'中高', worth:'⭐⭐⭐⭐', link:'https://www.cce-global.org/gcdf' },
+    { name:'行政管理师', level:'行业', org:'中国行政管理学会', desc:'企业行政管理岗位职业资格，行政总监晋升参考', diff:'中', worth:'⭐⭐⭐', link:'https://www.mohrss.gov.cn/SYrlzyhshbzb/zwgk/gzsy/zyzg/' },
     { name:'企业培训师（一/二/三级）', level:'国家职业', org:'人社部', desc:'企业内训师资格，含TTT（培训师的培训）', diff:'中', worth:'⭐⭐⭐⭐', link:'https://www.osta.org.cn' },
     { name:'社会工作者（初/中级）', level:'国家职业', org:'民政部/人社部', desc:'社会工作机构/街道社区工作者必备，新兴社工市场', diff:'中', worth:'⭐⭐⭐⭐', link:'https://www.mca.gov.cn' },
     { name:'劳动关系协调员（一/二/三级）', level:'国家职业', org:'人社部', desc:'企业劳动争议处理/用工合规管理，HR高阶资格', diff:'中高', worth:'⭐⭐⭐⭐', link:'https://www.osta.org.cn' },
-    { name:'组织行为学师（OD工程师）', level:'行业', org:'中国人力资源开发研究会', desc:'企业组织发展/文化建设专项资格，HR战略层面', diff:'难', worth:'⭐⭐⭐⭐', link:'https://www.chrr.com.cn' },
+    { name:'组织行为学师（OD工程师）', level:'行业', org:'中国人力资源开发研究会', desc:'企业组织发展/文化建设专项资格，HR战略层面', diff:'难', worth:'⭐⭐⭐⭐', link:'https://www.hrdchina.org' },
     { name:'PHR（人力资源专业人士）', level:'国际', org:'HRCI（美国人力资源认证协会）', desc:'国际HR从业基础认证，全球认可，适合外企HR人员', diff:'中高', worth:'⭐⭐⭐⭐', link:'https://www.hrci.org' },
     { name:'SPHR（高级人力资源专业人士）', level:'国际', org:'HRCI', desc:'国际HR高级认证，需5年以上从业经验，外资/跨国企业适用', diff:'难', worth:'⭐⭐⭐⭐⭐', link:'https://www.hrci.org' },
     { name:'SHRM-CP（人力资源管理师认证）', level:'国际', org:'SHRM（美国人力资源管理学会）', desc:'全球最大HR机构认证，行为能力导向，国际化就业加分', diff:'难', worth:'⭐⭐⭐⭐⭐', link:'https://www.shrm.org' },
@@ -16834,6 +16950,30 @@ function applyResumeFont(fontKey) {
 }
 
 function applyResumeTheme(theme) {
+  // ── 至尊主题权限校验 ──
+  const supremeThemes = ['elegant', 'tech', 'minimal'];
+  if (supremeThemes.includes(theme)) {
+    const level = getUserLevel();
+    if (level !== 'supreme') {
+      if (!isLoggedIn()) {
+        showToast('🔑 至尊专属主题需要登录后使用');
+        setTimeout(() => showLoginModal(), 400);
+      } else {
+        showToast('👑 该主题为至尊会员专属，请联系管理员升级');
+      }
+      // 恢复为当前选中值
+      const sel = document.getElementById('resumeTheme');
+      const currentEl = document.querySelector('[class*="rv-theme-"]');
+      if (currentEl) {
+        currentEl.classList.forEach(c => {
+          if (c.startsWith('rv-theme-')) sel.value = c.replace('rv-theme-', '');
+        });
+      } else {
+        sel.value = 'classic';
+      }
+      return;
+    }
+  }
   const preview = document.getElementById('resumePreview');
   const el = preview.querySelector('.rv-doc') || preview.querySelector('[class*="rv-theme-"]');
   if (el) {
@@ -16916,28 +17056,6 @@ function clearResume() {
   const spw = document.getElementById('scorePanelWrap');
   if (spw) { spw.style.display = 'none'; spw.innerHTML = ''; }
   showToast('已清空所有内容');
-}
-
-// 保存简历到本地（登录用户专享）
-function saveResumeLocal() {
-  const user = currentUser();
-  if (!user) return;
-  const data = {};
-  ['resumeJobTitle','resumeName','resumeGender','resumeEdu','resumeSkills','resumeCity','resumeSalary',
-   'resumeHighlight','resumePhone','resumeEmail','resumeGpa','resumeCert','resumeSelfEval','resumeLang'].forEach(id => {
-    const el = document.getElementById(id);
-    if (el) data[id] = el.value;
-  });
-  // 保存动态经历
-  data._expItems = getExpItems();
-  const key = `careerpro_resume_${user}`;
-  const saved = JSON.parse(localStorage.getItem(key) || '[]');
-  const entry = { id: Date.now(), time: new Date().toLocaleString(), jobTitle: data.resumeJobTitle, data };
-  saved.unshift(entry);
-  if (saved.length > 5) saved.length = 5;
-  localStorage.setItem(key, JSON.stringify(saved));
-  showToast('✅ 简历已保存（最多保留5份）');
-  renderSavedResumes();
 }
 
 // 显示已保存简历列表
